@@ -12,7 +12,7 @@ import {
 } from "viem";
 import type { Hex } from "viem";
 import { sepolia } from "viem/chains";
-import BearthNFT from "../BearthNFTAbi";
+import BearthNFT from "../../BearthNFTAbi";
 import { parseEther } from "viem/utils";
 export default function Home() {
   const { login, logout, user } = usePrivy();
@@ -62,14 +62,17 @@ export default function Home() {
 
     console.log("contract:", contract.address);
 
-    const price = parseEther("0.0303");
-    const totalPrice = price * BigInt(5);
+    // const price = parseEther("0.0303");
+    // const totalPrice = price * BigInt(5);
 
-    const { request } = await contract.simulate.paidMint([totalPrice]);
+    // const { requestWl } = await contract.simulate.wlMint([""]);
+    // const { request } = await contract.simulate.paidMint([totalPrice]);
+    // const { request } = await contract.simulate.publicMint();
 
-    console.log("request:", request);
+    // console.log("request:", request);
 
-    const hash = await walletClient.writeContract(request);
+    // const hash = await walletClient.writeContract(request);
+    const hash = await contract.write.publicMint();
 
     console.log("contract call successful, hash:", hash);
   }, [wallet, wallet?.type]);
