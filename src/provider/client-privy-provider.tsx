@@ -9,5 +9,9 @@ export const ClientPrivyProvider = ({
   children: React.ReactNode;
   appId: string;
 }) => {
+  if (typeof window === "undefined") {
+    return children;
+  }
+
   return <PrivyProvider appId={appId}>{children}</PrivyProvider>;
 };
