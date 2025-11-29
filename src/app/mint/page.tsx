@@ -55,15 +55,17 @@ export default function Home() {
     console.log("walletClient:", walletClient);
 
     const contract = getContract({
-      address: "0x65Ae17fDCF89F5a8089715680332dEc2bACAA2B4",
+      address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`,
       abi: BearthNFT,
       client: { public: publicClient, wallet: walletClient },
     });
 
     console.log("contract:", contract.address);
 
-    // const price = parseEther("0.0303");
-    // const totalPrice = price * BigInt(5);
+    // For public mint
+    const price = parseEther("0.0303");
+    const totalPrice = price * BigInt(5);
+    console.log("totalPrice:", totalPrice);
 
     // const { requestWl } = await contract.simulate.wlMint([""]);
     // const { request } = await contract.simulate.paidMint([totalPrice]);
