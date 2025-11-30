@@ -15,7 +15,7 @@ interface CardOverlayProps {
 
 export function CardOverlay({ cardContent, onClose }: CardOverlayProps) {
   return (
-    <div className="absolute inset-0 bg-[#EAE8E4] z-50 overflow-y-auto flex flex-col xl:flex-row rounded-2xl shadow-[3px_3px_4px_0px_#00000040_inset]">
+    <div className="absolute inset-0 bg-[#EAE8E4] z-50 overflow-y-auto flex flex-col lg:flex-row rounded-2xl shadow-[3px_3px_4px_0px_#00000040_inset]">
       <div className="p-6 md:p-12 flex-1">
         <X
           aria-label="Close overlay"

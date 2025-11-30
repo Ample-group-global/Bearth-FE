@@ -1,26 +1,27 @@
-import { SiDiscord, SiInstagram, SiX } from "@icons-pack/react-simple-icons";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
+import BreathSocialLinks from "./BreathSocialLinks";
 
-export default function BearthFooter() {
+export default function BearthFooter({
+  absolute = false,
+}: {
+  absolute?: boolean;
+}) {
   return (
-    <footer className="w-full items-end justify-between pb-4 hidden md:flex text-white mt-8">
+    <footer
+      className={cn(
+        "w-full items-end justify-between pb-4 hidden md:flex text-white mt-8",
+        "h-[64px] px-4 z-10",
+        "bottom-0 left-0",
+        absolute ? "absolute" : "fixed",
+      )}
+    >
       <div className="text-3xl font-black tracking-wide drop-shadow-md">
-        Contact
+        <Link href="/contact">Contact</Link>
       </div>
 
       <div className="flex items-center gap-4">
-        <Link href="#" className="transition-transform hover:scale-110">
-          <SiDiscord className="h-8 w-8 drop-shadow-md" />
-          <span className="sr-only">Discord</span>
-        </Link>
-        <Link href="#" className="transition-transform hover:scale-110">
-          <SiInstagram className="h-8 w-8 drop-shadow-md" />
-          <span className="sr-only">Instagram</span>
-        </Link>
-        <Link href="#" className="transition-transform hover:scale-110">
-          <SiX className="h-8 w-8 drop-shadow-md" />
-          <span className="sr-only">X (Twitter)</span>
-        </Link>
+        <BreathSocialLinks />
       </div>
     </footer>
   );

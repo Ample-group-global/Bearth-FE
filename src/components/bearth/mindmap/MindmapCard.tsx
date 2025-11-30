@@ -30,7 +30,7 @@ export function MindmapCard({
     >
       <span
         className={cn(
-          "mb-1 md:mb-2 text-4xl lg:text-6xl xl:text-8xl",
+          "mb-1 md:mb-2 text-4xl lg:text-6xl lg:text-8xl",
           numberClassName,
         )}
       >
@@ -38,7 +38,7 @@ export function MindmapCard({
       </span>
       <h2
         className={cn(
-          "leading-tight self-end md:self-start text-right md:text-left text-2xl md:text-4xl lg:text-5xl xl:text-6xl",
+          "leading-tight self-end md:self-start text-right md:text-left text-2xl md:text-4xl lg:text-5xl lg:text-6xl",
           titleClassName,
         )}
       >

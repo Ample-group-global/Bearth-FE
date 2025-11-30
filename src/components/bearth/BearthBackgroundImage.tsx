@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function BearthBackgroundImage() {
   return (
-    <div className="absolute inset-0 -z-1">
+    <div className="fixed inset-0 w-screen h-screen -z-1">
       <Image
         src="/assets/bg.jpg"
         alt=""
@@ -12,7 +12,8 @@ export default function BearthBackgroundImage() {
         fetchPriority="high"
         className="h-full w-full object-cover"
       />
-      <div className="absolute inset-0 bg-black/70" />
+      {/* Darken the image */}
+      {/* <div className="fixed inset-0 bg-black/70" /> */}
     </div>
   );
 }
