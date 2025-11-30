@@ -12,14 +12,15 @@ export default function HomePage() {
         {/* Hero Section */}
         <div className="flex flex-col items-center justify-center text-center grow">
           {/* Main Logo */}
-          <div className="relative mb-2">
+          <div className="relative mb-2 w-full aspect-3/1">
             <Image
               fetchPriority="high"
               loading="eager"
               src="/assets/logo.png"
               alt="Bearth Logo"
-              width={924}
-              height={271}
+              fill
+              sizes="(max-width: 768px) 80vw, (max-width: 1280px) 50vw, 100vw"
+              className="object-contain"
             />
           </div>
 

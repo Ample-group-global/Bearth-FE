@@ -15,6 +15,23 @@ import { MenuIcon, XIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+export function BearthSideMenuLink({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <Link
+      href={href}
+      className="w-full after:content-[''] after:block after:h-px after:w-full after:bg-black/10"
+    >
+      {children}
+    </Link>
+  );
+}
+
 export function BearthSideMenu() {
   return (
     <Drawer direction="left">
@@ -46,24 +63,21 @@ export function BearthSideMenu() {
             orientation="vertical"
           >
             <NavigationMenuList className="flex flex-col items-start text-2xl font-semibold leading-normal">
-              <Link href="/about">
+              <BearthSideMenuLink href="/about">
                 <DrawerClose className="uppercase">About</DrawerClose>
-              </Link>
+              </BearthSideMenuLink>
 
-              <div className="h-px w-full bg-black/10">&nbsp;</div>
-
-              <Link href="/city">
+              <BearthSideMenuLink href="/city">
                 <DrawerClose className="uppercase">City</DrawerClose>
-              </Link>
-              <div className="h-px w-full bg-black/10">&nbsp;</div>
-              <Link href="/mindmap">
+              </BearthSideMenuLink>
+
+              <BearthSideMenuLink href="/mindmap">
                 <DrawerClose className="uppercase">Mindmap</DrawerClose>
-              </Link>
-              <div className="h-px w-full bg-black/10">&nbsp;</div>
-              <Link href="/contact">
+              </BearthSideMenuLink>
+
+              <BearthSideMenuLink href="/contact">
                 <DrawerClose className="uppercase">Contact</DrawerClose>
-              </Link>
-              <div className="h-px w-full bg-black/10">&nbsp;</div>
+              </BearthSideMenuLink>
             </NavigationMenuList>
           </NavigationMenu>
         </div>

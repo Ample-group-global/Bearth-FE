@@ -9,15 +9,26 @@ import { cn } from "@/lib/utils";
 export function BearthNavigationBarLink({
   children,
   href,
+  isLast = false,
 }: {
   href: string;
   children: React.ReactNode;
+  isLast?: boolean;
 }) {
   return (
-    <NavigationMenuItem>
+    <NavigationMenuItem
+      className={cn(
+        "relative",
+        !isLast
+          ? "pr-2 after:absolute after:top-0 after:right-0 after:content-[' '] after:h-full after:w-1 after:mx-1 after:border-r after:border-background"
+          : "",
+      )}
+    >
       <NavigationMenuLink
         href={href}
-        className="text-2xl rounded-3xl px-8 py-2 leading-6 text-background focus:text-background hover:text-background focus:underline hover:underline"
+        className={cn(
+          "text-2xl rounded-3xl px-8 py-2 leading-6 text-background focus:text-background hover:text-background focus:underline hover:underline",
+        )}
       >
         {children}
       </NavigationMenuLink>
@@ -45,10 +56,8 @@ export default function BearthDesktopNavigationBar({
     >
       <NavigationMenuList className="gap-0">
         <BearthNavigationBarLink href="/about">About</BearthNavigationBarLink>
-        <BearthNavigationBarLinkSeparator />
         <BearthNavigationBarLink href="/city">City</BearthNavigationBarLink>
-        <BearthNavigationBarLinkSeparator />
-        <BearthNavigationBarLink href="/mindmap">
+        <BearthNavigationBarLink href="/mindmap" isLast>
           Mindmap
         </BearthNavigationBarLink>
       </NavigationMenuList>

@@ -6,11 +6,12 @@ export default function BearthBackgroundImage() {
       <Image
         src="/assets/bg.jpg"
         alt=""
-        width={2048}
-        height={1262}
+        aria-hidden="true"
         loading="eager"
         fetchPriority="high"
         className="h-full w-full object-cover"
+        fill
+        sizes="100vw"
       />
       {/* Darken the image */}
       {/* <div className="fixed inset-0 bg-black/70" /> */}
