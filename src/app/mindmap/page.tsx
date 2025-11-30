@@ -4,6 +4,7 @@ import { useState } from "react";
 import { MindmapCard } from "@/components/bearth/mindmap/MindmapCard";
 import { CardOverlay } from "@/components/bearth/mindmap/CardOverlay";
 import BearthFooter from "@/components/bearth/navigation/BearthFooter";
+import MaxWidthConstraintedLayout from "@/components/bearth/MaxWidthConstraintedLayout";
 
 const cardContent = {
   1: {
@@ -36,7 +37,14 @@ export default function MindmapPage() {
   const [activeCard, setActiveCard] = useState<number | null>(null);
 
   return (
-    <main className="min-h-screen bg-secondary text-white w-full p-4 flex flex-col items-center pt-24 px-4 md:px-8">
+    <MaxWidthConstraintedLayout
+      as="main"
+      paddingHeader
+      paddingFooter
+      fullHeight
+      outerDivClassName="w-full bg-secondary"
+      className="min-h-screen text-white w-full flex flex-col items-center px-4 lg:py-40"
+    >
       <header className="mb-8 md:mb-12">
         <h1 className="font-black mb-4 md:mb-6 text-4xl md:text-8xl">
           MINDMAP
@@ -118,6 +126,6 @@ export default function MindmapPage() {
       </div>
 
       <BearthFooter />
-    </main>
+    </MaxWidthConstraintedLayout>
   );
 }

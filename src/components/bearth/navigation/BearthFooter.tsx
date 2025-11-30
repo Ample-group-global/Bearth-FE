@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import BreathSocialLinks from "./BreathSocialLinks";
+import BearthSocialLinks from "./BearthSocialLinks";
 
 export default function BearthFooter({
   absolute = false,
@@ -21,7 +21,7 @@ export default function BearthFooter({
       </div>
 
       <div className="flex items-center gap-4">
-        <BreathSocialLinks />
+        <BearthSocialLinks />
       </div>
     </footer>
   );

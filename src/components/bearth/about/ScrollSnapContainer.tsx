@@ -138,6 +138,7 @@ export default function ScrollSnapContainer({
     <div
       ref={containerRef}
       className={`h-screen ${isDesktop ? "overflow-hidden" : "overflow-y-auto"}`}
+      id="scroll-snap-container"
     >
       {children}
     </div>

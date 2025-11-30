@@ -1,7 +1,7 @@
 import { SiDiscord, SiInstagram, SiX } from "@icons-pack/react-simple-icons";
 import Link from "next/link";
 
-export default function BreathSocialLinks() {
+export default function BearthSocialLinks() {
   return (
     <>
       <Link href="#" className="transition-transform hover:scale-110">

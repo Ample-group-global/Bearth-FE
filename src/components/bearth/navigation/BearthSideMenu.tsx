@@ -22,7 +22,7 @@ export function BearthSideMenu() {
         <MenuIcon className="size-8 md:size-10 text-background" />
       </DrawerTrigger>
       <DrawerContent aira-describedby="Bearth Side Menu">
-        <DrawerTitle className="hidden">Breath</DrawerTitle>
+        <DrawerTitle className="hidden">Bearth</DrawerTitle>
         <DrawerHeader className="flex flex-row items-center justify-between">
           <Link href="/">
             <DrawerClose>

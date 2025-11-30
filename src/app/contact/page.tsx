@@ -1,6 +1,6 @@
 import Heading from "@/components/bearth/Heading";
 import MaxWidthConstraintedLayout from "@/components/bearth/MaxWidthConstraintedLayout";
-import BreathSocialLinks from "@/components/bearth/navigation/BreathSocialLinks";
+import BearthSocialLinks from "@/components/bearth/navigation/BearthSocialLinks";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -38,7 +38,7 @@ export default function ContactPage() {
       </div>
 
       <div className="flex flex-row gap-4 justify-center">
-        <BreathSocialLinks />
+        <BearthSocialLinks />
       </div>
 
       <Image
