@@ -18,7 +18,7 @@ import Link from "next/link";
 export function BearthSideMenu() {
   return (
     <Drawer direction="left">
-      <DrawerTrigger>
+      <DrawerTrigger name="open-menu">
         <MenuIcon className="size-8 md:size-10 text-background" />
       </DrawerTrigger>
       <DrawerContent aira-describedby="Bearth Side Menu">
