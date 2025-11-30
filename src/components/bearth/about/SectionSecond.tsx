@@ -19,13 +19,15 @@ export default function SectionSecond() {
         </Heading>
       </div>
       <div className="relative mt-4">
-        <Image
-          src="/assets/about-1.png"
-          alt="Section Second"
-          width={2278}
-          height={1346}
-          className="object-cover rounded-2xl aspect-4/3 lg:aspect-video shadow-2xl"
-        />
+        <div className="relative aspect-4/3 lg:aspect-video shadow-2xl">
+          <Image
+            src="/assets/about-1.png"
+            alt="Section Second"
+            fill
+            sizes="100vw"
+            className="object-cover rounded-2xl"
+          />
+        </div>
         <div className="rounded-2xl lg:rounded-tr-none lg:rounded-bl-none bg-black lg:w-[650px] lg:absolute bottom-0 right-0 py-4 px-4 lg:px-8 mt-4 gap-4 flex flex-col">
           <Paragraph>
             When the bears awoke from their long hibernation, the world had

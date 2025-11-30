@@ -25,6 +25,8 @@ export default function MintPage() {
   }, [wallet]);
 
   const mint = useCallback(async () => {
+    if (typeof window === "undefined" || !window.ethereum) return;
+
     if (!wallet || wallet.type !== "ethereum") return;
 
     console.log("wallet:", wallet);

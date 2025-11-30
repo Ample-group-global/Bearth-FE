@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
+import "./font.css";
 import "./globals.css";
-import { ServerProvider } from "../provider/server-provider";
 import BearthTopBar from "@/components/bearth/navigation/BearthTopBar";
 import BearthTopBarScrollDetection from "@/components/bearth/navigation/BearthTopBarScrollDetection";
 
@@ -28,7 +28,7 @@ export default function RootLayout({
         <BearthTopBarScrollDetection>
           <BearthTopBar />
         </BearthTopBarScrollDetection>
-        <ServerProvider>{children}</ServerProvider>
+        {children}
       </body>
     </html>
   );

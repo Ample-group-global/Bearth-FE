@@ -25,13 +25,15 @@ export default function SectionThird() {
         </Heading>
         <div className="flex flex-col lg:flex-row gap-8">
           <div className="relative lg:w-[550px] flex flex-col gap-4">
-            <Image
-              src="/assets/about-2.png"
-              alt="Section Second"
-              width={2278}
-              height={1346}
-              className="object-cover rounded-2xl aspect-video shadow-xl lg:order-2"
-            />
+            <div className="relative object-cover aspect-video lg:order-2 shadow-xl rounded-2xl overflow-hidden">
+              <Image
+                src="/assets/about-2.png"
+                alt="Section Second"
+                fill
+                sizes="(max-width: 1280px) 50vw, 100vw"
+                className="object-cover"
+              />
+            </div>
             <div className="gap-4 flex flex-col lg:order-1 px-2 lg:px-0">
               <Paragraph type="large">
                 Created by Judy, an architecture student in Lyon, Bearth is
@@ -45,13 +47,15 @@ export default function SectionThird() {
           </div>
 
           <div className="relative lg:w-[550px] flex flex-col gap-4">
-            <Image
-              src="/assets/about-2.png"
-              alt="Section Second"
-              width={2278}
-              height={1346}
-              className="object-cover rounded-2xl aspect-video shadow-xl"
-            />
+            <div className="relative object-cover aspect-video shadow-xl rounded-2xl overflow-hidden">
+              <Image
+                src="/assets/about-2.png"
+                alt="Section Second"
+                fill
+                sizes="(max-width: 1280px) 50vw, 100vw"
+                className="object-cover"
+              />
+            </div>
             <div className="gap-4 flex flex-col px-2 lg:px-0">
               <Paragraph type="large">
                 Judy combines architectural rigor with childlike imagination.
