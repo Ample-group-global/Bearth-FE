@@ -6,7 +6,7 @@ import SectionThird from "@/components/bearth/about/SectionThird";
 import SectionTop from "@/components/bearth/about/SectionTop";
 import BearthBackgroundImage from "@/components/bearth/BearthBackgroundImage";
 
-export default function Page() {
+export default function AboutPage() {
   return (
     <main>
       <BearthBackgroundImage />

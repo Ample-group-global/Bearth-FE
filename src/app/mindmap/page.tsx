@@ -32,7 +32,7 @@ const cardContent = {
   },
 };
 
-export default function Page() {
+export default function MindmapPage() {
   const [activeCard, setActiveCard] = useState<number | null>(null);
 
   return (

@@ -3,7 +3,7 @@ import { BearthButton } from "../../components/bearth/BearthButton";
 import BearthBackgroundImage from "@/components/bearth/BearthBackgroundImage";
 import BearthFooter from "@/components/bearth/navigation/BearthFooter";
 
-export default function Page() {
+export default function HomePage() {
   return (
     <main className="relative min-h-screen w-full">
       <BearthBackgroundImage></BearthBackgroundImage>

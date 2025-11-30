@@ -14,7 +14,7 @@ import type { Hex } from "viem";
 import { sepolia } from "viem/chains";
 import BearthNFT from "../../BearthNFTAbi";
 import { parseEther } from "viem/utils";
-export default function Home() {
+export default function MintPage() {
   const { login, logout, user } = usePrivy();
   const { wallet } = useActiveWallet();
 

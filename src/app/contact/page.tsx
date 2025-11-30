@@ -4,7 +4,7 @@ import BreathSocialLinks from "@/components/bearth/navigation/BreathSocialLinks"
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Page() {
+export default function ContactPage() {
   return (
     <MaxWidthConstraintedLayout
       as="main"
@@ -42,7 +42,7 @@ export default function Page() {
       </div>
 
       <Image
-        className="mt-4 aspect-square max-w-[500px]"
+        className="mt-4 aspect-square w-full max-w-[500px]"
         src="/assets/placeholder.svg"
         alt="Contact"
         width={1000}
