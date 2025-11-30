@@ -14,6 +14,7 @@ import {
 import { MenuIcon, XIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import BearthSocialLinks from "./BearthSocialLinks";
 
 export function BearthSideMenuLink({
   href,
@@ -25,7 +26,7 @@ export function BearthSideMenuLink({
   return (
     <Link
       href={href}
-      className="w-full after:content-[''] after:block after:h-px after:w-full after:bg-black/10"
+      className="leading-[50px] w-full after:content-[''] after:block after:h-px after:w-full after:bg-black/10"
     >
       {children}
     </Link>
@@ -59,10 +60,10 @@ export function BearthSideMenu() {
 
         <div>
           <NavigationMenu
-            className="items-start justify-start p-4 max-w-none [&>div]:w-full"
+            className="items-start justify-start px-8 max-w-none [&>div]:w-full"
             orientation="vertical"
           >
-            <NavigationMenuList className="flex flex-col items-start text-2xl font-semibold leading-normal">
+            <NavigationMenuList className="flex flex-col items-start text-2xl font-semibold leading-normal gap-0">
               <BearthSideMenuLink href="/about">
                 <DrawerClose className="uppercase">About</DrawerClose>
               </BearthSideMenuLink>
@@ -82,7 +83,19 @@ export function BearthSideMenu() {
           </NavigationMenu>
         </div>
 
-        <DrawerFooter></DrawerFooter>
+        <DrawerFooter className="flex flex-row items-center justify-between p-8">
+          <div className="flex flex-row gap-4 filter brightness-0">
+            <BearthSocialLinks />
+          </div>
+          <div className="flex flex-col gap-1 text-[8px]">
+            <p>BEARTH LABS, INC ⓒ 2025</p>
+            <p className="underline">
+              <Link href="mailto:official@bearth.earth">
+                official@bearth.earth
+              </Link>
+            </p>
+          </div>
+        </DrawerFooter>
       </DrawerContent>
     </Drawer>
   );
