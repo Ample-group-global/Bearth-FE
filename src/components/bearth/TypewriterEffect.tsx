@@ -21,6 +21,7 @@ interface TypewriterEffectProps {
   font: any;
   textColor: string;
   style?: CSSProperties;
+  className?: string;
 }
 
 /**
@@ -41,6 +42,7 @@ export default function TypewriterEffect(props: TypewriterEffectProps) {
     font,
     textColor,
     style,
+    className,
   } = props;
 
   const [displayed, setDisplayed] = useState("");
@@ -150,6 +152,7 @@ export default function TypewriterEffect(props: TypewriterEffectProps) {
         whiteSpace: "pre",
       }}
       aria-live="polite"
+      className={className}
     >
       {displayed}
       <span

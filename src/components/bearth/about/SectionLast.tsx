@@ -2,6 +2,7 @@ import MaxWidthConstraintedLayout from "../MaxWidthConstraintedLayout";
 import Heading from "../Heading";
 import Paragraph from "../Paragraph";
 import { BearthButton } from "../BearthButton";
+import BearthBackgroundImage from "../BearthBackgroundImage";
 
 export default function SectionLast() {
   return (
@@ -10,6 +11,8 @@ export default function SectionLast() {
       paddingHeader
       paddingFooter
       className="px-4 py-40 lg:py-60 text-white flex flex-col justify-between min-h-screen"
+      outerDivClassName="relative"
+      slotOutside={<BearthBackgroundImage absolute darken />}
     >
       <div className="flex flex-col items-center justify-center text-center">
         <Heading type="h1">

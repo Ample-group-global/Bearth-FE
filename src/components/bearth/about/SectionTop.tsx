@@ -1,3 +1,4 @@
+import BearthBackgroundImage from "../BearthBackgroundImage";
 import Heading from "../Heading";
 import MaxWidthConstraintedLayout from "../MaxWidthConstraintedLayout";
 import BearthFooter from "../navigation/BearthFooter";
@@ -7,14 +8,21 @@ export default function SectionTop() {
   return (
     <MaxWidthConstraintedLayout
       as="section"
-      className="flex flex-col justify-between pt-20 relative min-h-screen lg:py-40"
+      outerDivClassName="relative"
+      className="reflex flex-col justify-between pt-20 relative min-h-screen lg:py-40"
       paddingHeader
       paddingFooter
+      slotOutside={
+        <>
+          <BearthBackgroundImage absolute />
+          <BearthFooter absolute />
+        </>
+      }
     >
       {/* Hero Section */}
       <div className="p-4 lg:p-12 flex flex-col lg:grow">
         <div className="grow flex flex-col lg:flex-row lg:justify-between">
-          <p className="text-white text-sm lg:text-[32px] font-bold mb-2 lg:mb-0">
+          <p className="text-shadow-lg text-white text-sm lg:text-[32px] font-bold mb-2 lg:mb-0">
             About BEARTH
           </p>
           <Heading type="h1" className="text-white mb-2 lg:mb-0">
@@ -31,6 +39,7 @@ export default function SectionTop() {
           </Heading>
           <h2 className="lg:hidden">
             <TypewriterEffect
+              className="text-shadow-lg"
               words={[
                 { word: "Who Has Lost Something Precious" },
                 { word: "Who Believes In Second Chances" },
@@ -53,6 +62,7 @@ export default function SectionTop() {
           </h2>
           <h2 className="hidden lg:block h-[64px]">
             <TypewriterEffect
+              className="text-shadow-lg"
               words={[
                 { word: "Who Has Lost Something Precious" },
                 { word: "Who Believes In Second Chances" },
@@ -75,7 +85,6 @@ export default function SectionTop() {
           </h2>
         </div>
       </div>
-      <BearthFooter absolute />
     </MaxWidthConstraintedLayout>
   );
 }

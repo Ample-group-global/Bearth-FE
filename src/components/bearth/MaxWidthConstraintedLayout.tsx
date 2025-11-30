@@ -9,6 +9,7 @@ export default function MaxWidthConstraintedLayout({
   paddingHeader = false,
   paddingFooter = false,
   as = "div",
+  slotOutside,
 }: {
   children: React.ReactNode;
   as?: "div" | "main" | "section";
@@ -17,6 +18,7 @@ export default function MaxWidthConstraintedLayout({
   fullHeight?: boolean;
   paddingHeader?: boolean;
   paddingFooter?: boolean;
+  slotOutside?: React.ReactNode;
 }) {
   return (
     <div className={cn(fullHeight && "min-h-screen", outerDivClassName)}>
@@ -32,6 +34,7 @@ export default function MaxWidthConstraintedLayout({
         },
         children,
       )}
+      {slotOutside}
     </div>
   );
 }
