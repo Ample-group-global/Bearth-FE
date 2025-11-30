@@ -1,10 +1,22 @@
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 
-export default function BearthBackgroundImage() {
+export default function BearthBackgroundImage({
+  absolute = false,
+  darken = false,
+}: {
+  absolute?: boolean;
+  darken?: boolean;
+}) {
   return (
-    <div className="fixed inset-0 w-screen h-screen -z-1">
+    <div
+      className={cn(
+        "inset-0 w-screen h-screen -z-1",
+        absolute ? "absolute" : "fixed",
+      )}
+    >
       <Image
-        src="/assets/bg.jpg"
+        src="/assets/bg.png"
         alt=""
         aria-hidden="true"
         loading="eager"
@@ -14,7 +26,11 @@ export default function BearthBackgroundImage() {
         sizes="100vw"
       />
       {/* Darken the image */}
-      {/* <div className="fixed inset-0 bg-black/70" /> */}
+      {darken && (
+        <div
+          className={cn("inset-0 bg-black/70", absolute ? "absolute" : "fixed")}
+        />
+      )}
     </div>
   );
 }
