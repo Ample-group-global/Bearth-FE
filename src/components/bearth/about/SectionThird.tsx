@@ -27,7 +27,7 @@ export default function SectionThird() {
           <div className="relative lg:w-[550px] flex flex-col gap-4">
             <div className="relative object-cover aspect-video lg:order-2 shadow-xl rounded-2xl overflow-hidden">
               <Image
-                src="/assets/about-2.png"
+                src="/assets/about-l.png"
                 alt="Section Second"
                 fill
                 sizes="(max-width: 1280px) 50vw, 100vw"
@@ -49,7 +49,7 @@ export default function SectionThird() {
           <div className="relative lg:w-[550px] flex flex-col gap-4">
             <div className="relative object-cover aspect-video shadow-xl rounded-2xl overflow-hidden">
               <Image
-                src="/assets/about-2.png"
+                src="/assets/about-r.png"
                 alt="Section Second"
                 fill
                 sizes="(max-width: 1280px) 50vw, 100vw"

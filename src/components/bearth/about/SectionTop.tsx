@@ -9,7 +9,7 @@ export default function SectionTop() {
     <MaxWidthConstraintedLayout
       as="section"
       outerDivClassName="relative"
-      className="reflex flex-col justify-between pt-20 relative min-h-screen lg:py-40"
+      className="flex flex-col justify-between pt-20 relative min-h-screen lg:py-40"
       paddingHeader
       paddingFooter
       slotOutside={
@@ -39,48 +39,24 @@ export default function SectionTop() {
           </Heading>
           <h2 className="lg:hidden">
             <TypewriterEffect
-              className="text-shadow-lg"
-              words={[
-                { word: "Who Has Lost Something Precious" },
-                { word: "Who Believes In Second Chances" },
-                { word: "Who Dreams Of A Gentler World" },
-              ]}
-              typingSpeed={100}
-              deletingSpeed={100}
-              pauseDuration={1000}
-              cursorColor="#FFFFFF"
-              cursorWidth={2}
-              cursorHeight={100}
+              {...typewriterDefaultOptions}
               font={{
                 fontFamily: "hoss-round",
                 fontSize: "18px",
                 fontWeight: "600",
                 lineHeight: "1",
               }}
-              textColor="#FFFFFF"
             />
           </h2>
           <h2 className="hidden lg:block h-[64px]">
             <TypewriterEffect
-              className="text-shadow-lg"
-              words={[
-                { word: "Who Has Lost Something Precious" },
-                { word: "Who Believes In Second Chances" },
-                { word: "Who Dreams Of A Gentler World" },
-              ]}
-              typingSpeed={100}
-              deletingSpeed={100}
-              pauseDuration={1000}
-              cursorColor="#FFFFFF"
-              cursorWidth={2}
-              cursorHeight={100}
+              {...typewriterDefaultOptions}
               font={{
                 fontFamily: "hoss-round",
                 fontSize: "64px",
                 fontWeight: "600",
                 lineHeight: "1",
               }}
-              textColor="#FFFFFF"
             />
           </h2>
         </div>
@@ -88,3 +64,20 @@ export default function SectionTop() {
     </MaxWidthConstraintedLayout>
   );
 }
+
+const typewriterDefaultOptions = {
+  prefix: "Who ",
+  className: "text-shadow-lg",
+  words: [
+    { word: "Has Lost Something Precious" },
+    { word: "Believes In Second Chances" },
+    { word: "Dreams Of A Gentler World" },
+  ],
+  typingSpeed: 50,
+  deletingSpeed: 50,
+  pauseDuration: 1000,
+  cursorColor: "#FFFFFF",
+  cursorWidth: 2,
+  cursorHeight: 100,
+  textColor: "#FFFFFF",
+};

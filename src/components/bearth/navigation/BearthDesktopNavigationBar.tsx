@@ -9,21 +9,12 @@ import { cn } from "@/lib/utils";
 export function BearthNavigationBarLink({
   children,
   href,
-  isLast = false,
 }: {
   href: string;
   children: React.ReactNode;
-  isLast?: boolean;
 }) {
   return (
-    <NavigationMenuItem
-      className={cn(
-        "relative",
-        !isLast
-          ? "pr-2 after:absolute after:top-0 after:right-0 after:content-[' '] after:h-full after:w-1 after:mx-1 after:border-r after:border-background"
-          : "",
-      )}
-    >
+    <NavigationMenuItem className={cn("relative")}>
       <NavigationMenuLink
         href={href}
         className={cn(
@@ -57,7 +48,7 @@ export default function BearthDesktopNavigationBar({
       <NavigationMenuList className="gap-0">
         <BearthNavigationBarLink href="/about">About</BearthNavigationBarLink>
         <BearthNavigationBarLink href="/city">City</BearthNavigationBarLink>
-        <BearthNavigationBarLink href="/mindmap" isLast>
+        <BearthNavigationBarLink href="/mindmap">
           Mindmap
         </BearthNavigationBarLink>
       </NavigationMenuList>

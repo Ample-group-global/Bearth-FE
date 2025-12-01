@@ -7,7 +7,7 @@ export default function Paragraph({
 }: {
   children: React.ReactNode;
   className?: string;
-  type?: "normal" | "large" | "large2";
+  type?: "normal" | "large" | "large2" | "normal2";
 }) {
   return (
     <p
@@ -16,6 +16,7 @@ export default function Paragraph({
         type === "normal" && "text-xs md:text-base",
         type === "large" && "text-xs md:text-2xl",
         type === "large2" && "text-base md:text-2xl",
+        type === "normal2" && "text-xs md:text-base leading-[1.2]",
         className,
       )}
     >

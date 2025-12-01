@@ -11,6 +11,7 @@ import {
 import { addPropertyControls, ControlType } from "framer";
 
 interface TypewriterEffectProps {
+  prefix?: string;
   words: { word: string }[];
   typingSpeed: number;
   deletingSpeed: number;
@@ -43,6 +44,7 @@ export default function TypewriterEffect(props: TypewriterEffectProps) {
     textColor,
     style,
     className,
+    prefix,
   } = props;
 
   const [displayed, setDisplayed] = useState("");
@@ -154,7 +156,7 @@ export default function TypewriterEffect(props: TypewriterEffectProps) {
       aria-live="polite"
       className={className}
     >
-      {displayed}
+      {prefix}{displayed}
       <span
         aria-hidden="true"
         style={{

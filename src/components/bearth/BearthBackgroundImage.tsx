@@ -11,8 +11,8 @@ export default function BearthBackgroundImage({
   return (
     <div
       className={cn(
-        "inset-0 w-screen h-screen -z-1",
-        absolute ? "absolute" : "fixed",
+        "inset-0 -z-1",
+        absolute ? "absolute w-full h-full" : "fixed w-screen h-screen",
       )}
     >
       <Image
