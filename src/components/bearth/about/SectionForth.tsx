@@ -19,6 +19,7 @@ export function SectionForthVideo({ className }: { className?: string }) {
         autoPlay
         muted
         loop
+        playsInline
       >
         <source src="/assets/about-3.webm" type="video/webm" />
         <source src="/assets/about-3.mp4" type="video/mp4" />
