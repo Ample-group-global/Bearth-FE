@@ -2,19 +2,15 @@ import MaxWidthConstraintedLayout from "../MaxWidthConstraintedLayout";
 import Heading from "../Heading";
 import Paragraph from "../Paragraph";
 import { cn } from "@/lib/utils";
+import AnimatedTitle from "./AnimatedTitle";
 
 export function SectionForthVideo({ className }: { className?: string }) {
   return (
-    <div
-      className={cn(
-        "relative lg:w-[550px] flex flex-col rounded-2xl",
-        className,
-      )}
-    >
-      <div className="absolute inset-0 rounded-2xl shadow-[0px_4px_4px_0px_#00000040_inset]"></div>
+    <div className={cn("relative flex flex-col rounded-2xl", className)}>
+      <div className="absolute inset-0 rounded-2xl shadow-[0px_4px_4px_0px_#00000040_inset] aspect-4/5"></div>
 
       <video
-        className="object-cover rounded-2xl aspect-square"
+        className="object-cover rounded-2xl aspect-4/5"
         controls={false}
         autoPlay
         muted
@@ -33,21 +29,24 @@ export default function SectionForth() {
   return (
     <MaxWidthConstraintedLayout
       as="section"
-      paddingHeader
-      paddingFooter
-      className="px-4 text-white flex justify-center min-h-screen lg:h-screen items-center"
+      className="px-4 text-white flex justify-center desktop:h-screen items-center py-4 desktop:pt-20 desktop:pb-8"
       outerDivClassName="w-full bg-primary"
     >
-      <div className="flex flex-col gap-6">
-        <Heading type="h1" className="uppercase">
-          When Mary <br /> Became a <br className="block lg:hidden" /> Universe
-        </Heading>
+      <div className="flex flex-col gap-6 w-full">
+        <AnimatedTitle>
+          <Heading type="h1" className="uppercase">
+            When Mary <br /> Became a <br className="block lg:hidden" />{" "}
+            Universe
+          </Heading>
+        </AnimatedTitle>
+
         <Heading type="h2" as="h2" className="leading-none">
           BEARTH isn't just imagined— <br />
           it's constructed.
         </Heading>
-        <div className="flex flex-col lg:flex-row gap-8">
-          <div className="relative lg:w-[550px] flex flex-col gap-4">
+
+        <div className="flex flex-col lg:flex-row gap-8 flex-1">
+          <div className="relative lg:w-[550px] flex flex-col gap-4 flex-3 justify-center">
             <Paragraph type="large">
               Every universe begins with a spark. For Bearth, it was a teddy
               bear named Mary.
@@ -83,7 +82,9 @@ export default function SectionForth() {
             </Paragraph>
           </div>
 
-          <SectionForthVideo className="hidden lg:flex" />
+          <div className="flex-1 hidden lg:flex">
+            <SectionForthVideo />
+          </div>
         </div>
       </div>
     </MaxWidthConstraintedLayout>

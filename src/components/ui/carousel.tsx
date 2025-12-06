@@ -18,6 +18,7 @@ type CarouselProps = {
   plugins?: CarouselPlugin;
   orientation?: "horizontal" | "vertical";
   setApi?: (api: CarouselApi) => void;
+  onSlideChange?: (...props: any[]) => void;
 };
 
 type CarouselContextProps = {
@@ -48,6 +49,7 @@ function Carousel({
   plugins,
   className,
   children,
+  onSlideChange,
   ...props
 }: React.ComponentProps<"div"> & CarouselProps) {
   const [carouselRef, api] = useEmblaCarousel(
@@ -102,6 +104,14 @@ function Carousel({
       api?.off("select", onSelect);
     };
   }, [api, onSelect]);
+
+  React.useEffect(() => {
+    if (!api || !onSlideChange) return;
+    api.on("slidesInView", onSlideChange);
+    return () => {
+      api?.off("slidesInView", onSlideChange);
+    };
+  }, [api, onSlideChange]);
 
   return (
     <CarouselContext.Provider

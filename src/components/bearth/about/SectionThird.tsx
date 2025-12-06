@@ -2,39 +2,42 @@ import Image from "next/image";
 import MaxWidthConstraintedLayout from "../MaxWidthConstraintedLayout";
 import Heading from "../Heading";
 import Paragraph from "../Paragraph";
+import AnimatedTitle from "./AnimatedTitle";
 
 export default function SectionThird() {
   return (
     <MaxWidthConstraintedLayout
       as="section"
-      paddingHeader
-      paddingFooter
-      className="px-4 text-white flex justify-center min-h-screen items-center"
+      className="px-4 text-white flex justify-center desktop:h-screen items-center py-4 desktop:pt-20 desktop:pb-8"
       outerDivClassName="w-full bg-primary"
     >
-      <div className="flex flex-col gap-6">
-        <Heading type="h1" className="uppercase">
-          Building a Universe, <br />
-          One Nap at a&nbsp;
-          <br className="block lg:hidden" />
-          Time
-        </Heading>
+      <div className="flex flex-col gap-6 h-full min-h-0">
+        <AnimatedTitle>
+          <Heading type="h1" className="uppercase">
+            Building a Universe, <br />
+            One Nap at a&nbsp;
+            <br className="block lg:hidden" />
+            Time
+          </Heading>
+        </AnimatedTitle>
+
         <Heading type="h2" as="h2" className="leading-none">
           BEARTH isn't just imagined— <br />
           it's constructed.
         </Heading>
-        <div className="flex flex-col lg:flex-row gap-8">
-          <div className="relative lg:w-[550px] flex flex-col gap-4">
-            <div className="relative object-cover aspect-video lg:order-2 shadow-xl rounded-2xl overflow-hidden">
+
+        <div className="flex flex-col lg:flex-row gap-8 min-h-0 flex-1">
+          <div className="relative flex flex-col gap-4 flex-1 min-w-0 min-h-0">
+            <div className="w-full aspect-video overflow-hidden">
               <Image
                 src="/assets/about-l.png"
                 alt="Section Second"
-                fill
-                sizes="(max-width: 1280px) 50vw, 100vw"
-                className="object-cover"
+                className="object-cover relative lg:order-2 shadow-xl rounded-2xl w-full h-full"
+                width={9000}
+                height={9000}
               />
             </div>
-            <div className="gap-4 flex flex-col lg:order-1 px-2 lg:px-0">
+            <div className="gap-4 flex flex-col lg:order-1 px-2 lg:px-0 shrink-0">
               <Paragraph type="large">
                 Created by Judy, an architecture student in Lyon, Bearth is
                 built with the same vision she brings to her studies.
@@ -46,17 +49,17 @@ export default function SectionThird() {
             </div>
           </div>
 
-          <div className="relative lg:w-[550px] flex flex-col gap-4">
-            <div className="relative object-cover aspect-video shadow-xl rounded-2xl overflow-hidden">
+          <div className="relative flex flex-col gap-4 flex-1 min-w-0 min-h-0">
+            <div className="lg:order-2 w-full overflow-hidden">
               <Image
-                src="/assets/about-r.png"
+                src="/assets/about-2.png"
                 alt="Section Second"
-                fill
-                sizes="(max-width: 1280px) 50vw, 100vw"
-                className="object-cover"
+                className="object-cover relative lg:order-2 shadow-xl rounded-2xl w-full h-full"
+                width={9000}
+                height={9000}
               />
             </div>
-            <div className="gap-4 flex flex-col px-2 lg:px-0">
+            <div className="gap-4 flex flex-col px-2 lg:px-0 shrink-0">
               <Paragraph type="large">
                 Judy combines architectural rigor with childlike imagination.
                 For her, art is the language of the soul—a force for change,

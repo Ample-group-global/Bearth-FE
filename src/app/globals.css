@@ -3,6 +3,9 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+@custom-variant desktop (@media (min-height: 800px) and (min-width: 1024px));
+@custom-variant hlg (@media (min-height: 1000px) and (min-width: 1024px));
+
 @theme inline {
   --breakpoint-xs: 22rem;
   --radius-sm: calc(var(--radius) - 4px);
@@ -75,6 +78,19 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+}
+
+@layer utilities {
+  /* Hide scrollbar for Chrome, Safari, Edge, and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge, and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
 }
 
 @layer base {

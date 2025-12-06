@@ -19,7 +19,7 @@ export default function Heading({
     {
       className: cn(
         "text-shadow-lg",
-        type === "h1" && "text-4xl lg:text-8xl font-black",
+        type === "h1" && "text-4xl hlg:text-8xl lg:text-6xl font-black",
         type === "h2" && "text-lg lg:text-[64px] font-semibold",
         type === "h3" && "text-[24px] lg:text-[48px]",
         className,

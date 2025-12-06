@@ -5,6 +5,7 @@ interface ScrollSnapContainerProps {
   totalSections: number;
 }
 
+import { cn } from "@/lib/utils";
 import { useEffect, useRef, useState } from "react";
 
 export default function ScrollSnapContainer({
@@ -19,9 +20,8 @@ export default function ScrollSnapContainer({
 
   useEffect(() => {
     const checkIsDesktop = () => {
-      setIsDesktop(window.innerWidth >= 1280 && window.innerHeight >= 720);
+      setIsDesktop(window.innerWidth >= 1024 && window.innerHeight >= 800);
     };
-
     checkIsDesktop();
     window.addEventListener("resize", checkIsDesktop);
 
@@ -137,7 +137,10 @@ export default function ScrollSnapContainer({
   return (
     <div
       ref={containerRef}
-      className={`h-screen ${isDesktop ? "overflow-hidden" : "overflow-y-auto"}`}
+      className={cn(
+        `h-screen no-scrollbar`,
+        isDesktop ? "overflow-hidden" : "overflow-y-auto",
+      )}
       id="scroll-snap-container"
     >
       {children}
