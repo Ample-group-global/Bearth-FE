@@ -2,38 +2,9 @@
 
 import BearthFooter from "@/components/bearth/navigation/BearthFooter";
 import MaxWidthConstraintedLayout from "@/components/bearth/MaxWidthConstraintedLayout";
-import NewGrid from "@/components/bearth/mindmap/MindmapGrid";
-
-const cardContent = {
-  1: {
-    title: "Vision & Value",
-    content: <></>,
-  },
-  2: {
-    title: "Community",
-    content: <></>,
-  },
-  3: {
-    title: "Expand",
-    content: <></>,
-  },
-  4: {
-    title: "Digital",
-    content: <></>,
-  },
-  5: {
-    title: "Physical",
-    content: <></>,
-  },
-  6: {
-    title: "Hybrid",
-    content: <></>,
-  },
-};
+import MindmapGrid from "@/components/bearth/mindmap/MindmapGrid";
 
 export default function MindmapPage() {
-  // const [activeCard, setActiveCard] = useState<number | null>(null);
-
   return (
     <MaxWidthConstraintedLayout
       as="main"
@@ -62,7 +33,7 @@ export default function MindmapPage() {
         </div>
       </header>
 
-      <NewGrid />
+      <MindmapGrid />
 
       <BearthFooter />
     </MaxWidthConstraintedLayout>
