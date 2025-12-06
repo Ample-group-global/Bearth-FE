@@ -65,7 +65,7 @@ export default function SectionSecond() {
       as="section"
       // paddingHeader
       // paddingFooter
-      className="px-8 py-4 desktop:pt-20 desktop:pb-8 text-white flex flex-col justify-center desktop:h-screen"
+      className="px-8 py-8 desktop:pt-20 desktop:pb-8 text-white flex flex-col justify-center min-h-screen desktop:h-screen"
       outerDivClassName="w-full bg-primary"
     >
       <div className="flex flex-col items-center justify-center text-center">

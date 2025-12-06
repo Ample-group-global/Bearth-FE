@@ -8,9 +8,9 @@ export default function AnimatedTitle({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, translateY: "50%" }}
+      initial={{ opacity: 0, translateY: "90px" }}
       whileInView={{ opacity: 1, translateY: 0 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.7 }}
     >
       {children}
     </motion.div>
