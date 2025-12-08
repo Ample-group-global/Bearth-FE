@@ -10,12 +10,12 @@ export default function SectionLast() {
       as="section"
       paddingHeader
       paddingFooter
-      className="px-4 py-40 lg:py-60 text-white flex flex-col justify-between min-h-screen"
+      className="px-4 py-24 lg:py-40 text-white flex flex-col min-h-screen"
       outerDivClassName="relative"
-      slotOutside={<BearthBackgroundImage absolute darken />}
+      slotOutside={<BearthBackgroundImage src="/assets/about-bg-bottom.png" absolute containerClassName="bg-secondary" />}
     >
       <div className="flex flex-col items-center justify-center text-center">
-        <Heading type="h1">
+        <Heading type="h1" className="uppercase text-primary title-stroke-white">
           Find Your Place <br /> in the Stars
         </Heading>
       </div>

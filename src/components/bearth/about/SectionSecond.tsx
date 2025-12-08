@@ -66,17 +66,19 @@ export default function SectionSecond() {
       // paddingHeader
       // paddingFooter
       className="px-8 py-8 desktop:pt-20 desktop:pb-8 text-white flex flex-col justify-center min-h-screen desktop:h-screen"
-      outerDivClassName="w-full bg-primary"
+      outerDivClassName="w-full bg-secondary"
     >
       <div className="flex flex-col items-center justify-center text-center">
         <AnimatedTitle>
-          <Heading type="h1">Welcome to Bearth!</Heading>
+          <Heading type="h1" className="uppercase text-primary title-stroke-black">
+            Welcome to Bearth!
+          </Heading>
         </AnimatedTitle>
         <Heading type="h3" as="h2">
           BEARTH = BEAR+EARTH+BIRTH
         </Heading>
       </div>
-      <div className="place-self-center overflow-hidden relative">
+      <div className="place-self-center overflow-hidden relative mt-4 rounded-2xl">
         <SectionSecondCarousel
           slideText={sections.map((section) => ({
             text: section.text,

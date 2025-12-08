@@ -2,26 +2,33 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 
 export default function BearthBackgroundImage({
+  src,
   absolute = false,
   darken = false,
+  containerClassName,
+  imageClassName,
 }: {
+  src: string;
   absolute?: boolean;
   darken?: boolean;
+  containerClassName?: string;
+  imageClassName?: string;
 }) {
   return (
     <div
       className={cn(
         "inset-0 -z-1",
         absolute ? "absolute w-full h-full" : "fixed w-screen h-screen",
+        containerClassName,
       )}
     >
       <Image
-        src="/assets/bg.png"
+        src={src}
         alt=""
         aria-hidden="true"
         loading="eager"
         fetchPriority="high"
-        className="h-full w-full object-cover"
+        className={cn("h-full w-full object-cover", imageClassName)}
         fill
         sizes="100vw"
       />

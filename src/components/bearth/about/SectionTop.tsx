@@ -14,7 +14,7 @@ export default function SectionTop() {
       paddingFooter
       slotOutside={
         <>
-          <BearthBackgroundImage absolute />
+          <BearthBackgroundImage src="/assets/about-bg-top.png" absolute />
           <BearthFooter absolute />
         </>
       }
@@ -25,7 +25,10 @@ export default function SectionTop() {
           <p className="text-shadow-lg text-white text-sm lg:text-[32px] font-bold mb-2 lg:mb-0">
             About BEARTH
           </p>
-          <Heading type="h1" className="text-white mb-2 lg:mb-0">
+          <Heading
+            type="h1"
+            className="text-primary mb-2 lg:mb-0 title-stroke-white"
+          >
             A Universe
             <br />
             Born from&nbsp;

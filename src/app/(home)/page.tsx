@@ -6,7 +6,7 @@ import BearthFooter from "@/components/bearth/navigation/BearthFooter";
 export default function HomePage() {
   return (
     <main className="relative min-h-screen w-full">
-      <BearthBackgroundImage></BearthBackgroundImage>
+      <BearthBackgroundImage src="/assets/home-bg.png"></BearthBackgroundImage>
       {/* Content Container */}
       <div className="relative z-1 flex min-h-screen flex-col items-center justify-between px-4 py-6 md:px-8">
         {/* Hero Section */}

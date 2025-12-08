@@ -9,11 +9,11 @@ export default function SectionThird() {
     <MaxWidthConstraintedLayout
       as="section"
       className="px-4 text-white flex justify-center desktop:h-screen items-center py-4 desktop:pt-20 desktop:pb-8"
-      outerDivClassName="w-full bg-primary"
+      outerDivClassName="w-full bg-secondary"
     >
-      <div className="flex flex-col gap-6 h-full min-h-0">
+      <div className="flex flex-col gap-6 h-full hlg:h-fit min-h-0">
         <AnimatedTitle>
-          <Heading type="h1" className="uppercase">
+          <Heading type="h1" className="uppercase text-primary title-stroke-black">
             Building a Universe, <br />
             One Nap at a&nbsp;
             <br className="block lg:hidden" />
@@ -21,7 +21,7 @@ export default function SectionThird() {
           </Heading>
         </AnimatedTitle>
 
-        <Heading type="h2" as="h2" className="leading-none">
+        <Heading type="h3" as="h2" className="font-semibold leading-none">
           BEARTH isn't just imagined— <br />
           it's constructed.
         </Heading>

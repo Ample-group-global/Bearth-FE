@@ -30,23 +30,18 @@ export default function SectionForth() {
     <MaxWidthConstraintedLayout
       as="section"
       className="px-4 text-white flex justify-center desktop:h-screen items-center py-4 desktop:pt-20 desktop:pb-8"
-      outerDivClassName="w-full bg-primary"
+      outerDivClassName="w-full bg-secondary"
     >
       <div className="flex flex-col gap-6 w-full">
         <AnimatedTitle>
-          <Heading type="h1" className="uppercase">
+          <Heading type="h1" className="uppercase text-primary title-stroke-black">
             When Mary <br /> Became a <br className="block lg:hidden" />{" "}
             Universe
           </Heading>
         </AnimatedTitle>
 
-        <Heading type="h2" as="h2" className="leading-none">
-          BEARTH isn't just imagined— <br />
-          it's constructed.
-        </Heading>
-
         <div className="flex flex-col lg:flex-row gap-8 flex-1">
-          <div className="relative lg:w-[550px] flex flex-col gap-4 flex-3 justify-center">
+          <div className="relative lg:w-[550px] flex flex-col gap-4 desktop:flex-2 hlg:flex-1 justify-center">
             <Paragraph type="large">
               Every universe begins with a spark. For Bearth, it was a teddy
               bear named Mary.
