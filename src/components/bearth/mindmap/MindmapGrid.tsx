@@ -6,6 +6,7 @@ import { XIcon } from "lucide-react";
 import Heading from "../Heading";
 import Paragraph from "../Paragraph";
 import BearthBadge from "../BearthBadge";
+import { cn } from "@/lib/utils";
 
 const items = [
   {
@@ -13,6 +14,7 @@ const items = [
     number: "1",
     title: "Vision\n& Value",
     contentTitle: "Vision & Value",
+    desktop2Line: true,
     content: (
       <div className="flex flex-col gap-2">
         <div>
@@ -74,6 +76,7 @@ const items = [
     id: 2,
     number: "2",
     title: "Community",
+    desktop2Line: true,
     content: (
       <div className="flex flex-col gap-2">
         <div>
@@ -119,6 +122,7 @@ const items = [
     id: 3,
     number: "3",
     title: "Expand",
+    desktop2Line: true,
     content: (
       <div className="flex flex-col gap-2">
         <div>
@@ -186,6 +190,7 @@ const items = [
     id: 4,
     number: "4",
     title: "Digital",
+    desktop2Line: false,
     content: (
       <div className="flex flex-col gap-2">
         <div>
@@ -230,6 +235,7 @@ const items = [
     id: 5,
     number: "5",
     title: "Physical",
+    desktop2Line: false,
     content: (
       <div className="flex flex-col gap-2">
         <div>
@@ -285,6 +291,7 @@ const items = [
     id: 6,
     number: "6",
     title: "Hybrid",
+    desktop2Line: false,
     content: (
       <div className="flex flex-col gap-2">
         <div>
@@ -365,7 +372,7 @@ export default function MindmapGrid() {
               <motion.div
                 key={item.id}
                 layoutId={`card-${item.id}`}
-                className={`relative cursor-pointer overflow-hidden rounded-xl aspect-square lg:aspect-auto lg:rounded-2xl z-0 bg-[#EBE7E0] ${getGridClasses(index)}`}
+                className={`relative cursor-pointer overflow-hidden rounded-xl aspect-square lg:aspect-auto lg:rounded-2xl z-0 bg-[#EBE7E0] shadow-[3px_3px_4px_0px_#00000040_inset] ${getGridClasses(index)}`}
                 onClick={() => setExpandedId(item.id)}
                 transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
               >
@@ -376,17 +383,22 @@ export default function MindmapGrid() {
                   sizes="(max-width: 768px) 50vw, 30vw"
                   className="-z-1 object-cover lg:hidden mix-blend-darken"
                 ></Image>
-                <div className="relative flex h-full w-full flex-col p-4 justify-between lg:items-start lg:justify-end lg:p-6 lg:text-left">
+                <div
+                  className={cn(
+                    "relative flex h-full w-full p-4 justify-between lg:items-start lg:justify-end lg:p-6 lg:text-left flex-col",
+                    !item.desktop2Line && "lg:items-center lg:justify-start lg:gap-6 lg:flex-row",
+                  )}
+                >
                   <motion.div
                     layoutId={`number-${item.id}`}
-                    className="text-3xl font-bold text-[#2d3748] lg:text-5xl"
+                    className="text-3xl font-semibold text-[#2d3748] lg:text-[80px]"
                     transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
                   >
                     {item.number}
                   </motion.div>
                   <motion.h2
                     layoutId={`title-${item.id}`}
-                    className="mt-2 whitespace-pre-line text-sm font-bold text-[#2d3748] text-right lg:text-left lg:mt-1 lg:text-lg"
+                    className="mt-2 whitespace-pre-line text-sm font-semibold text-[#2d3748] text-right lg:text-left lg:mt-1 lg:text-[60px]"
                     transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
                   >
                     {item.title}

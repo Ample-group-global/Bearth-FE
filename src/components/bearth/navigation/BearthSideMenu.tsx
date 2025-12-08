@@ -68,9 +68,9 @@ export function BearthSideMenu() {
                 <DrawerClose className="uppercase">About</DrawerClose>
               </BearthSideMenuLink>
 
-              <BearthSideMenuLink href="/city">
+              {/* <BearthSideMenuLink href="/city">
                 <DrawerClose className="uppercase">City</DrawerClose>
-              </BearthSideMenuLink>
+              </BearthSideMenuLink> */}
 
               <BearthSideMenuLink href="/mindmap">
                 <DrawerClose className="uppercase">Mindmap</DrawerClose>
