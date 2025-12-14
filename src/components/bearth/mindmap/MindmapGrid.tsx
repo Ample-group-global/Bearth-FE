@@ -15,6 +15,7 @@ const items = [
     title: "Vision\n& Value",
     contentTitle: "Vision & Value",
     desktop2Line: true,
+    image: "/assets/mindmap-vision-and-value.png",
     content: (
       <div className="flex flex-col gap-2">
         <div>
@@ -77,6 +78,7 @@ const items = [
     number: "2",
     title: "Community",
     desktop2Line: true,
+    image: "/assets/mindmap-community.png",
     content: (
       <div className="flex flex-col gap-2">
         <div>
@@ -123,6 +125,7 @@ const items = [
     number: "3",
     title: "Expand",
     desktop2Line: true,
+    image: "/assets/mindmap-item-placeholder-outline.png",
     content: (
       <div className="flex flex-col gap-2">
         <div>
@@ -191,6 +194,7 @@ const items = [
     number: "4",
     title: "Digital",
     desktop2Line: false,
+    image: "/assets/mindmap-item-placeholder-outline.png",
     content: (
       <div className="flex flex-col gap-2">
         <div>
@@ -236,6 +240,7 @@ const items = [
     number: "5",
     title: "Physical",
     desktop2Line: false,
+    image: "/assets/mindmap-physical.png",
     content: (
       <div className="flex flex-col gap-2">
         <div>
@@ -292,6 +297,7 @@ const items = [
     number: "6",
     title: "Hybrid",
     desktop2Line: false,
+    image: "/assets/mindmap-item-placeholder-outline.png",
     content: (
       <div className="flex flex-col gap-2">
         <div>
@@ -377,7 +383,7 @@ export default function MindmapGrid() {
                 transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
               >
                 <Image
-                  src="/assets/mindmap-item-placeholder-filled.png"
+                  src={item.image}
                   alt={item.title}
                   fill
                   sizes="(max-width: 768px) 50vw, 30vw"
@@ -386,7 +392,8 @@ export default function MindmapGrid() {
                 <div
                   className={cn(
                     "relative flex h-full w-full p-4 justify-between lg:items-start lg:justify-end lg:p-6 lg:text-left flex-col",
-                    !item.desktop2Line && "lg:items-center lg:justify-start lg:gap-6 lg:flex-row",
+                    !item.desktop2Line &&
+                      "lg:items-center lg:justify-start lg:gap-6 lg:flex-row",
                   )}
                 >
                   <motion.div
@@ -449,7 +456,7 @@ export default function MindmapGrid() {
                 </div>
                 <div className="hidden lg:flex relative lg:flex-2 w-full h-full pointer-events-none">
                   <Image
-                    src="/assets/mindmap-item-placeholder-outline.png"
+                    src={expandedItem.image}
                     alt={expandedItem.title}
                     fill
                     sizes="50vw"

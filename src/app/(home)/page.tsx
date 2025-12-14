@@ -35,7 +35,7 @@ export default function HomePage() {
             Genosis NFT Minting is LIVE NOW!
           </h2>
           {/* CTA Button */}
-          <BearthButton />
+          <BearthButton href="/about">Join the Journey</BearthButton>
         </div>
 
         <BearthFooter />

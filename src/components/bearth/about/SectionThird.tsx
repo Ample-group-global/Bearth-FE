@@ -13,7 +13,10 @@ export default function SectionThird() {
     >
       <div className="flex flex-col gap-6 h-full hlg:h-fit min-h-0">
         <AnimatedTitle>
-          <Heading type="h1" className="uppercase text-primary title-stroke-black">
+          <Heading
+            type="h1"
+            className="uppercase text-primary title-stroke-black"
+          >
             Building a Universe, <br />
             One Nap at a&nbsp;
             <br className="block lg:hidden" />
@@ -30,11 +33,11 @@ export default function SectionThird() {
           <div className="relative flex flex-col gap-4 flex-1 min-w-0 min-h-0">
             <div className="w-full aspect-video overflow-hidden">
               <Image
-                src="/assets/about-l.png"
+                src="/assets/about-3-1.png"
                 alt="Section Second"
                 className="object-cover relative lg:order-2 shadow-xl rounded-2xl w-full h-full"
-                width={9000}
-                height={9000}
+                width={1920}
+                height={1080}
               />
             </div>
             <div className="gap-4 flex flex-col lg:order-1 px-2 lg:px-0 shrink-0">
@@ -52,11 +55,11 @@ export default function SectionThird() {
           <div className="relative flex flex-col gap-4 flex-1 min-w-0 min-h-0">
             <div className="lg:order-2 w-full overflow-hidden">
               <Image
-                src="/assets/about-2.png"
+                src="/assets/about-3-2.png"
                 alt="Section Second"
                 className="object-cover relative lg:order-2 shadow-xl rounded-2xl w-full h-full"
-                width={9000}
-                height={9000}
+                width={1920}
+                height={1080}
               />
             </div>
             <div className="gap-4 flex flex-col px-2 lg:px-0 shrink-0">

@@ -63,14 +63,15 @@ export default function SectionSecond() {
   return (
     <MaxWidthConstraintedLayout
       as="section"
-      // paddingHeader
-      // paddingFooter
       className="px-8 py-8 desktop:pt-20 desktop:pb-8 text-white flex flex-col justify-center min-h-screen desktop:h-screen"
       outerDivClassName="w-full bg-secondary"
     >
       <div className="flex flex-col items-center justify-center text-center">
         <AnimatedTitle>
-          <Heading type="h1" className="uppercase text-primary title-stroke-black">
+          <Heading
+            type="h1"
+            className="uppercase text-primary title-stroke-black"
+          >
             Welcome to Bearth!
           </Heading>
         </AnimatedTitle>
@@ -90,8 +91,8 @@ export default function SectionSecond() {
                 <Image
                   src={section.image}
                   alt=""
-                  width={900}
-                  height={900}
+                  width={2278}
+                  height={1346}
                   className="object-cover rounded-2xl w-full h-full"
                 />
               </div>

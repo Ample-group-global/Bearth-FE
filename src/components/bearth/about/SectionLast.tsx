@@ -12,10 +12,19 @@ export default function SectionLast() {
       paddingFooter
       className="px-4 py-24 lg:py-40 text-white flex flex-col min-h-screen"
       outerDivClassName="relative"
-      slotOutside={<BearthBackgroundImage src="/assets/about-bg-bottom.png" absolute containerClassName="bg-secondary" />}
+      slotOutside={
+        <BearthBackgroundImage
+          src="/assets/about-bg-bottom.png"
+          absolute
+          containerClassName="bg-secondary"
+        />
+      }
     >
       <div className="flex flex-col items-center justify-center text-center">
-        <Heading type="h1" className="uppercase text-primary title-stroke-white">
+        <Heading
+          type="h1"
+          className="uppercase text-primary title-stroke-white"
+        >
           Find Your Place <br /> in the Stars
         </Heading>
       </div>
@@ -31,7 +40,7 @@ export default function SectionLast() {
             Your nap spot is waiting.
           </Paragraph>
         </div>
-        <BearthButton />
+        <BearthButton href="/mint">Join the Journey</BearthButton>
       </div>
     </MaxWidthConstraintedLayout>
   );

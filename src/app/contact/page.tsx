@@ -42,11 +42,11 @@ export default function ContactPage() {
       </div>
 
       <Image
-        className="mt-4 aspect-square w-full max-w-[500px]"
-        src="/assets/placeholder.svg"
+        className="mt-4 aspect-square w-full max-w-[500px] mix-blend-darken"
+        src="/assets/contact.gif"
         alt="Contact"
-        width={1000}
-        height={1000}
+        width={500}
+        height={500}
       />
     </MaxWidthConstraintedLayout>
   );
