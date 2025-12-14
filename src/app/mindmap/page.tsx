@@ -3,6 +3,7 @@
 import BearthFooter from "@/components/bearth/navigation/BearthFooter";
 import MaxWidthConstraintedLayout from "@/components/bearth/MaxWidthConstraintedLayout";
 import MindmapGrid from "@/components/bearth/mindmap/MindmapGrid";
+import { motion } from "motion/react";
 
 export default function MindmapPage() {
   return (
@@ -33,7 +34,13 @@ export default function MindmapPage() {
         </div>
       </header>
 
-      <MindmapGrid />
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.7 }}
+      >
+        <MindmapGrid />
+      </motion.div>
 
       <BearthFooter />
     </MaxWidthConstraintedLayout>
