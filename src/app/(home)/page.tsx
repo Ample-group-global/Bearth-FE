@@ -2,15 +2,21 @@ import Image from "next/image";
 import { BearthButton } from "../../components/bearth/BearthButton";
 import BearthBackgroundImage from "@/components/bearth/BearthBackgroundImage";
 import BearthFooter from "@/components/bearth/navigation/BearthFooter";
+import MaxWidthConstraintedLayout from "@/components/bearth/MaxWidthConstraintedLayout";
 
 export default function HomePage() {
   return (
-    <main className="relative min-h-screen w-full">
+    <MaxWidthConstraintedLayout
+      as="main"
+      fullHeight
+      outerDivClassName="relative"
+      className="relative w-full"
+    >
       <BearthBackgroundImage src="/assets/home-bg.png"></BearthBackgroundImage>
       {/* Content Container */}
       <div className="relative z-1 flex min-h-screen flex-col items-center justify-between px-4 py-6 md:px-8">
         {/* Hero Section */}
-        <div className="flex flex-col items-center justify-center text-center grow">
+        <div className="flex flex-col items-center justify-center text-center grow w-full">
           {/* Main Logo */}
           <div className="relative mb-2 w-full aspect-3/1">
             <Image
@@ -19,7 +25,7 @@ export default function HomePage() {
               src="/assets/logo.png"
               alt="Bearth Logo"
               fill
-              sizes="(max-width: 768px) 80vw, (max-width: 1280px) 50vw, 100vw"
+              sizes="(max-width: 768px) 80vw, 100vw"
               className="object-contain"
             />
           </div>
@@ -34,6 +40,6 @@ export default function HomePage() {
 
         <BearthFooter />
       </div>
-    </main>
+    </MaxWidthConstraintedLayout>
   );
 }

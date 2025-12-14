@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${figtree.variable} antialiased`}>
+      <body className={`${figtree.variable} antialiased bg-secondary`}>
         {/* Top Navigation */}
         <BearthTopBarScrollDetection>
           <BearthTopBar />
