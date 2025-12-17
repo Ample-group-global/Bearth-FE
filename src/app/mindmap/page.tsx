@@ -4,6 +4,7 @@ import BearthFooter from "@/components/bearth/navigation/BearthFooter";
 import MaxWidthConstraintedLayout from "@/components/bearth/MaxWidthConstraintedLayout";
 import MindmapGrid from "@/components/bearth/mindmap/MindmapGrid";
 import { motion } from "motion/react";
+import Heading from "@/components/bearth/Heading";
 
 export default function MindmapPage() {
   return (
@@ -13,12 +14,15 @@ export default function MindmapPage() {
       paddingFooter
       fullHeight
       outerDivClassName="w-full bg-secondary"
-      className="min-h-screen text-white w-full flex flex-col items-center px-4 lg:py-40"
+      className="min-h-[900px] h-screen text-white w-full flex flex-col items-center px-4 lg:py-40"
     >
-      <header className="mb-8 md:mb-12">
-        <h1 className="font-black mb-4 md:mb-6 text-4xl md:text-8xl">
+      <header className="mb-8 md:mb-12 max-w-[800px] self-start">
+        <Heading
+          type="h1"
+          className="text-primary title-stroke-black"
+        >
           MINDMAP
-        </h1>
+        </Heading>
         <div className="space-y-4">
           <p className="text-base md:text-lg leading-relaxed">
             Building a universe takes time, patience, and the right rhythm.
@@ -38,6 +42,7 @@ export default function MindmapPage() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.7 }}
+        className="grow w-full"
       >
         <MindmapGrid />
       </motion.div>

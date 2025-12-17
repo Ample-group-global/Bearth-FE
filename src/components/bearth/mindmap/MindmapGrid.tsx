@@ -370,104 +370,100 @@ export default function MindmapGrid() {
   };
 
   return (
-    <div className="w-full lg:h-[600px]">
-      <div className="mx-auto h-full">
-        <div className="relative h-full">
-          <div className="grid grid-cols-2 gap-3 lg:grid-cols-3 lg:grid-rows-6 h-full">
-            {items.map((item, index) => (
+    <div className="relative h-full">
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-3 lg:grid-rows-6 h-full">
+        {items.map((item, index) => (
+          <motion.div
+            key={item.id}
+            layoutId={`card-${item.id}`}
+            className={`relative cursor-pointer overflow-hidden rounded-xl aspect-square lg:aspect-auto lg:rounded-2xl z-0 bg-[#EBE7E0] shadow-[3px_3px_4px_0px_#00000040_inset] ${getGridClasses(index)}`}
+            onClick={() => setExpandedId(item.id)}
+            transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+          >
+            <Image
+              src={item.image}
+              alt={item.title}
+              fill
+              sizes="(max-width: 768px) 50vw, 30vw"
+              className="-z-1 object-cover lg:hidden mix-blend-darken"
+            ></Image>
+            <div
+              className={cn(
+                "relative flex h-full w-full p-4 justify-between lg:items-start lg:justify-end lg:p-6 lg:text-left flex-col",
+                !item.desktop2Line &&
+                  "lg:items-center lg:justify-start lg:gap-6 lg:flex-row",
+              )}
+            >
               <motion.div
-                key={item.id}
-                layoutId={`card-${item.id}`}
-                className={`relative cursor-pointer overflow-hidden rounded-xl aspect-square lg:aspect-auto lg:rounded-2xl z-0 bg-[#EBE7E0] shadow-[3px_3px_4px_0px_#00000040_inset] ${getGridClasses(index)}`}
-                onClick={() => setExpandedId(item.id)}
+                layoutId={`number-${item.id}`}
+                className="text-3xl font-semibold text-[#2d3748] lg:text-[80px]"
                 transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
               >
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  fill
-                  sizes="(max-width: 768px) 50vw, 30vw"
-                  className="-z-1 object-cover lg:hidden mix-blend-darken"
-                ></Image>
-                <div
-                  className={cn(
-                    "relative flex h-full w-full p-4 justify-between lg:items-start lg:justify-end lg:p-6 lg:text-left flex-col",
-                    !item.desktop2Line &&
-                      "lg:items-center lg:justify-start lg:gap-6 lg:flex-row",
-                  )}
-                >
-                  <motion.div
-                    layoutId={`number-${item.id}`}
-                    className="text-3xl font-semibold text-[#2d3748] lg:text-[80px]"
-                    transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-                  >
-                    {item.number}
-                  </motion.div>
-                  <motion.h2
-                    layoutId={`title-${item.id}`}
-                    className="mt-2 whitespace-pre-line text-sm font-semibold text-[#2d3748] text-right lg:text-left lg:mt-1 lg:text-[60px]"
-                    transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-                  >
-                    {item.title}
-                  </motion.h2>
-                </div>
+                {item.number}
               </motion.div>
-            ))}
-          </div>
-
-          <AnimatePresence>
-            {expandedId !== null && expandedItem && (
-              <motion.div
-                layoutId={`card-${expandedId}`}
-                className="absolute inset-0 overflow-hidden rounded-2xl flex flex-row bg-[#EBE7E0] z-10"
+              <motion.h2
+                layoutId={`title-${item.id}`}
+                className="mt-2 whitespace-pre-line text-sm font-semibold text-[#2d3748] text-right lg:text-left lg:mt-1 lg:text-[60px]"
                 transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
               >
-                <motion.button
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3, delay: 0.2 }}
-                  className="absolute top-4 right-4 text-black cursor-pointer z-1"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setExpandedId(null);
-                  }}
-                >
-                  <XIcon className="size-12" />
-                </motion.button>
-                <div className="relative flex lg:flex-3 h-full w-full flex-col p-4 lg:p-8">
-                  <motion.h1
-                    layoutId={`title-${expandedId}`}
-                    className="mb-4 whitespace-pre-line text-3xl font-bold text-secondary pb-2 lg:text-6xl border-b border-black"
-                    transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-                  >
-                    {expandedItem.contentTitle ?? expandedItem.title}
-                  </motion.h1>
-
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3, delay: 0.2 }}
-                    className="text-black overflow-y-auto"
-                  >
-                    {expandedItem.content}
-                  </motion.div>
-                </div>
-                <div className="hidden lg:flex relative lg:flex-2 w-full h-full pointer-events-none">
-                  <Image
-                    src={expandedItem.image}
-                    alt={expandedItem.title}
-                    fill
-                    sizes="50vw"
-                    className="-z-1 object-cover mix-blend-darken"
-                  ></Image>
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+                {item.title}
+              </motion.h2>
+            </div>
+          </motion.div>
+        ))}
       </div>
+
+      <AnimatePresence>
+        {expandedId !== null && expandedItem && (
+          <motion.div
+            layoutId={`card-${expandedId}`}
+            className="absolute inset-0 overflow-hidden rounded-2xl flex flex-row bg-[#EBE7E0] z-10"
+            transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+          >
+            <motion.button
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3, delay: 0.2 }}
+              className="absolute top-4 right-4 text-black cursor-pointer z-1"
+              onClick={(e) => {
+                e.stopPropagation();
+                setExpandedId(null);
+              }}
+            >
+              <XIcon className="size-12" />
+            </motion.button>
+            <div className="relative flex lg:flex-3 h-full w-full flex-col p-4 lg:p-8">
+              <motion.h1
+                layoutId={`title-${expandedId}`}
+                className="mb-4 whitespace-pre-line text-3xl font-bold text-secondary pb-2 lg:text-6xl border-b border-black"
+                transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+              >
+                {expandedItem.contentTitle ?? expandedItem.title}
+              </motion.h1>
+
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3, delay: 0.2 }}
+                className="text-black overflow-y-auto"
+              >
+                {expandedItem.content}
+              </motion.div>
+            </div>
+            <div className="hidden lg:flex relative lg:flex-2 w-full h-full pointer-events-none">
+              <Image
+                src={expandedItem.image}
+                alt={expandedItem.title}
+                fill
+                sizes="50vw"
+                className="-z-1 object-cover mix-blend-darken"
+              ></Image>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

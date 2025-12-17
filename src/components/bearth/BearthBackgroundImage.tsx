@@ -4,40 +4,39 @@ import Image from "next/image";
 export default function BearthBackgroundImage({
   src,
   absolute = false,
-  darken = false,
   containerClassName,
   imageClassName,
 }: {
   src: string;
   absolute?: boolean;
-  darken?: boolean;
   containerClassName?: string;
   imageClassName?: string;
 }) {
   return (
     <div
       className={cn(
-        "inset-0 -z-1",
+        "inset-0 -z-1 flex flex-col items-center justify-center",
         absolute ? "absolute w-full h-full" : "fixed w-screen h-screen",
         containerClassName,
       )}
     >
-      <Image
-        src={src}
-        alt=""
-        aria-hidden="true"
-        loading="eager"
-        fetchPriority="high"
-        className={cn("h-full w-full object-cover", imageClassName)}
-        fill
-        sizes="100vw"
-      />
-      {/* Darken the image */}
-      {darken && (
-        <div
-          className={cn("inset-0 bg-black/70", absolute ? "absolute" : "fixed")}
+      <div className="absolute z-1 w-full xl:w-auto h-full xl:aspect-16/10">
+        <div className="hidden xl:block absolute left-0 top-0 h-full w-[150px] bg-linear-to-r from-secondary to-secondary/0"></div>
+        <div className="hidden xl:block absolute right-0 top-0 h-full w-[150px] bg-linear-to-l from-secondary to-secondary/0"></div>
+      </div>
+      {/* gradient from left to right, from black to transparent */}
+      <div className="w-full xl:w-auto h-full xl:aspect-16/10 relative">
+        <Image
+          src={src}
+          alt=""
+          aria-hidden="true"
+          loading="eager"
+          fetchPriority="high"
+          className={cn("object-cover", imageClassName)}
+          fill
+          sizes="(max-width: 1440px) 100vw, 1440px"
         />
-      )}
+      </div>
     </div>
   );
 }

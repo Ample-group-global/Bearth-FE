@@ -44,7 +44,7 @@ export default function BearthTopBarScrollDetection({
     <header
       className={cn(
         "w-full h-[64px] md:h-[72px] fixed top-0 left-0 z-10 flex items-center transition-all duration-300",
-        isScrolled && "backdrop-blur-md md:backdrop-blur-none",
+        // isScrolled && "backdrop-blur-md md:backdrop-blur-none",
       )}
     >
       {children}

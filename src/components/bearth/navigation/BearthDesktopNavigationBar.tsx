@@ -5,6 +5,7 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
+import BearthLiquidGlassEffect from "./BearthLiquidGlassEffect";
 
 export function BearthNavigationBarLink({
   children,
@@ -39,24 +40,26 @@ export default function BearthDesktopNavigationBar({
   className?: string;
 }) {
   return (
-    <NavigationMenu
-      className={cn(
-        "rounded-full border border-background overflow-visible font-semibold uppercase",
-        className,
-      )}
-    >
-      <NavigationMenuList className="gap-0">
-        <BearthNavigationBarLink href="/about">About</BearthNavigationBarLink>
-        <BearthNavigationBarLink href="#">
-          Mint
-          <span className="text-xs text-white bg-primary text-center absolute px-2 py-1 w-[90px] text-[10px] -bottom-3 left-[50%] translate-x-[-50%] rounded-sm leading-none">
-            Coming Soon
-          </span>
-        </BearthNavigationBarLink>
-        <BearthNavigationBarLink href="/mindmap">
-          Mindmap
-        </BearthNavigationBarLink>
-      </NavigationMenuList>
-    </NavigationMenu>
+    <BearthLiquidGlassEffect>
+      <NavigationMenu
+        className={cn(
+          "rounded-full border-background overflow-visible font-semibold uppercase",
+          className,
+        )}
+      >
+        <NavigationMenuList className="gap-0">
+          <BearthNavigationBarLink href="/about">About</BearthNavigationBarLink>
+          <BearthNavigationBarLink href="#">
+            City
+            <span className="text-xs text-white bg-primary text-center absolute px-2 py-1 w-[90px] text-[10px] -bottom-3 left-[50%] translate-x-[-50%] rounded-sm leading-none">
+              Coming Soon
+            </span>
+          </BearthNavigationBarLink>
+          <BearthNavigationBarLink href="/mindmap">
+            Mindmap
+          </BearthNavigationBarLink>
+        </NavigationMenuList>
+      </NavigationMenu>
+    </BearthLiquidGlassEffect>
   );
 }

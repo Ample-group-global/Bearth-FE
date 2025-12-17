@@ -13,10 +13,7 @@ export default function SectionTop() {
       paddingHeader
       paddingFooter
       slotOutside={
-        <>
-          <BearthBackgroundImage src="/assets/about-bg-top.png" absolute />
-          <BearthFooter absolute />
-        </>
+        <BearthBackgroundImage src="/assets/about-bg-top.png" absolute />
       }
     >
       {/* Hero Section */}
@@ -64,6 +61,8 @@ export default function SectionTop() {
           </h2>
         </div>
       </div>
+
+      <BearthFooter absolute />
     </MaxWidthConstraintedLayout>
   );
 }
