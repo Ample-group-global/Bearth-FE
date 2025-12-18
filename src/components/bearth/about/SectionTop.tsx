@@ -8,7 +8,7 @@ export default function SectionTop() {
   return (
     <MaxWidthConstraintedLayout
       as="section"
-      outerDivClassName="relative"
+      outerDivClassName="relative z-21 bg-secondary"
       className="flex flex-col justify-between pt-20 relative min-h-screen lg:py-40"
       paddingHeader
       paddingFooter

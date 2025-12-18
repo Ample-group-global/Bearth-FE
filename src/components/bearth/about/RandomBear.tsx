@@ -37,7 +37,7 @@ export default function RandomBear() {
 
   return (
     <div
-      className="absolute inset-0 z-50 pointer-events-none mix-blend-darken w-full"
+      className="absolute inset-0 z-20 pointer-events-none w-full"
       style={{
         transform: direction === "right" ? "scaleX(-1)" : "scaleX(1)",
       }}
@@ -56,7 +56,7 @@ export default function RandomBear() {
           "w-[60px] sm:w-[100px] md:w-[120px] lg:w-[150px] xl:w-[200px] absolute",
           (!isReady || !isVisible) && "opacity-0",
         )}
-        src="/assets/animated-bear.webp"
+        src="/assets/animated-bear-1.webp"
         alt="Bear"
         width={200}
         height={400}
