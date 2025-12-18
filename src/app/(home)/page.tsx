@@ -38,7 +38,7 @@ export default function HomePage() {
           <BearthButton href="/about">Join the Journey</BearthButton>
         </div>
 
-        <BearthFooter />
+        <BearthFooter absolute />
       </div>
     </MaxWidthConstraintedLayout>
   );

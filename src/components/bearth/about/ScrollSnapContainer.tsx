@@ -101,7 +101,7 @@ export default function ScrollSnapContainer({
 
       const touchEnd = e.changedTouches[0].clientY;
       const diff = touchStartRef.current - touchEnd;
-      const threshold = 50;
+      const threshold = 100;
 
       if (Math.abs(diff) < threshold) return;
 

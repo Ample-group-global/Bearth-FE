@@ -4,6 +4,7 @@ import "./font.css";
 import "./globals.css";
 import BearthTopBar from "@/components/bearth/navigation/BearthTopBar";
 import BearthTopBarScrollDetection from "@/components/bearth/navigation/BearthTopBarScrollDetection";
+import { BreathLiquidGlassBase } from "@/components/bearth/navigation/BearthLiquidGlassEffect";
 
 const figtree = Figtree({
   subsets: ["latin"],
@@ -29,6 +30,7 @@ export default function RootLayout({
           <BearthTopBar />
         </BearthTopBarScrollDetection>
         {children}
+        <BreathLiquidGlassBase />
       </body>
     </html>
   );

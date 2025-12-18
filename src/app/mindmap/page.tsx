@@ -14,13 +14,10 @@ export default function MindmapPage() {
       paddingFooter
       fullHeight
       outerDivClassName="w-full bg-secondary"
-      className="min-h-[900px] h-screen text-white w-full flex flex-col items-center px-4 lg:py-40"
+      className="relative min-h-[900px] h-screen text-white w-full flex flex-col items-center px-4 lg:py-40"
     >
       <header className="mb-8 md:mb-12 max-w-[800px] self-start">
-        <Heading
-          type="h1"
-          className="text-primary title-stroke-black"
-        >
+        <Heading type="h1" className="text-primary title-stroke-black">
           MINDMAP
         </Heading>
         <div className="space-y-4">
@@ -47,7 +44,7 @@ export default function MindmapPage() {
         <MindmapGrid />
       </motion.div>
 
-      <BearthFooter />
+      <BearthFooter absolute={true} />
     </MaxWidthConstraintedLayout>
   );
 }
