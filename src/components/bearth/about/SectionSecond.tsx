@@ -16,18 +16,18 @@ const sections = [
     title: "The Great Awakening",
     text: (
       <>
-        <Paragraph type="normal2">
+        <Paragraph type="normal">
           The story begins with an exceptionally long nap.
         </Paragraph>
-        <Paragraph type="normal2">
+        <Paragraph type="normal">
           When the bears woke, the noisy humans had vanished—leaving behind a
           silent, high-tech floating city.
         </Paragraph>
-        <Paragraph type="normal2">
+        <Paragraph type="normal">
           To these groggy new tenants, the abandoned city wasn't a crisis.
           Through sleepy eyes, it wasn't a ruin.
         </Paragraph>
-        <Paragraph type="normal2" className="font-bold">
+        <Paragraph type="normal" className="font-bold">
           It was a giant, unopened playground.
         </Paragraph>
       </>
@@ -39,15 +39,15 @@ const sections = [
     title: "The Age of Bear Logic",
     text: (
       <>
-        <Paragraph type="normal2">
+        <Paragraph type="normal">
           We ignored the manuals and used "Bear Logic" instead, replacing
           complex climate dashboards with simple "Gentle Breeze" knobs and
           converting geothermal plants into hot springs.
         </Paragraph>
-        <Paragraph type="normal2">
+        <Paragraph type="normal">
           We slowed time and rewrote the "Second Layer" rules.
         </Paragraph>
-        <Paragraph type="normal2" className="font-bold">
+        <Paragraph type="normal" className="font-bold">
           We repurposed humanity's highest technology for the serious business
           of relaxation.
         </Paragraph>
@@ -60,17 +60,17 @@ const sections = [
     title: "The Quest for the Perfect Nap",
     text: (
       <>
-        <Paragraph type="normal2">
+        <Paragraph type="normal">
           With home cozy, curiosity turned to the stars.
         </Paragraph>
-        <Paragraph type="normal2">
+        <Paragraph type="normal">
           We filled rockets with honey and cushions, launching to find the
           universe's sweetest honey and perfect sunlight.
         </Paragraph>
-        <Paragraph type="normal2">
+        <Paragraph type="normal">
           Our mission: find the ultimate napping spot.
         </Paragraph>
-        <Paragraph type="normal2" className="font-bold">
+        <Paragraph type="normal" className="font-bold">
           As for saving the world? That might just be the best side effect of
           the journey.
         </Paragraph>
@@ -128,14 +128,16 @@ export default function SectionSecond() {
                         {section.text}
                       </div>
                     </div>
-                    <div className="flex justify-center">
-                      <Image
+                    <div className="flex justify-center grow">
+                      <div className="h-full w-full relative aspect-16/10">
+                        <Image
                         src={section.image}
                         alt=""
                         className="object-cover rounded-2xl"
-                        width={800}
-                        height={545}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 500px"
                       />
+                      </div>
                     </div>
                     <div className="grow text-white flex desktop:hidden flex-col gap-2">
                       {section.text}
@@ -146,8 +148,8 @@ export default function SectionSecond() {
             ))}
           </SectionSecondCarousel>
         </div>
-        <div className="flex items-center justify-center my-8">
-          <CarouselButton className="flex desktop:hidden" />
+        <div className="flex desktop:hidden items-center justify-center my-8">
+          <CarouselButton className="flex" />
         </div>
       </CarouselProvider>
     </MaxWidthConstraintedLayout>

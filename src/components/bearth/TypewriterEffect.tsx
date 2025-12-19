@@ -19,9 +19,10 @@ interface TypewriterEffectProps {
   cursorWidth: number;
   cursorHeight: number;
   font: any;
-  textColor: string;
+  textColor?: string;
   style?: CSSProperties;
   className?: string;
+  cursorMarginLeft?: number;
 }
 
 /**
@@ -44,6 +45,7 @@ export default function TypewriterEffect(props: TypewriterEffectProps) {
     style,
     className,
     prefix,
+    cursorMarginLeft,
   } = props;
 
   const [displayed, setDisplayed] = useState("");
@@ -164,7 +166,7 @@ export default function TypewriterEffect(props: TypewriterEffectProps) {
           background: cursorColor,
           width: cursorWidth,
           height: fontSize * (cursorHeight / 100),
-          marginLeft: 2,
+          marginLeft: cursorMarginLeft ?? 2,
           marginRight: 2,
           verticalAlign: "bottom",
           opacity: showCursor ? 1 : 0,

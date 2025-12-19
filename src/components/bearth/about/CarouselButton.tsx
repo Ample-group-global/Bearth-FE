@@ -28,7 +28,7 @@ export function CarouselButton({ className }: { className?: string }) {
       <Button
         onClick={() => carouselApi?.scrollPrev()}
         className={cn(
-          "rounded-l-full rounded-r-none bg-white text-black",
+          "rounded-l-full rounded-r-none bg-white text-black hover:bg-white/80",
           !canScrollPrev && "opacity-20 cursor-not-allowed",
         )}
       >
@@ -37,7 +37,7 @@ export function CarouselButton({ className }: { className?: string }) {
       <Button
         onClick={() => carouselApi?.scrollNext()}
         className={cn(
-          "rounded-r-full rounded-l-none bg-white text-black",
+          "rounded-r-full rounded-l-none bg-white text-black hover:bg-white/80",
           !canScrollNext && "opacity-20 cursor-not-allowed",
         )}
       >

@@ -25,8 +25,7 @@ export default function SectionThird() {
         </AnimatedTitle>
 
         <Heading type="h3" as="h2" className="font-semibold leading-none">
-          BEARTH isn't just imagined— <br />
-          it's constructed.
+          BEARTH isn't just imagined — it's constructed.
         </Heading>
 
         <div className="flex flex-col lg:flex-row gap-8 min-h-0 flex-1">
@@ -35,17 +34,17 @@ export default function SectionThird() {
               <Image
                 src="/assets/about-3-1.png"
                 alt="Section Second"
-                className="object-cover relative lg:order-2 shadow-xl rounded-2xl w-full h-full"
+                className="object-cover relative shadow-xl rounded-2xl w-full h-full"
                 width={1920}
                 height={1080}
               />
             </div>
-            <div className="gap-4 flex flex-col lg:order-1 px-2 lg:px-0 shrink-0">
-              <Paragraph type="large">
+            <div className="gap-4 flex flex-col px-2 lg:px-0 shrink-0">
+              <Paragraph type="normal">
                 Created by Judy, an architecture student in Lyon, Bearth is
                 built with the same vision she brings to her studies.
               </Paragraph>
-              <Paragraph type="large">
+              <Paragraph type="normal">
                 She's designing an entire universe—from bear cities to the
                 perfect napping planet.
               </Paragraph>
@@ -53,22 +52,22 @@ export default function SectionThird() {
           </div>
 
           <div className="relative flex flex-col gap-4 flex-1 min-w-0 min-h-0">
-            <div className="lg:order-2 w-full overflow-hidden">
+            <div className="w-full overflow-hidden lg:order-2">
               <Image
                 src="/assets/about-3-2.png"
                 alt="Section Second"
-                className="object-cover relative lg:order-2 shadow-xl rounded-2xl w-full h-full"
+                className="object-cover relative shadow-xl rounded-2xl w-full h-full"
                 width={1920}
                 height={1080}
               />
             </div>
             <div className="gap-4 flex flex-col px-2 lg:px-0 shrink-0">
-              <Paragraph type="large">
+              <Paragraph type="normal">
                 Judy combines architectural rigor with childlike imagination.
                 For her, art is the language of the soul—a force for change,
                 inspired by artist MAGO.
               </Paragraph>
-              <Paragraph type="large">
+              <Paragraph type="normal">
                 Bearth is her dream, and a gentle gift to the world.
               </Paragraph>
             </div>

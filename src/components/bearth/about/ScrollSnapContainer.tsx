@@ -20,7 +20,7 @@ export default function ScrollSnapContainer({
 
   useEffect(() => {
     const checkIsDesktop = () => {
-      setIsDesktop(window.innerWidth >= 1024 && window.innerHeight >= 800);
+      setIsDesktop(window.innerWidth >= 1024 && window.innerHeight >= 700);
     };
     checkIsDesktop();
     window.addEventListener("resize", checkIsDesktop);

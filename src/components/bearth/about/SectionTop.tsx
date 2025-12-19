@@ -17,48 +17,54 @@ export default function SectionTop() {
       }
     >
       {/* Hero Section */}
-      <div className="p-4 lg:p-12 flex flex-col lg:grow">
-        <div className="grow flex flex-col lg:flex-row lg:justify-between">
-          <p className="text-shadow-lg text-white text-sm lg:text-[32px] font-bold mb-2 lg:mb-0">
-            About BEARTH
-          </p>
-          <Heading
-            type="h1"
-            className="text-primary mb-2 lg:mb-0 title-stroke-white"
-          >
-            A Universe
-            <br />
-            Born from&nbsp;
-            <br className="hidden lg:block" />
-            Love
-          </Heading>
-        </div>
-        <div className="flex flex-col">
-          <Heading type="h2" className="text-white">
-            BEARTH Is For Everyone
-          </Heading>
-          <h2 className="lg:hidden">
-            <TypewriterEffect
-              {...typewriterDefaultOptions}
-              font={{
-                fontFamily: "hoss-round",
-                fontSize: "18px",
-                fontWeight: "600",
-                lineHeight: "1",
-              }}
-            />
-          </h2>
-          <h2 className="hidden lg:block h-[64px]">
-            <TypewriterEffect
-              {...typewriterDefaultOptions}
-              font={{
-                fontFamily: "hoss-round",
-                fontSize: "64px",
-                fontWeight: "600",
-                lineHeight: "1",
-              }}
-            />
-          </h2>
+      <div className="p-4 lg:p-12 flex flex-col grow items-center justify-center text-center">
+        <div className="w-full h-full flex flex-col max-h-[60vh] grow justify-between">
+          <div>
+            <p className="text-shadow-lg text-white text-2xl lg:text-[32px] font-bold mb-4 lg:mb-0">
+              About BEARTH
+            </p>
+            <Heading
+              type="h1"
+              className="text-primary mb-2 lg:mb-0 title-stroke-white"
+            >
+              A Universe
+              <br />
+              Born from Love
+            </Heading>
+          </div>
+
+          <div>
+            <h2 className="text-primary title-stroke-white text-[20px] lg:text-[40px] font-semibold">
+              BEARTH Is For Everyone
+            </h2>
+            <h2 className="lg:hidden">
+              <TypewriterEffect
+                {...typewriterDefaultOptions}
+                className="text-primary title-stroke-white"
+                font={{
+                  fontFamily: "hoss-round",
+                  fontSize: "20px",
+                  fontWeight: "600",
+                  lineHeight: "1",
+                }}
+                cursorMarginLeft={4}
+              />
+            </h2>
+            <h2 className="hidden lg:block h-[40px]">
+              <TypewriterEffect
+                {...typewriterDefaultOptions}
+                className="text-primary title-stroke-white"
+                font={{
+                  fontFamily: "hoss-round",
+                  fontSize: "40px",
+                  fontWeight: "600",
+                  lineHeight: "1",
+                }}
+                cursorMarginLeft={8}
+                cursorWidth={4}
+              />
+            </h2>
+          </div>
         </div>
       </div>
 
@@ -80,6 +86,5 @@ const typewriterDefaultOptions = {
   pauseDuration: 1000,
   cursorColor: "#FFFFFF",
   cursorWidth: 2,
-  cursorHeight: 100,
-  textColor: "#FFFFFF",
+  cursorHeight: 110,
 };
