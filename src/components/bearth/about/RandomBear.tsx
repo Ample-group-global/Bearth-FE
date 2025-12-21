@@ -1,39 +1,45 @@
 "use client";
 import { cn } from "@/lib/utils";
-import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 export default function RandomBear() {
-  const appearEvery = 5000;
-  const [isReady, setIsReady] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
+  const waitTime = 5000; // 5 seconds between appearances
   const [key, setKey] = useState(0);
   const [position, setPosition] = useState(0);
   const [direction, setDirection] = useState<"left" | "right">("left");
   const [direction2, setDirection2] = useState<"top" | "bottom">("top");
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  useEffect(() => {
-    if (!isReady) return;
+  const showAndPlayVideo = useCallback(() => {
+    setKey((key) => key + 1);
+    setPosition(Math.random() * 50);
+    setDirection(Math.random() > 0.5 ? "left" : "right");
+    setDirection2(Math.random() > 0.5 ? "top" : "bottom");
 
-    const interval = setInterval(() => {
-      setIsVisible((currentVisible) => {
-        let shouldVisible = currentVisible;
-        if (currentVisible) {
-          shouldVisible = false;
-        } else {
-          shouldVisible = true;
-          setKey((key) => key + 1);
-          setPosition(Math.random() * 50);
-          setDirection(Math.random() > 0.5 ? "left" : "right");
-          setDirection2(Math.random() > 0.5 ? "top" : "bottom");
-        }
+    // Play video after a brief moment to ensure it's visible
+    setTimeout(() => {
+      if (videoRef.current) {
+        videoRef.current.currentTime = 0;
+        videoRef.current.play().catch(() => {
+          // Handle play error silently
+        });
+      }
+    }, 50);
+  }, []);
 
-        return shouldVisible;
-      });
-    }, appearEvery);
+  const scheduleNextAppearance = useCallback(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    timeoutRef.current = setTimeout(() => {
+      showAndPlayVideo();
+    }, waitTime);
+  }, [showAndPlayVideo, waitTime]);
 
-    return () => clearInterval(interval);
-  }, [isReady]);
+  const handleVideoEnded = useCallback(() => {
+    scheduleNextAppearance();
+  }, [scheduleNextAppearance]);
 
   return (
     <div
@@ -42,25 +48,28 @@ export default function RandomBear() {
         transform: direction === "right" ? "scaleX(-1)" : "scaleX(1)",
       }}
     >
-      <Image
-        key={key}
-        onLoad={() => {
-          setIsReady(true);
-        }}
-        preload={true}
-        style={{
-          bottom: direction2 === "bottom" ? `${position}%` : undefined,
-          top: direction2 === "top" ? `${position}%` : undefined,
-        }}
-        className={cn(
-          "w-[60px] sm:w-[100px] md:w-[120px] lg:w-[150px] xl:w-[200px] absolute",
-          (!isReady || !isVisible) && "opacity-0",
-        )}
-        src="/assets/animated-bear-1.webp"
-        alt="Bear"
-        width={200}
-        height={400}
-      />
+      {
+        <video
+          ref={videoRef}
+          key={key}
+          onLoadedData={() => {
+            scheduleNextAppearance();
+          }}
+          onEnded={handleVideoEnded}
+          style={{
+            bottom: direction2 === "bottom" ? `${position}%` : undefined,
+            top: direction2 === "top" ? `${position}%` : undefined,
+          }}
+          className={cn(
+            "w-[60px] sm:w-[100px] md:w-[120px] lg:w-[150px] xl:w-[200px] absolute",
+          )}
+          src="/assets/animated-bear-1.webm"
+          muted
+          playsInline
+          autoPlay={false}
+          preload="auto"
+        />
+      }
     </div>
   );
 }
