@@ -4,8 +4,10 @@ import BearthSocialLinks from "./BearthSocialLinks";
 
 export default function BearthFooter({
   absolute = false,
+  className,
 }: {
   absolute?: boolean;
+  className?: string;
 }) {
   return (
     <footer
@@ -14,6 +16,7 @@ export default function BearthFooter({
         "h-[64px] px-4 z-10",
         "bottom-0 left-0",
         absolute ? "absolute" : "fixed",
+        className,
       )}
     >
       <div className="text-3xl font-black tracking-wide drop-shadow-md">

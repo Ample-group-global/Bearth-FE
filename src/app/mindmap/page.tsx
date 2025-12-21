@@ -11,10 +11,12 @@ export default function MindmapPage() {
     <MaxWidthConstraintedLayout
       as="main"
       paddingHeader
-      paddingFooter
       fullHeight
       outerDivClassName="w-full bg-secondary"
-      className="relative min-h-[900px] h-screen text-white w-full flex flex-col items-center px-4 lg:py-40"
+      className="relative desktop:h-screen text-white w-full flex flex-col items-center px-4 min-h-screen"
+      slotOutside={
+        <BearthFooter className="max-w-7xl left-1/2 -translate-x-1/2" />
+      }
     >
       <header className="mb-8 md:mb-12 max-w-[800px] self-start">
         <Heading type="h1" className="text-primary title-stroke-black">
@@ -39,12 +41,10 @@ export default function MindmapPage() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.7 }}
-        className="grow w-full"
+        className="grow w-full lg:min-h-[800px] xl:min-h-[600px] pb-24 flex flex-col"
       >
         <MindmapGrid />
       </motion.div>
-
-      <BearthFooter absolute={true} />
     </MaxWidthConstraintedLayout>
   );
 }

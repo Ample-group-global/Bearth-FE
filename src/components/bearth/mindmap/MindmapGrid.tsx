@@ -125,7 +125,7 @@ const items = [
     number: "3",
     title: "Expand",
     desktop2Line: true,
-    image: "/assets/mindmap-item-placeholder-outline.png",
+    image: "/assets/mindmap-expand.png",
     content: (
       <div className="flex flex-col gap-2">
         <div>
@@ -194,7 +194,7 @@ const items = [
     number: "4",
     title: "Digital",
     desktop2Line: false,
-    image: "/assets/mindmap-item-placeholder-outline.png",
+    image: "/assets/mindmap-digital.png",
     content: (
       <div className="flex flex-col gap-2">
         <div>
@@ -297,7 +297,7 @@ const items = [
     number: "6",
     title: "Hybrid",
     desktop2Line: false,
-    image: "/assets/mindmap-item-placeholder-outline.png",
+    image: "/assets/mindmap-hybrid.png",
     content: (
       <div className="flex flex-col gap-2">
         <div>
@@ -357,53 +357,64 @@ export default function MindmapGrid() {
 
   const getGridClasses = (index: number): string => {
     // Mobile: 2 columns, items flow naturally
-    // Desktop: complex spanning layout
+    // xl: complex spanning layout
     const desktopPositions = [
-      "lg:[grid-column:1] lg:[grid-row:1/7]",
-      "lg:[grid-column:2] lg:[grid-row:1/4]",
-      "lg:[grid-column:2] lg:[grid-row:4/7]",
-      "lg:[grid-column:3] lg:[grid-row:1/3]",
-      "lg:[grid-column:3] lg:[grid-row:3/5]",
-      "lg:[grid-column:3] lg:[grid-row:5/7]",
+      "xl:[grid-column:1] xl:[grid-row:1/7]",
+      "xl:[grid-column:2] xl:[grid-row:1/4]",
+      "xl:[grid-column:2] xl:[grid-row:4/7]",
+      "xl:[grid-column:3] xl:[grid-row:1/3]",
+      "xl:[grid-column:3] xl:[grid-row:3/5]",
+      "xl:[grid-column:3] xl:[grid-row:5/7]",
     ];
-    return desktopPositions[index] || "";
+
+    const tabletPositions = [
+      "md:[grid-column:1/7] md:[grid-row:1]",
+      "md:[grid-column:1/4] md:[grid-row:2]",
+      "md:[grid-column:4/7] md:[grid-row:2]",
+      "md:[grid-column:1/3] md:[grid-row:3]",
+      "md:[grid-column:3/5] md:[grid-row:3]",
+      "md:[grid-column:5/7] md:[grid-row:3]",
+    ];
+    return `${desktopPositions[index]} ${tabletPositions[index]}` || "";
   };
 
   return (
-    <div className="relative h-full">
-      <div className="grid grid-cols-2 gap-3 lg:grid-cols-3 lg:grid-rows-6 h-full">
+    <div className="relative grow h-full flex flex-col">
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-6 md:grid-rows-3 xl:grid-cols-3 xl:grid-rows-6 grow">
         {items.map((item, index) => (
           <motion.div
             key={item.id}
             layoutId={`card-${item.id}`}
-            className={`relative cursor-pointer overflow-hidden rounded-xl aspect-square lg:aspect-auto lg:rounded-2xl z-0 bg-[#EBE7E0] shadow-[3px_3px_4px_0px_#00000040_inset] ${getGridClasses(index)}`}
+            className={`relative cursor-pointer overflow-hidden rounded-xl aspect-square md:aspect-auto xl:rounded-2xl z-0 bg-[#EBE7E0] shadow-[3px_3px_4px_0px_#00000040_inset] ${getGridClasses(index)}`}
             onClick={() => setExpandedId(item.id)}
             transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
           >
-            <Image
-              src={item.image}
-              alt={item.title}
-              fill
-              sizes="(max-width: 768px) 50vw, 30vw"
-              className="-z-1 object-cover lg:hidden mix-blend-darken"
-            ></Image>
+            <div className="absolute top-0 right-0 z-10 h-full aspect-square xl:hidden mix-blend-darken opacity-60">
+              <Image
+                src={item.image}
+                alt={item.title}
+                fill
+                sizes="190px"
+                className="h-full w-full object-contain"
+              ></Image>
+            </div>
             <div
               className={cn(
-                "relative flex h-full w-full p-4 justify-between lg:items-start lg:justify-end lg:p-6 lg:text-left flex-col",
+                "relative flex h-full w-full p-4 justify-between xl:items-start xl:justify-end xl:p-6 xl:text-left flex-col",
                 !item.desktop2Line &&
-                  "lg:items-center lg:justify-start lg:gap-6 lg:flex-row",
+                  "xl:items-center xl:justify-start xl:gap-6 xl:flex-row",
               )}
             >
               <motion.div
                 layoutId={`number-${item.id}`}
-                className="text-3xl font-semibold text-[#2d3748] lg:text-[80px]"
+                className="text-3xl font-semibold text-[#2d3748] md:text-[32px] xl:text-[80px]"
                 transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
               >
                 {item.number}
               </motion.div>
               <motion.h2
                 layoutId={`title-${item.id}`}
-                className="mt-2 whitespace-pre-line text-sm font-semibold text-[#2d3748] text-right lg:text-left lg:mt-1 lg:text-[60px]"
+                className="mt-2 whitespace-pre-line text-sm font-semibold text-[#2d3748] text-right md:text-left xl:mt-1 md:text-[32px] xl:text-[60px]"
                 transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
               >
                 {item.title}
@@ -433,10 +444,10 @@ export default function MindmapGrid() {
             >
               <XIcon className="size-12" />
             </motion.button>
-            <div className="relative flex lg:flex-3 h-full w-full flex-col p-4 lg:p-8">
+            <div className="relative flex xl:flex-3 h-full w-full flex-col p-4 xl:p-8">
               <motion.h1
                 layoutId={`title-${expandedId}`}
-                className="mb-4 whitespace-pre-line text-3xl font-bold text-secondary pb-2 lg:text-6xl border-b border-black"
+                className="mb-4 whitespace-pre-line text-3xl font-bold text-secondary pb-2 xl:text-6xl border-b border-black"
                 transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
               >
                 {expandedItem.contentTitle ?? expandedItem.title}
@@ -452,7 +463,7 @@ export default function MindmapGrid() {
                 {expandedItem.content}
               </motion.div>
             </div>
-            <div className="hidden lg:flex relative lg:flex-2 w-full h-full pointer-events-none">
+            <div className="hidden xl:flex relative xl:flex-2 w-full h-full pointer-events-none">
               <Image
                 src={expandedItem.image}
                 alt={expandedItem.title}
