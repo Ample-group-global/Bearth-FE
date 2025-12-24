@@ -141,13 +141,17 @@ function Carousel({
   );
 }
 
-function CarouselContent({ className, ...props }: React.ComponentProps<"div">) {
+function CarouselContent({
+  className,
+  outerClassName,
+  ...props
+}: React.ComponentProps<"div"> & { outerClassName?: string }) {
   const { carouselRef, orientation } = useCarousel();
 
   return (
     <div
       ref={carouselRef}
-      className="overflow-hidden"
+      className={cn("overflow-hidden", outerClassName)}
       data-slot="carousel-content"
     >
       <div
@@ -171,7 +175,7 @@ function CarouselItem({ className, ...props }: React.ComponentProps<"div">) {
       aria-roledescription="slide"
       data-slot="carousel-item"
       className={cn(
-        "min-w-0 shrink-0 grow-0 basis-full",
+        "min-w-0 shrink-0 grow-0 basis-full h-full",
         orientation === "horizontal" ? "pl-4" : "pt-4",
         className,
       )}

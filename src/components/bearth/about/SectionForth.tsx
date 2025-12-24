@@ -25,15 +25,15 @@ export default function SectionForth() {
   return (
     <MaxWidthConstraintedLayout
       as="section"
-      className="px-4 text-white flex justify-center desktop:h-screen items-center py-4 desktop:pt-20 desktop:pb-8"
+      className="px-4 text-white flex justify-center items-center py-4 desktop:pt-20 desktop:pb-8"
       outerDivClassName="w-full bg-secondary"
     >
       <div className="flex flex-col gap-6 w-full max-h-full">
         <div className="flex flex-col lg:flex-row gap-8 flex-1">
-          <div className="flex-4 hlg:flex-1 hidden lg:flex lg:justify-end lg:my-8">
-            <SectionForthVideo className="max-w-full aspect-4/5" />
+          <div className="shrink-0 hidden lg:flex lg:justify-end lg:my-8">
+            <SectionForthVideo className="aspect-842/617" />
           </div>
-          <div className="relative lg:w-[550px] flex flex-col gap-4 flex-5 hlg:flex-1 mt-8 items-start">
+          <div className="relative lg:w-[550px] flex flex-col gap-4 flex-1 mt-8 items-start">
             <AnimatedTitle>
               <Heading
                 type="h1"

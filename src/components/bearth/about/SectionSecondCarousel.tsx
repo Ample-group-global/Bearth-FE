@@ -19,7 +19,7 @@ export function SectionSecondCarousel({
         containScroll: false,
       }}
     >
-      <CarouselContent className="h-full">{children}</CarouselContent>
+      <CarouselContent outerClassName="h-full" className="h-full">{children}</CarouselContent>
     </Carousel>
   );
 }

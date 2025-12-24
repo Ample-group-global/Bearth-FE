@@ -11,7 +11,7 @@ export default function SectionThird() {
       className="px-4 text-white flex justify-center desktop:h-screen items-center py-4 desktop:pt-20 desktop:pb-8"
       outerDivClassName="w-full bg-secondary"
     >
-      <div className="flex flex-col gap-6 h-full hlg:h-fit min-h-0">
+      <div className="flex flex-col gap-6 h-fit min-h-0">
         <AnimatedTitle>
           <Heading
             type="h1"

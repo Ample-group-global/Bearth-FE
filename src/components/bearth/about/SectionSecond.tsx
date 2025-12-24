@@ -83,7 +83,7 @@ export default function SectionSecond() {
   return (
     <MaxWidthConstraintedLayout
       as="section"
-      className="px-4 py-8 desktop:pt-20 desktop:pb-8 text-white flex flex-col justify-center min-h-screen desktop:h-screen"
+      className="px-4 py-8 desktop:pt-20 desktop:pb-8 text-white flex flex-col justify-center"
       outerDivClassName="w-full bg-secondary"
     >
       <CarouselProvider>
@@ -103,7 +103,7 @@ export default function SectionSecond() {
             <CarouselButton className="hidden desktop:flex mr-30" />
           </div>
         </div>
-        <div className="w-full place-self-center overflow-hidden relative mt-4 rounded-2xl">
+        <div className="w-full place-self-center overflow-hidden relative mt-4 rounded-2xl desktop:h-[545px]">
           <SectionSecondCarousel>
             {sections.map((section) => (
               <CarouselItem key={section.order} className="basis-11/12">
