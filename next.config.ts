@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   experimental: {
     inlineCss: true,
   },
+  output: "standalone",
 };
 
 export default nextConfig;
