@@ -7,12 +7,14 @@ export default function BearthBackgroundImage({
   containerClassName,
   imageClassName,
   unoptimized,
+  showGradient = true,
 }: {
   src: string;
   absolute?: boolean;
   containerClassName?: string;
   imageClassName?: string;
   unoptimized?: boolean;
+  showGradient?: boolean;
 }) {
   return (
     <div
@@ -22,13 +24,15 @@ export default function BearthBackgroundImage({
         containerClassName,
       )}
     >
-      <div className="absolute z-1 w-full xl:w-auto h-full xl:aspect-16/10">
-        <div className="hidden xl:block absolute left-0 top-0 h-full w-[150px] bg-linear-to-r from-secondary to-secondary/0"></div>
-        <div className="hidden xl:block absolute right-0 top-0 h-full w-[150px] bg-linear-to-l from-secondary to-secondary/0"></div>
-      </div>
+      {showGradient && (
+        <div className="absolute z-1 w-full xl:w-auto h-full xl:aspect-video">
+          <div className="hidden xl:block absolute left-0 top-0 h-full w-[150px] bg-linear-to-r from-secondary to-secondary/0"></div>
+          <div className="hidden xl:block absolute right-0 top-0 h-full w-[150px] bg-linear-to-l from-secondary to-secondary/0"></div>
+        </div>
+      )}
       {/* gradient from left to right, from black to transparent */}
-      <div className="w-full xl:w-auto h-full xl:aspect-16/10 relative">
-        {src.endsWith(".webm") ? (
+      <div className="w-full xl:w-auto h-full xl:aspect-video relative">
+        {src.endsWith(".webm") || src.endsWith(".mp4") ? (
           <video
             src={src}
             autoPlay

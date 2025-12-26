@@ -84,7 +84,7 @@ export default function SectionSecond() {
     <MaxWidthConstraintedLayout
       as="section"
       className="px-4 py-8 desktop:pt-20 desktop:pb-8 text-white flex flex-col justify-center"
-      outerDivClassName="w-full bg-secondary"
+      outerDivClassName="w-full"
     >
       <CarouselProvider>
         <div className="flex flex-col">

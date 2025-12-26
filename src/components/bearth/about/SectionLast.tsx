@@ -10,13 +10,12 @@ export default function SectionLast() {
       as="section"
       paddingHeader
       paddingFooter
-      className="px-4 py-24 lg:py-40 text-white flex flex-col min-h-screen"
+      className="px-4 py-24 lg:py-40 text-white flex flex-col min-h-screen justify-between"
       outerDivClassName="relative"
       slotOutside={
         <BearthBackgroundImage
           src="/assets/about-bg-bottom.webm"
           absolute
-          containerClassName="bg-secondary"
         />
       }
     >
