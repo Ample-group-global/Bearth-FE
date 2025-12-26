@@ -1,8 +1,8 @@
 "use client";
-import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { preload } from "react-dom";
+import { cn } from "@/lib/utils";
 
 const bearImages = [
   {

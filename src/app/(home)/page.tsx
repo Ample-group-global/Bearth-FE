@@ -1,8 +1,8 @@
 import Image from "next/image";
-import { BearthButton } from "../../components/bearth/BearthButton";
 import BearthBackgroundImage from "@/components/bearth/BearthBackgroundImage";
-import BearthFooter from "@/components/bearth/navigation/BearthFooter";
 import MaxWidthConstraintedLayout from "@/components/bearth/MaxWidthConstraintedLayout";
+import BearthFooter from "@/components/bearth/navigation/BearthFooter";
+import { BearthButton } from "../../components/bearth/BearthButton";
 
 export default function HomePage() {
   return (

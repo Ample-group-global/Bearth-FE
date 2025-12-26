@@ -1,8 +1,8 @@
+import Image from "next/image";
+import Link from "next/link";
 import Heading from "@/components/bearth/Heading";
 import MaxWidthConstraintedLayout from "@/components/bearth/MaxWidthConstraintedLayout";
 import BearthSocialLinks from "@/components/bearth/navigation/BearthSocialLinks";
-import Image from "next/image";
-import Link from "next/link";
 
 export default function ContactPage() {
   return (

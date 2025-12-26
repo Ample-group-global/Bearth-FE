@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
 import "./font.css";
 import "./globals.css";
+import { BreathLiquidGlassBase } from "@/components/bearth/navigation/BearthLiquidGlassEffect";
 import BearthTopBar from "@/components/bearth/navigation/BearthTopBar";
 import BearthTopBarScrollDetection from "@/components/bearth/navigation/BearthTopBarScrollDetection";
-import { BreathLiquidGlassBase } from "@/components/bearth/navigation/BearthLiquidGlassEffect";
 
 const figtree = Figtree({
   subsets: ["latin"],

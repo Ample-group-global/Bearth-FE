@@ -1,5 +1,5 @@
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import BearthDesktopNavigationBar from "./BearthDesktopNavigationBar";
 import { BearthSideMenu } from "./BearthSideMenu";
 

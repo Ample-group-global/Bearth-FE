@@ -1,7 +1,7 @@
 "use client";
 
-import { CarouselApi } from "@/components/ui/carousel";
 import { createContext, useState } from "react";
+import type { CarouselApi } from "@/components/ui/carousel";
 
 export const CarouselContext = createContext<{
   carouselApi: CarouselApi;

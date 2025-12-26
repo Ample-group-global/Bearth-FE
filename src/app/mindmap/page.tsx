@@ -1,10 +1,10 @@
 "use client";
 
-import BearthFooter from "@/components/bearth/navigation/BearthFooter";
-import MaxWidthConstraintedLayout from "@/components/bearth/MaxWidthConstraintedLayout";
-import MindmapGrid from "@/components/bearth/mindmap/MindmapGrid";
 import { motion } from "motion/react";
 import Heading from "@/components/bearth/Heading";
+import MaxWidthConstraintedLayout from "@/components/bearth/MaxWidthConstraintedLayout";
+import MindmapGrid from "@/components/bearth/mindmap/MindmapGrid";
+import BearthFooter from "@/components/bearth/navigation/BearthFooter";
 
 export default function MindmapPage() {
   return (

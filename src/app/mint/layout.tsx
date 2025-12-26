@@ -1,5 +1,5 @@
-import { ServerProvider } from "@/provider/server-provider";
 import { notFound } from "next/navigation";
+import { ServerProvider } from "@/provider/server-provider";
 
 export default function MintLayout({
   children,

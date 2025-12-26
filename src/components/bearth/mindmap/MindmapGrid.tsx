@@ -1,12 +1,12 @@
 "use client";
-import { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import Image from "next/image";
 import { XIcon } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
+import Image from "next/image";
+import { useState } from "react";
+import { cn } from "@/lib/utils";
+import BearthBadge from "../BearthBadge";
 import Heading from "../Heading";
 import Paragraph from "../Paragraph";
-import BearthBadge from "../BearthBadge";
-import { cn } from "@/lib/utils";
 
 const items = [
   {

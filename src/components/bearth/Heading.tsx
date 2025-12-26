@@ -1,5 +1,5 @@
-import { cn } from "@/lib/utils";
 import { createElement } from "react";
+import { cn } from "@/lib/utils";
 
 interface HeadingProps {
   children: React.ReactNode;
@@ -19,7 +19,8 @@ export default function Heading({
     {
       className: cn(
         type === "h1" && "mb-4 text-4xl lg:text-7xl font-black",
-        type === "h2" && "text-shadow-lg text-[20px] lg:text-[40px] font-semibold",
+        type === "h2" &&
+          "text-shadow-lg text-[20px] lg:text-[40px] font-semibold",
         type === "h3" && "text-shadow-lg text-[24px] lg:text-[40px]",
         type === "h4" && "text-shadow-none font-bold text-base lg:text-[24px]",
         type === "h5" && "text-shadow-none font-semibold text-base",

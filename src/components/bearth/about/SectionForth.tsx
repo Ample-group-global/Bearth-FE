@@ -1,7 +1,7 @@
-import MaxWidthConstraintedLayout from "../MaxWidthConstraintedLayout";
-import Heading from "../Heading";
-import Paragraph from "../Paragraph";
 import { cn } from "@/lib/utils";
+import Heading from "../Heading";
+import MaxWidthConstraintedLayout from "../MaxWidthConstraintedLayout";
+import Paragraph from "../Paragraph";
 import AnimatedTitle from "./AnimatedTitle";
 
 export function SectionForthVideo({ className }: { className?: string }) {

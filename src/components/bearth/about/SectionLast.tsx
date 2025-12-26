@@ -1,8 +1,8 @@
-import MaxWidthConstraintedLayout from "../MaxWidthConstraintedLayout";
-import Heading from "../Heading";
-import Paragraph from "../Paragraph";
-import { BearthButton } from "../BearthButton";
 import BearthBackgroundImage from "../BearthBackgroundImage";
+import { BearthButton } from "../BearthButton";
+import Heading from "../Heading";
+import MaxWidthConstraintedLayout from "../MaxWidthConstraintedLayout";
+import Paragraph from "../Paragraph";
 
 export default function SectionLast() {
   return (

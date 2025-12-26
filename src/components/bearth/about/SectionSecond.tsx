@@ -1,13 +1,13 @@
 import Image from "next/image";
-import MaxWidthConstraintedLayout from "../MaxWidthConstraintedLayout";
-import Heading from "../Heading";
-import Paragraph from "../Paragraph";
 import { CarouselItem } from "@/components/ui/carousel";
-import { SectionSecondCarousel } from "./SectionSecondCarousel";
-import AnimatedTitle from "./AnimatedTitle";
+import Heading from "../Heading";
+import MaxWidthConstraintedLayout from "../MaxWidthConstraintedLayout";
 import BearthLiquidGlassEffect from "../navigation/BearthLiquidGlassEffect";
-import { CarouselProvider } from "./CarouselContext";
+import Paragraph from "../Paragraph";
+import AnimatedTitle from "./AnimatedTitle";
 import { CarouselButton } from "./CarouselButton";
+import { CarouselProvider } from "./CarouselContext";
+import { SectionSecondCarousel } from "./SectionSecondCarousel";
 
 const sections = [
   {
@@ -131,12 +131,12 @@ export default function SectionSecond() {
                     <div className="flex justify-center grow">
                       <div className="h-full w-full relative aspect-16/10">
                         <Image
-                        src={section.image}
-                        alt=""
-                        className="object-cover rounded-2xl"
-                        fill
-                        sizes="(max-width: 768px) 100vw, 500px"
-                      />
+                          src={section.image}
+                          alt=""
+                          className="object-cover rounded-2xl"
+                          fill
+                          sizes="(max-width: 768px) 100vw, 500px"
+                        />
                       </div>
                     </div>
                     <div className="grow text-white flex desktop:hidden flex-col gap-2">

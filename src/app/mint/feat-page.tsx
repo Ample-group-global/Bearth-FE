@@ -3,6 +3,7 @@
 import "viem/window";
 import { useActiveWallet, usePrivy } from "@privy-io/react-auth";
 import { useCallback, useEffect } from "react";
+import type { Hex } from "viem";
 import {
   createPublicClient,
   createWalletClient,
@@ -10,10 +11,9 @@ import {
   getContract,
   http,
 } from "viem";
-import type { Hex } from "viem";
 import { sepolia } from "viem/chains";
-import BearthNFT from "../../BearthNFTAbi";
 import { parseEther } from "viem/utils";
+import BearthNFT from "../../BearthNFTAbi";
 export default function MintPage() {
   const { login, logout, user } = usePrivy();
   const { wallet } = useActiveWallet();

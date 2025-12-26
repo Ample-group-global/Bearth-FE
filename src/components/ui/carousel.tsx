@@ -1,10 +1,10 @@
 /** biome-ignore-all lint/a11y/useSemanticElements: carousel do not use semantic elements */
 "use client";
 
-import * as React from "react";
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from "embla-carousel-react";
+import * as React from "react";
 
 import { cn } from "@/lib/utils";
 

@@ -1,12 +1,12 @@
 "use client";
 // Dynamic Typing Animation Component with Customizable Cursor and Typography
 import {
-  useState,
-  useEffect,
-  useRef,
-  useMemo,
-  startTransition,
   type CSSProperties,
+  startTransition,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
 } from "react";
 
 interface TypewriterEffectProps {

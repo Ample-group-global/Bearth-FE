@@ -1,10 +1,10 @@
 "use client";
 
-import { useContext, useMemo, useState } from "react";
-import { CarouselContext } from "./CarouselContext";
-import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useContext, useMemo, useState } from "react";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { CarouselContext } from "./CarouselContext";
 
 export function CarouselButton({ className }: { className?: string }) {
   const { carouselApi } = useContext(CarouselContext);

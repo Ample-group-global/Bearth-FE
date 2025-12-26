@@ -1,6 +1,6 @@
 "use client";
-import { Carousel, CarouselContent } from "@/components/ui/carousel";
 import { useContext } from "react";
+import { Carousel, CarouselContent } from "@/components/ui/carousel";
 import { CarouselContext } from "./CarouselContext";
 
 export function SectionSecondCarousel({
@@ -19,7 +19,9 @@ export function SectionSecondCarousel({
         containScroll: false,
       }}
     >
-      <CarouselContent outerClassName="h-full" className="h-full">{children}</CarouselContent>
+      <CarouselContent outerClassName="h-full" className="h-full">
+        {children}
+      </CarouselContent>
     </Carousel>
   );
 }

@@ -1,6 +1,6 @@
 import Image from "next/image";
-import MaxWidthConstraintedLayout from "../MaxWidthConstraintedLayout";
 import Heading from "../Heading";
+import MaxWidthConstraintedLayout from "../MaxWidthConstraintedLayout";
 import Paragraph from "../Paragraph";
 import AnimatedTitle from "./AnimatedTitle";
 
