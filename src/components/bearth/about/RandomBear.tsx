@@ -24,7 +24,7 @@ const bearImages = [
 ];
 
 export default function RandomBear() {
-  const waitTime = 500;
+  const waitTime = 5000;
   const [key, setKey] = useState(0);
   const [position, setPosition] = useState(0);
   const [direction, setDirection] = useState<"left" | "right">("left");
