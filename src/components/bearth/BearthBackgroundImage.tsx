@@ -6,11 +6,13 @@ export default function BearthBackgroundImage({
   absolute = false,
   containerClassName,
   imageClassName,
+  unoptimized,
 }: {
   src: string;
   absolute?: boolean;
   containerClassName?: string;
   imageClassName?: string;
+  unoptimized?: boolean;
 }) {
   return (
     <div
@@ -26,17 +28,27 @@ export default function BearthBackgroundImage({
       </div>
       {/* gradient from left to right, from black to transparent */}
       <div className="w-full xl:w-auto h-full xl:aspect-16/10 relative">
-        <Image
-          src={src}
-          alt=""
-          aria-hidden="true"
-          loading="eager"
-          fetchPriority="high"
-          className={cn("object-cover", imageClassName)}
-          fill
-          sizes="(max-width: 1440px) 100vw, 1440px"
-          unoptimized={true}
-        />
+        {src.endsWith(".webm") ? (
+          <video
+            src={src}
+            autoPlay
+            muted
+            loop
+            className={cn("object-cover w-full h-full", imageClassName)}
+          />
+        ) : (
+          <Image
+            src={src}
+            alt=""
+            aria-hidden="true"
+            loading="eager"
+            fetchPriority="high"
+            className={cn("object-cover", imageClassName)}
+            fill
+            sizes="(max-width: 1440px) 100vw, 1440px"
+            unoptimized={unoptimized}
+          />
+        )}
       </div>
     </div>
   );

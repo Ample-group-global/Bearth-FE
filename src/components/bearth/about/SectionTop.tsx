@@ -13,7 +13,7 @@ export default function SectionTop() {
       paddingHeader
       paddingFooter
       slotOutside={
-        <BearthBackgroundImage src="/assets/about-bg-top.webp" absolute />
+        <BearthBackgroundImage src="/assets/about-bg-top.webm" absolute />
       }
     >
       {/* Hero Section */}

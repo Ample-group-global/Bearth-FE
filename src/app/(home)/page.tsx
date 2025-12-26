@@ -12,7 +12,7 @@ export default function HomePage() {
       outerDivClassName="relative"
       className="relative w-full"
     >
-      <BearthBackgroundImage src="/assets/home-bg.webp"></BearthBackgroundImage>
+      <BearthBackgroundImage src="/assets/home-bg.webm"></BearthBackgroundImage>
       {/* Content Container */}
       <div className="relative z-1 flex min-h-screen flex-col items-center justify-between px-4 py-6 md:px-8">
         {/* Hero Section */}
