@@ -7,7 +7,7 @@ import SectionTop from "@/components/bearth/about/SectionTop";
 
 export default function AboutPage() {
   return (
-    <main className="w-screen flex flex-col justify-center overflow-hidden">
+    <main className="w-full flex flex-col justify-center overflow-hidden">
       <RandomBear />
       <SectionTop></SectionTop>
       <SectionSecond></SectionSecond>

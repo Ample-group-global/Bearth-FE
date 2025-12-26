@@ -8,7 +8,7 @@ export default function SectionThird() {
   return (
     <MaxWidthConstraintedLayout
       as="section"
-      className="px-4 text-white flex justify-center desktop:h-screen items-center py-4 desktop:pt-20 desktop:pb-8"
+      className="px-4 text-white flex justify-center items-center py-4 desktop:pt-20 desktop:pb-8"
       outerDivClassName="w-full bg-secondary"
     >
       <div className="flex flex-col gap-6 h-fit min-h-0">

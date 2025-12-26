@@ -30,7 +30,7 @@ export default function SectionForth() {
     >
       <div className="flex flex-col gap-6 w-full max-h-full">
         <div className="flex flex-col lg:flex-row gap-8 flex-1">
-          <div className="shrink-0 hidden lg:flex lg:justify-end lg:my-8">
+          <div className="flex-1 hidden lg:flex lg:justify-end lg:my-8">
             <SectionForthVideo className="aspect-842/617" />
           </div>
           <div className="relative lg:w-[550px] flex flex-col gap-4 flex-1 mt-8 items-start">
