@@ -35,6 +35,7 @@ export default function BearthBackgroundImage({
           className={cn("object-cover", imageClassName)}
           fill
           sizes="(max-width: 1440px) 100vw, 1440px"
+          unoptimized={true}
         />
       </div>
     </div>

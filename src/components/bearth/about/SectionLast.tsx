@@ -14,7 +14,7 @@ export default function SectionLast() {
       outerDivClassName="relative"
       slotOutside={
         <BearthBackgroundImage
-          src="/assets/about-bg-bottom.png"
+          src="/assets/about-bg-bottom.webp"
           absolute
           containerClassName="bg-secondary"
         />

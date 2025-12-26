@@ -42,11 +42,12 @@ export default function ContactPage() {
       </div>
 
       <Image
-        className="mt-4 aspect-square w-full max-w-[500px] mix-blend-darken"
-        src="/assets/contact.gif"
+        className="mt-4 aspect-square w-full max-w-[500px] object-contain"
+        src="/assets/contact.webp"
+        unoptimized={true}
         alt="Contact"
-        width={500}
-        height={500}
+        width={1400}
+        height={1100}
       />
     </MaxWidthConstraintedLayout>
   );
