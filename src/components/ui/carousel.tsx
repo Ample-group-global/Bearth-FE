@@ -18,7 +18,7 @@ type CarouselProps = {
   plugins?: CarouselPlugin;
   orientation?: "horizontal" | "vertical";
   setApi?: (api: CarouselApi) => void;
-  onSlideChange?: (...props: any[]) => void;
+  onSlideChange?: (...props: unknown[]) => void;
 };
 
 type CarouselContextProps = {
