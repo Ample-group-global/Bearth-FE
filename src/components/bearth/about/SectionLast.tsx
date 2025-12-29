@@ -22,7 +22,7 @@ export default function SectionLast() {
       <div className="flex flex-col items-center justify-center text-center z-27">
         <Heading
           type="h1"
-          className="uppercase text-primary title-stroke-white"
+          className="uppercase text-primary title-stroke title-strokecolor-white"
         >
           Find Your Place <br /> in the Stars
         </Heading>

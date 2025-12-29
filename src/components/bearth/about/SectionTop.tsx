@@ -1,9 +1,52 @@
+"use client";
+
 import Image from "next/image";
 import BearthBackgroundImage from "../BearthBackgroundImage";
 import MaxWidthConstraintedLayout from "../MaxWidthConstraintedLayout";
 import TypewriterEffect from "../TypewriterEffect";
+import { useEffect, useRef } from "react";
 
 export default function SectionTop() {
+  const imageRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
+
+  function calculateScale() {
+    let scale = 1;
+    // check image scale (contain, 500*150) check both width and height
+    if (imageRef.current) {
+      const image = imageRef.current;
+      const imageWidth = image.offsetWidth;
+      const imageHeight = image.offsetHeight;
+
+      const widthRatio = imageWidth / 500;
+      const heightRatio = imageHeight / 150;
+      scale = Math.min(widthRatio, heightRatio);
+    }
+
+    // set the scale size to text
+    if (textRef.current) {
+      const text = textRef.current;
+      text.style.transform = `scale(${scale})`;
+    }
+  }
+
+  const resizeObserverRef = useRef<ResizeObserver>(
+    new ResizeObserver(calculateScale),
+  );
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    calculateScale();
+    resizeObserverRef.current.observe(document.body);
+
+    return () => {
+      resizeObserverRef.current.disconnect();
+    };
+  }, []);
+
   return (
     <MaxWidthConstraintedLayout
       as="section"
@@ -18,7 +61,10 @@ export default function SectionTop() {
       {/* Hero Section */}
       <div className="p-4 lg:p-12 flex flex-col grow items-center justify-center text-center">
         <div className="w-full flex flex-col grow justify-between max-h-[70vh]">
-          <div className="relative flex items-center justify-center h-[20vh]">
+          <div
+            className="relative flex items-center justify-center h-[20vh]"
+            ref={imageRef}
+          >
             <Image
               src="/assets/logo.svg"
               alt="Bearth Logo"
@@ -29,7 +75,7 @@ export default function SectionTop() {
             />
           </div>
 
-          <div>
+          <div ref={textRef}>
             <h2 className="text-white title-stroke2 title-strokecolor-primary text-[20px] font-semibold">
               BEARTH Is For Everyone
             </h2>
@@ -43,7 +89,7 @@ export default function SectionTop() {
                   fontWeight: "600",
                   lineHeight: "1",
                 }}
-                cursorMarginLeft={4}
+                cursorMarginLeft={2}
               />
             </h2>
           </div>

@@ -21,7 +21,7 @@ export default function AboutPage() {
         <ScrollTransformContainer className="h-screen w-screen fixed inset-0 pointer-events-none">
           <BearthBackgroundImage
             unoptimized
-            src="/assets/star.webm"
+            src="/assets/star.webp"
             showGradient={false}
           />
         </ScrollTransformContainer>
