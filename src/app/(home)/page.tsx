@@ -25,7 +25,7 @@ export default function HomePage() {
             <Image
               fetchPriority="high"
               loading="eager"
-              src="/assets/logo.png"
+              src="/assets/logo.svg"
               alt="Bearth Logo"
               fill
               sizes="(max-width: 768px) 80vw, 100vw"
