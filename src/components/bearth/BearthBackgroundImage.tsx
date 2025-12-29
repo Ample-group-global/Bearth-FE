@@ -26,8 +26,8 @@ export default function BearthBackgroundImage({
     >
       {showGradient && (
         <div className="absolute z-1 w-full xl:w-auto h-full xl:aspect-video">
-          <div className="hidden xl:block absolute left-0 top-0 h-full w-[150px] bg-linear-to-r from-secondary to-secondary/0"></div>
-          <div className="hidden xl:block absolute right-0 top-0 h-full w-[150px] bg-linear-to-l from-secondary to-secondary/0"></div>
+          <div className="hidden xl:block absolute -left-px top-0 h-full w-[150px] bg-linear-to-r from-secondary to-secondary/0"></div>
+          <div className="hidden xl:block absolute -right-px top-0 h-full w-[150px] bg-linear-to-l from-secondary to-secondary/0"></div>
         </div>
       )}
       {/* gradient from left to right, from black to transparent */}

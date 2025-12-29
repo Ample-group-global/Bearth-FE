@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { CarouselItem } from "@/components/ui/carousel";
 import Heading from "../Heading";
-import MaxWidthConstraintedLayout from "../MaxWidthConstraintedLayout";
 import BearthLiquidGlassEffect from "../navigation/BearthLiquidGlassEffect";
 import Paragraph from "../Paragraph";
 import AnimatedTitle from "./AnimatedTitle";
@@ -81,32 +80,34 @@ const sections = [
 
 export default function SectionSecond() {
   return (
-    <MaxWidthConstraintedLayout
-      as="section"
-      className="px-4 py-8 desktop:pt-20 desktop:pb-8 text-white flex flex-col justify-center"
-      outerDivClassName="w-full"
-    >
+    <section className="py-8 desktop:pt-20 desktop:pb-8 text-white flex flex-col justify-center items-center">
       <CarouselProvider>
-        <div className="flex flex-col">
-          <AnimatedTitle>
-            <Heading
-              type="h1"
-              className="uppercase text-primary title-stroke-black"
-            >
-              Welcome to Bearth!
-            </Heading>
-          </AnimatedTitle>
-          <div className="flex justify-between items-center">
-            <Heading type="h3" as="h2">
-              BEARTH = BEAR+EARTH+BIRTH
-            </Heading>
-            <CarouselButton className="hidden desktop:flex mr-30" />
+        <div className="w-full max-w-[1280px] px-4">
+          <div className="flex flex-col">
+            <AnimatedTitle>
+              <Heading
+                type="h1"
+                className="uppercase text-primary title-stroke title-strokecolor-black"
+              >
+                Welcome to Bearth!
+              </Heading>
+            </AnimatedTitle>
+            <div className="flex justify-between items-center">
+              <Heading type="h3" as="h2" className="font-semibold">
+                BEARTH = BEAR+EARTH+BIRTH
+              </Heading>
+              <CarouselButton className="hidden desktop:flex mr-8" />
+            </div>
           </div>
         </div>
-        <div className="w-full place-self-center overflow-hidden relative mt-4 rounded-2xl desktop:h-[545px]">
+
+        <div className="w-full place-self-center overflow-hidden relative mt-4 xl:h-[545px]">
           <SectionSecondCarousel>
             {sections.map((section) => (
-              <CarouselItem key={section.order} className="basis-11/12">
+              <CarouselItem
+                key={section.order}
+                className="basis-11/12 max-w-[1232px]"
+              >
                 <BearthLiquidGlassEffect
                   shineType="2"
                   tintColor="bg-primary/50"
@@ -114,33 +115,30 @@ export default function SectionSecond() {
                   className="h-full"
                   contentClassName="w-full"
                 >
-                  <div className="flex flex-col desktop:flex-row gap-4 desktop:gap-8 p-4 lg:p-8 desktop:p-8 h-full desktop:items-center">
-                    <div className="flex-1 flex flex-col text-white gap-4 desktop:self-end">
-                      <div className="flex flex-row gap-4 items-center desktop:h-auto">
-                        <div className="font-bold text-4xl desktop:text-7xl">
-                          {section.order}
-                        </div>
-                        <div className="text-2xl desktop:text-[40px] font-bold leading-none">
-                          {section.title}
+                  <div className="flex flex-col desktop:flex-col gap-4 p-4 lg:p-8 desktop:p-8 h-full">
+                    <div className="flex flex-row gap-4 text-white items-center">
+                      <div className="font-bold text-4xl desktop:text-7xl">
+                        {section.order}
+                      </div>
+                      <div className="text-2xl desktop:text-[40px] font-bold leading-none">
+                        {section.title}
+                      </div>
+                    </div>
+                    <div className="flex flex-col xl:flex-row grow gap-4">
+                      <div className="flex justify-center flex-1">
+                        <div className="h-full w-full aspect-16/10 xl:aspect-auto relative">
+                          <Image
+                            src={section.image}
+                            alt=""
+                            className="object-cover rounded-2xl"
+                            fill
+                            sizes="(max-width: 768px) 100vw, 500px"
+                          />
                         </div>
                       </div>
-                      <div className="hidden desktop:flex flex-col gap-2 min-w-[300px]">
+                      <div className="grow text-white flex flex-col gap-2 justify-end xl:max-w-[400px] xl:min-w-[300px]">
                         {section.text}
                       </div>
-                    </div>
-                    <div className="flex justify-center grow">
-                      <div className="h-full w-full relative aspect-16/10">
-                        <Image
-                          src={section.image}
-                          alt=""
-                          className="object-cover rounded-2xl"
-                          fill
-                          sizes="(max-width: 768px) 100vw, 500px"
-                        />
-                      </div>
-                    </div>
-                    <div className="grow text-white flex desktop:hidden flex-col gap-2">
-                      {section.text}
                     </div>
                   </div>
                 </BearthLiquidGlassEffect>
@@ -152,6 +150,6 @@ export default function SectionSecond() {
           <CarouselButton className="flex" />
         </div>
       </CarouselProvider>
-    </MaxWidthConstraintedLayout>
+    </section>
   );
 }

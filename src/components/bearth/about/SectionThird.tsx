@@ -15,7 +15,7 @@ export default function SectionThird() {
         <AnimatedTitle>
           <Heading
             type="h1"
-            className="uppercase text-primary title-stroke-black"
+            className="uppercase text-primary title-stroke title-strokecolor-black"
           >
             Building a Universe, <br />
             One Nap at a&nbsp;

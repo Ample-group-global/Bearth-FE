@@ -21,7 +21,7 @@ export default function ScrollTransformContainer({
       {...props}
       ref={divRef}
       style={{
-        transform: `translateY(${scrollY.getVelocity()}px)`,
+        transform: `translateY(100vh)`,
         ...props.style,
       }}
     >

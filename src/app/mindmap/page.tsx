@@ -19,7 +19,7 @@ export default function MindmapPage() {
       }
     >
       <header className="mb-8 md:mb-12 max-w-[800px] self-start">
-        <Heading type="h1" className="text-primary title-stroke-black">
+        <Heading type="h1" className="text-primary title-stroke title-strokecolor-white">
           MINDMAP
         </Heading>
         <div className="space-y-4">

@@ -26,7 +26,7 @@ export default function SectionForth() {
     <MaxWidthConstraintedLayout
       as="section"
       className="px-4 text-white flex justify-center items-center py-4 desktop:py-48"
-      outerDivClassName="w-full"
+      outerDivClassName="w-full z-26 relative"
     >
       <div className="flex flex-col gap-6 w-full max-h-full">
         <div className="flex flex-col lg:flex-row gap-8 flex-1">
@@ -37,7 +37,7 @@ export default function SectionForth() {
             <AnimatedTitle>
               <Heading
                 type="h1"
-                className="uppercase text-primary title-stroke-black"
+                className="uppercase text-primary title-stroke title-strokecolor-black"
               >
                 When Mary <br /> Became a <br className="block lg:hidden" />{" "}
                 Universe

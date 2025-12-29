@@ -26,7 +26,7 @@ export default function MaxWidthConstraintedLayout({
         as,
         {
           className: cn(
-            "max-w-[1440px] mx-auto px-4 lg:px-8",
+            "max-w-[1280px] mx-auto px-4 lg:px-8",
             paddingHeader && "pt-[72px]",
             paddingFooter && "pb-8 md:pb-[64px]",
             className,

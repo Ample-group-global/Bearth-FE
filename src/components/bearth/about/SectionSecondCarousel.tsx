@@ -19,7 +19,13 @@ export function SectionSecondCarousel({
         containScroll: false,
       }}
     >
-      <CarouselContent outerClassName="h-full" className="h-full">
+      <CarouselContent
+        outerClassName="h-full"
+        className="h-full"
+        outerStyle={{
+          paddingLeft: "max(8px, calc((100vw - 1280px) / 2) + 8px)",
+        }}
+      >
         {children}
       </CarouselContent>
     </Carousel>

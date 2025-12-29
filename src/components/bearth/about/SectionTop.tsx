@@ -1,7 +1,6 @@
+import Image from "next/image";
 import BearthBackgroundImage from "../BearthBackgroundImage";
-import Heading from "../Heading";
 import MaxWidthConstraintedLayout from "../MaxWidthConstraintedLayout";
-import BearthFooter from "../navigation/BearthFooter";
 import TypewriterEffect from "../TypewriterEffect";
 
 export default function SectionTop() {
@@ -9,7 +8,7 @@ export default function SectionTop() {
     <MaxWidthConstraintedLayout
       as="section"
       outerDivClassName="relative z-21 bg-secondary"
-      className="flex flex-col justify-between pt-20 relative min-h-screen lg:py-40"
+      className="flex flex-col justify-between relative min-h-screen"
       paddingHeader
       paddingFooter
       slotOutside={
@@ -18,29 +17,26 @@ export default function SectionTop() {
     >
       {/* Hero Section */}
       <div className="p-4 lg:p-12 flex flex-col grow items-center justify-center text-center">
-        <div className="w-full h-full flex flex-col max-h-[60vh] grow justify-between">
-          <div>
-            <p className="text-shadow-lg text-white text-2xl lg:text-[32px] font-bold mb-4 lg:mb-0">
-              About BEARTH
-            </p>
-            <Heading
-              type="h1"
-              className="text-primary mb-2 lg:mb-0 title-stroke-white"
-            >
-              A Universe
-              <br />
-              Born from Love
-            </Heading>
+        <div className="w-full flex flex-col grow justify-between max-h-[70vh]">
+          <div className="relative flex items-center justify-center h-[20vh]">
+            <Image
+              src="/assets/logo.svg"
+              alt="Bearth Logo"
+              unoptimized
+              className="w-full h-full object-contain"
+              fill
+              sizes="100vw"
+            />
           </div>
 
           <div>
-            <h2 className="text-primary title-stroke-white text-[20px] lg:text-[40px] font-semibold">
+            <h2 className="text-white title-stroke2 title-strokecolor-primary text-[20px] font-semibold">
               BEARTH Is For Everyone
             </h2>
-            <h2 className="lg:hidden">
+            <h2>
               <TypewriterEffect
                 {...typewriterDefaultOptions}
-                className="text-primary title-stroke-white"
+                className="text-white title-stroke2 title-strokecolor-primary"
                 font={{
                   fontFamily: "hoss-round",
                   fontSize: "20px",
@@ -50,25 +46,9 @@ export default function SectionTop() {
                 cursorMarginLeft={4}
               />
             </h2>
-            <h2 className="hidden lg:block h-[40px]">
-              <TypewriterEffect
-                {...typewriterDefaultOptions}
-                className="text-primary title-stroke-white"
-                font={{
-                  fontFamily: "hoss-round",
-                  fontSize: "40px",
-                  fontWeight: "600",
-                  lineHeight: "1",
-                }}
-                cursorMarginLeft={8}
-                cursorWidth={4}
-              />
-            </h2>
           </div>
         </div>
       </div>
-
-      <BearthFooter absolute />
     </MaxWidthConstraintedLayout>
   );
 }

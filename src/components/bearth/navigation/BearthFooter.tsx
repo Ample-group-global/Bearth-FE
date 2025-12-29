@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import BearthSocialLinks from "./BearthSocialLinks";
+import BearthLiquidGlassEffect from "./BearthLiquidGlassEffect";
+import Image from "next/image";
+import BearthLiquidGlassSocialLinks from "./BearthLiquidGlassSocialLinks";
 
 export default function BearthFooter({
   absolute = false,
@@ -19,12 +22,14 @@ export default function BearthFooter({
         className,
       )}
     >
-      <div className="text-3xl font-black tracking-wide drop-shadow-md">
-        <Link href="/contact">Contact</Link>
-      </div>
+      <BearthLiquidGlassEffect className="h-[40px]" contentClassName="flex items-center justify-center">
+        <div className="text-2xl text-white px-5 font-semibold tracking-wide drop-shadow-md">
+          <Link href="/contact">Contact</Link>
+        </div>
+      </BearthLiquidGlassEffect>
 
       <div className="flex items-center gap-4">
-        <BearthSocialLinks />
+        <BearthLiquidGlassSocialLinks />
       </div>
     </footer>
   );

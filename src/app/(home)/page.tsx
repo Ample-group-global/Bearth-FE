@@ -3,8 +3,11 @@ import BearthBackgroundImage from "@/components/bearth/BearthBackgroundImage";
 import MaxWidthConstraintedLayout from "@/components/bearth/MaxWidthConstraintedLayout";
 import BearthFooter from "@/components/bearth/navigation/BearthFooter";
 import { BearthButton } from "../../components/bearth/BearthButton";
+import { redirect } from "next/navigation";
 
 export default function HomePage() {
+  redirect("/about");
+
   return (
     <MaxWidthConstraintedLayout
       as="main"

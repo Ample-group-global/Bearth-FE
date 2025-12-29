@@ -6,22 +6,28 @@ import SectionSecond from "@/components/bearth/about/SectionSecond";
 import SectionThird from "@/components/bearth/about/SectionThird";
 import SectionTop from "@/components/bearth/about/SectionTop";
 import BearthBackgroundImage from "@/components/bearth/BearthBackgroundImage";
+import BearthFooter from "@/components/bearth/navigation/BearthFooter";
 
 export default function AboutPage() {
   return (
     <main className="w-full flex flex-col justify-center overflow-hidden">
+      <BearthFooter className="max-w-[1280px] left-1/2 -translate-x-1/2 z-30" />
       <RandomBear />
       <div className="fixed inset-0 z-1">
         <SectionTop></SectionTop>
       </div>
       <div className="h-screen"></div>
       <div className="bg-secondary z-22 relative">
-        <ScrollTransformContainer className="h-screen w-screen fixed inset-0 mix-blend-lighten">
-          <BearthBackgroundImage src="/assets/star.mp4" showGradient={false} />
+        <ScrollTransformContainer className="h-screen w-screen fixed inset-0 pointer-events-none">
+          <BearthBackgroundImage
+            unoptimized
+            src="/assets/star.webm"
+            showGradient={false}
+          />
         </ScrollTransformContainer>
-        <SectionSecond></SectionSecond>
-        <SectionThird></SectionThird>
         <SectionForth></SectionForth>
+        <SectionThird></SectionThird>
+        <SectionSecond></SectionSecond>
         <SectionLast></SectionLast>
       </div>
     </main>
