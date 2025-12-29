@@ -30,20 +30,20 @@ export default function SectionTop() {
     }
   }
 
-  const resizeObserverRef = useRef<ResizeObserver>(
-    new ResizeObserver(calculateScale),
-  );
+  const resizeObserverRef = useRef<ResizeObserver | null>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") {
       return;
     }
 
+    resizeObserverRef.current = new ResizeObserver(calculateScale);
+
     calculateScale();
-    resizeObserverRef.current.observe(document.body);
+    resizeObserverRef.current?.observe(document.body);
 
     return () => {
-      resizeObserverRef.current.disconnect();
+      resizeObserverRef.current?.disconnect();
     };
   }, []);
 
