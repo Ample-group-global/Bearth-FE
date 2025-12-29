@@ -16,6 +16,7 @@ export default function SectionLast() {
         <BearthBackgroundImage
           src="/assets/about-bg-bottom.webm"
           absolute
+          containerClassName="z-26"
         />
       }
     >

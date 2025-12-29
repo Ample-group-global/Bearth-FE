@@ -38,6 +38,7 @@ export default function BearthBackgroundImage({
             autoPlay
             muted
             loop
+            playsInline
             className={cn("object-cover w-full h-full", imageClassName)}
           />
         ) : (

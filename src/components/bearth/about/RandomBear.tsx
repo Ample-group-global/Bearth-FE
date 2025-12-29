@@ -3,6 +3,8 @@ import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { preload } from "react-dom";
 import { cn } from "@/lib/utils";
+import { useScroll } from "motion/react";
+import ScrollTransformContainer from "./ScrollTransformContainer";
 
 const bearImages = [
   {
@@ -76,12 +78,9 @@ export default function RandomBear() {
   }, [scheduleBear]);
 
   return (
-    <div
+    <ScrollTransformContainer
       id="random-bear"
-      className="fixed inset-0 z-20 pointer-events-none w-full"
-      style={{
-        transform: direction === "right" ? "scaleX(-1)" : "scaleX(1)",
-      }}
+      className="fixed inset-0 z-23 pointer-events-none w-full"
     >
       {!isHideBear && (
         <Image
@@ -92,6 +91,9 @@ export default function RandomBear() {
           style={{
             bottom: direction2 === "bottom" ? `${position}%` : undefined,
             top: direction2 === "top" ? `${position}%` : undefined,
+            left: direction === "left" ? `0` : undefined,
+            right: direction === "right" ? `0` : undefined,
+            transform: direction === "right" ? "scaleX(-1)" : "scaleX(1)",
           }}
           className={cn(
             "w-[60px] sm:w-[100px] md:w-[120px] lg:w-[150px] xl:w-[200px] absolute",
@@ -100,6 +102,6 @@ export default function RandomBear() {
           src={bearImage}
         ></Image>
       )}
-    </div>
+    </ScrollTransformContainer>
   );
 }
