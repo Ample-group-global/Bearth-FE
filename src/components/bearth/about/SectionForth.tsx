@@ -25,7 +25,7 @@ export default function SectionForth() {
   return (
     <MaxWidthConstraintedLayout
       as="section"
-      className="px-4 text-white flex justify-center items-center py-4 desktop:py-48"
+      className="px-4 text-white flex justify-center items-center py-4 desktop:py-24"
       outerDivClassName="w-full z-26 relative"
     >
       <div className="flex flex-col gap-6 w-full max-h-full">
