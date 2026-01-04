@@ -3,6 +3,7 @@ import Link from "next/link";
 import Heading from "@/components/bearth/Heading";
 import MaxWidthConstraintedLayout from "@/components/bearth/MaxWidthConstraintedLayout";
 import BearthSocialLinks from "@/components/bearth/navigation/BearthSocialLinks";
+import { socialLinks } from "@/config";
 
 export default function ContactPage() {
   return (
@@ -18,7 +19,7 @@ export default function ContactPage() {
         Contact
       </Heading>
       <div className="flex flex-row gap-12 justify-center">
-        <Link href="#">
+        <Link href={socialLinks.inquiries}>
           <Heading
             type="h2"
             className="text-2xl transition-transform hover:scale-110"
@@ -27,7 +28,7 @@ export default function ContactPage() {
           </Heading>
         </Link>
 
-        <Link href="#">
+        <Link href={socialLinks.support}>
           <Heading
             type="h2"
             className="text-2xl transition-transform hover:scale-110"

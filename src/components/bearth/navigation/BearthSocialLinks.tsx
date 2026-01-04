@@ -1,10 +1,14 @@
+import { socialLinks } from "@/config";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function BearthSocialLinks() {
   return (
     <>
-      <Link href="#" className="transition-transform hover:scale-110">
+      <Link
+        href={socialLinks.discord}
+        className="transition-transform hover:scale-110"
+      >
         <Image
           src="/assets/icon-discord.svg"
           alt="Discord"
@@ -12,7 +16,10 @@ export default function BearthSocialLinks() {
           height={40}
         />
       </Link>
-      <Link href="#" className="transition-transform hover:scale-110">
+      <Link
+        href={socialLinks.instagram}
+        className="transition-transform hover:scale-110"
+      >
         <Image
           src="/assets/icon-instagram.svg"
           alt="Instagram"
@@ -20,7 +27,10 @@ export default function BearthSocialLinks() {
           height={40}
         />
       </Link>
-      <Link href="#" className="transition-transform hover:scale-110">
+      <Link
+        href={socialLinks.x}
+        className="transition-transform hover:scale-110"
+      >
         <Image
           src="/assets/icon-x.svg"
           alt="X (Twitter)"
