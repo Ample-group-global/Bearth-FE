@@ -12,7 +12,12 @@ const items = [
   {
     id: 1,
     number: "1",
-    title: "Vision\n& Value",
+    title: (
+      <>
+        Vision
+        <br className="md:hidden" /> & Value
+      </>
+    ),
     contentTitle: "Vision & Value",
     desktop2Line: true,
     image: "/assets/mindmap-vision-and-value.png",
@@ -28,12 +33,21 @@ const items = [
           </Paragraph>
         </div>
 
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-2">
           <Heading type="h4" as="h2">
             Our Values
           </Heading>
 
-          <Heading type="h5" as="h3" className="w-fit px-1 bg-[#ffff00]/50">
+          <Paragraph type="normal2">
+            The Bearth universe is guided by a core set of values, rooted in the
+            story of the Bear Tribe:
+          </Paragraph>
+
+          <Heading
+            type="h5"
+            as="h3"
+            className="w-fit px-1 text-white bg-primary"
+          >
             Healing First
           </Heading>
           <Paragraph type="normal2">
@@ -42,32 +56,42 @@ const items = [
             new forms.
           </Paragraph>
 
-          <Heading type="h5" as="h3" className="w-fit px-1 bg-[#ffff00]/50">
+          <Heading
+            type="h5"
+            as="h3"
+            className="w-fit px-1 text-white bg-primary"
+          >
             Coexistence over competition
           </Heading>
           <Paragraph type="normal2">
-            Like the Bear Tribe’s laid-back philosophy, we believe the best
-            future isn’t about fighting for space—it’s about finding a planet
-            where everyone can nap comfortably. We choose collaboration over
-            conflict, community over conquest.
+            Like the Bear Tribe's laid-back philosophy, we believe the best
+            future isn't about fighting for space, but finding a planet where
+            everyone can rest comfortably.
           </Paragraph>
 
-          <Heading type="h5" as="h3" className="w-fit px-1 bg-[#ffff00]/50">
-            Build with intention
+          <Heading
+            type="h5"
+            as="h3"
+            className="w-fit px-1 text-white bg-primary"
+          >
+            Thoughtfully Crafted
           </Heading>
           <Paragraph type="normal2">
             Inspired by architectural thinking, every detail of Bearth is
-            thoughtfully designed. We don’t chase speed; we chase meaning. Good
-            things take time, and we’re here for the long journey.
+            designed with careful consideration. We pursue meaning, not speed.
           </Paragraph>
 
-          <Heading type="h5" as="h3" className="w-fit px-1 bg-[#ffff00]/50">
+          <Heading
+            type="h5"
+            as="h3"
+            className="w-fit px-1 text-white bg-primary"
+          >
             Sustainability in action
           </Heading>
           <Paragraph type="normal2">
-            Sustainability isn't a buzzword—it's a commitment woven into every
-            decision. From eco-friendly materials to responsible production, our
-            actions speak louder than words.
+            Sustainability isn't just a slogan—it's a commitment woven into
+            every decision. From eco-friendly materials to responsible
+            production, our actions speak louder than words.
           </Paragraph>
         </div>
       </div>
@@ -83,38 +107,63 @@ const items = [
       <div className="flex flex-col gap-2">
         <div>
           <Paragraph type="normal2">
-            We are the travelers of the cosmos, navigating the space between
-            loss and creation, between loneliness and belonging. We're making an
-            impact on web3 culture through warmth, not noise.
+            We are travelers of the universe, navigating between loss and
+            creation, solitude and belonging. We influence web3 culture through
+            warmth, not noise.
           </Paragraph>
         </div>
 
-        <div className="flex flex-col gap-1">
-          <Heading type="h5" as="h3" className="w-fit px-1 bg-[#ffff00]/50">
-            Empowering Creators
+        <div className="flex flex-col gap-2">
+          <Heading
+            type="h5"
+            as="h3"
+            className="w-fit px-1 text-white bg-primary"
+          >
+            Creator Empowerment
           </Heading>
           <Paragraph type="normal2">
-            We empower creatives from within, building infrastructure to surface
-            and support artists, storytellers, musicians, and dreamers of all
-            kinds.
+            We empower creators from within, building infrastructure that helps
+            artists, storytellers, musicians, and dreamers of all kinds rise and
+            thrive.
           </Paragraph>
 
-          <Heading type="h5" as="h3" className="w-fit px-1 bg-[#ffff00]/50">
-            Standing for Values
+          <Heading
+            type="h5"
+            as="h3"
+            className="w-fit px-1 text-white bg-primary"
+          >
+            Value Alignment
           </Heading>
           <Paragraph type="normal2">
-            Our community stands for healing, coexistence, and intentional
-            creation. We lead and support movements that share our vision of a
-            kinder, more thoughtful web3.
+            Our community supports healing, coexistence, and intentional
+            creation. We lead and support movements that share our vision,
+            building a kinder, more thoughtful web3.
           </Paragraph>
 
-          <Heading type="h5" as="h3" className="w-fit px-1 bg-[#ffff00]/50">
+          <Heading
+            type="h5"
+            as="h3"
+            className="w-fit px-1 text-white bg-primary"
+          >
             Growing Together
           </Heading>
           <Paragraph type="normal2">
-            We're recruiting Global Ambassadors and building governance
-            structures that allow the community to shape Bearth's future. But
-            we're not rushing—we're trusting the process.
+            We're recruiting global ambassadors and establishing governance
+            structures that let the community shape Bearth's future. But we
+            won't rush—we trust the process.
+          </Paragraph>
+
+          <Heading
+            type="h5"
+            as="h3"
+            className="w-fit px-1 text-white bg-primary"
+          >
+            Decentralized Governance (DAO)
+          </Heading>
+          <Paragraph type="normal2">
+            As our community matures, we're moving toward a DAO structure,
+            enabling holders to shape Bearth's future through collective
+            decision-making.
           </Paragraph>
         </div>
       </div>
@@ -123,28 +172,38 @@ const items = [
   {
     id: 3,
     number: "3",
-    title: "Expand",
+    title: "Expansion",
     desktop2Line: true,
     image: "/assets/mindmap-expand.png",
     content: (
       <div className="flex flex-col gap-2">
         <div>
           <Paragraph type="normal2">
-            Growth isn’t about rushing—it’s about finding the right rhythm. Like
-            the Fibonacci sequence that guides our minting phases, Bearth
-            expands organically, one thoughtful step at a time.
+            Growth isn't about rushing—it's about finding the right rhythm. Just
+            as the Fibonacci sequence guides our minting phases, Bearth expands
+            organically, one thoughtful step at a time.
           </Paragraph>
         </div>
 
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-2">
           <Heading type="h5" as="h3">
-            Phased Minting <BearthBadge color="green">In Progress</BearthBadge>
+            NFT Collection <BearthBadge color="green">In Progress</BearthBadge>
           </Heading>
           <Paragraph type="normal2">
-            We're minting 9,999 NFTs across seven Fibonacci-sequenced phases:
-            303, 303, 606, 909, 1515, 2424, 3939. Currently in Phase 1 & Phase 2
-            (303 + 303 NFTs), we're laying the foundation for a universe that
-            will welcome nearly 10,000 travelers.
+            The first entry into the Bearth universe is through our genesis NFT
+            collection. These 9,999 digital collectibles serve as your identity
+            and key within our world. The collection will be released in seven
+            phases, following the Fibonacci sequence: 303, 303, 606, 909, 1515,
+            2424, 3939.
+          </Paragraph>
+
+          <Heading type="h5" as="h3">
+            Partnerships <BearthBadge color="green">In Progress</BearthBadge>
+          </Heading>
+          <Paragraph type="normal2">
+            We're exploring collaborations with artists, brands, and projects
+            that share our values, helping us reach new audiences while staying
+            true to our mission.
           </Paragraph>
 
           <Heading type="h5" as="h3">
@@ -166,25 +225,6 @@ const items = [
               </li>
             </ul>
           </Paragraph>
-
-          <Heading type="h5" as="h3">
-            Partnerships <BearthBadge color="green">In Progress</BearthBadge>
-          </Heading>
-          <Paragraph type="normal2">
-            We're exploring collaborations with artists, brands, and projects
-            that share our values, helping us reach new audiences while staying
-            true to our mission.
-          </Paragraph>
-
-          <Heading type="h5" as="h3">
-            Decentralized Governance{" "}
-            <BearthBadge color="yellow">Exploring</BearthBadge>
-          </Heading>
-          <Paragraph type="normal2">
-            As our community matures, we're building toward a DAO structure that
-            empowers holders to shape Bearth's future through collective
-            decision-making.
-          </Paragraph>
         </div>
       </div>
     ),
@@ -199,9 +239,8 @@ const items = [
       <div className="flex flex-col gap-2">
         <div>
           <Paragraph type="normal2">
-            Where is the metaverse today, and where is it going? For us, the
-            metaverse is wherever our community gathers—Discord, Twitter, and
-            soon, our own digital home.
+            The digital realm is the native home of the Bearth IP, where our
+            community gathers and the world comes to life.
           </Paragraph>
         </div>
 
@@ -210,17 +249,17 @@ const items = [
             The City <BearthBadge color="green">In Progress</BearthBadge>
           </Heading>
           <Paragraph type="normal2">
-            We're building Bearth's own metaverse where holders can gather,
-            explore, and showcase their NFTs in an immersive 3D environment.
+            A web-based metaverse, similar to Azuki's Hilumia platform, that
+            will become our community's digital home.
           </Paragraph>
 
           <Heading type="h5" as="h3">
             3D Characters <BearthBadge color="yellow">Exploring</BearthBadge>
           </Heading>
           <Paragraph type="normal2">
-            Every Bear will have a 3D version for use across multiple
-            metaverses. Your Bear is a traveler, just like you—free to explore
-            wherever the journey leads.
+            We'll create 3D versions of every bear following OTHERSIDE
+            specifications. Your bear is a traveler, free to explore anywhere on
+            the journey, just like you.
           </Paragraph>
 
           <Heading type="h5" as="h3">
@@ -245,14 +284,13 @@ const items = [
       <div className="flex flex-col gap-2">
         <div>
           <Paragraph type="normal2">
-            The physical world is where Bearth comes to life in your hands.
-            Inspired by the success of projects like Pudgy Penguins, we’re
-            focusing on creating high-quality, collectible products that bring
-            joy and comfort to everyday life.
+            The Bearth IP extends into the physical world, bringing the universe
+            to life in your hands. These products are tangible extensions of our
+            story, not just merchandise.
           </Paragraph>
         </div>
 
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-2">
           <Heading type="h5" as="h3">
             Toys & Collectibles{" "}
             <BearthBadge color="yellow">Exploring</BearthBadge>
@@ -262,16 +300,6 @@ const items = [
             bring joy and comfort. These aren't just merchandise—they're
             companions that make the universe tangible.
           </Paragraph>
-
-          <Heading type="h5" as="h3">
-            Phygital Products{" "}
-            <BearthBadge color="yellow">Exploring</BearthBadge>
-          </Heading>
-          <Paragraph type="normal2">
-            Purchase a toy, receive an NFT. That NFT unlocks future experiences
-            and utilities within the Bearth ecosystem.
-          </Paragraph>
-
           <Heading type="h5" as="h3">
             Sustainable Production{" "}
             <BearthBadge color="yellow">Exploring</BearthBadge>
@@ -280,13 +308,18 @@ const items = [
             Every product uses eco-friendly materials and ethical manufacturing.
             Our values aren't just digital.
           </Paragraph>
-
           <Heading type="h5" as="h3">
-            Beyond Toys <BearthBadge color="yellow">Exploring</BearthBadge>
+            Apparel <BearthBadge color="yellow">Exploring</BearthBadge>
           </Heading>
           <Paragraph type="normal2">
-            We're exploring apparel, art prints, and home goods that bring
-            Bearth into daily life.
+            We're exploring clothing that brings Bearth into everyday life.
+          </Paragraph>
+          <Heading type="h5" as="h3">
+            Others <BearthBadge color="yellow">Exploring</BearthBadge>
+          </Heading>
+          <Paragraph type="normal2">
+            We're exploring art prints, home goods, and other merchandise that
+            bring Bearth into daily life.{" "}
           </Paragraph>
         </div>
       </div>
@@ -302,47 +335,39 @@ const items = [
       <div className="flex flex-col gap-2">
         <div>
           <Paragraph type="normal2">
-            The bridge between physical and digital worlds is where magic
-            happens. We experiment with new forms of media and interaction that
-            blur boundaries.
+            At the heart of the Bearth IP is the fusion of physical and digital
+            experiences. We experiment with new media and interactive formats
+            that blur the boundaries, creating a truly immersive universe.
           </Paragraph>
         </div>
 
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-2">
           <Heading type="h5" as="h3">
-            Meta-games <BearthBadge color="yellow">Exploring</BearthBadge>
-          </Heading>
-          <Paragraph type="normal2">
-            Micro-actions and community games that unlock new experiences,
-            spanning both physical locations and digital spaces.
-          </Paragraph>
-
-          <Heading type="h5" as="h3">
-            AR/VR Experiences{" "}
+            Interactive Storytelling{" "}
             <BearthBadge color="yellow">Exploring</BearthBadge>
           </Heading>
           <Paragraph type="normal2">
-            Augmented and virtual reality bring Bearth into your living room or
-            transport you into The City.
+            Imagine RPG games where the community shapes the storyline, or
+            animated shorts where your Bear plays a role.
           </Paragraph>
 
           <Heading type="h5" as="h3">
-            Interactive Storytelling{" "}
-            <BearthBadge color="green">In Progress</BearthBadge>
+            Phygital Technology{" "}
+            <BearthBadge color="yellow">Exploring</BearthBadge>
           </Heading>
           <Paragraph type="normal2">
-            Imagine an RPG where the community shapes the narrative, or animated
-            shorts where your Bear plays a role.
+            We're creating products that seamlessly blend physical and digital,
+            collectibles that exist in both worlds and unlock experiences in
+            each.
           </Paragraph>
 
           <Heading type="h5" as="h3">
-            Phygital Collectibles{" "}
-            <BearthBadge color="green">In Progress</BearthBadge>
+            IP Licensing & Monetization{" "}
+            <BearthBadge color="yellow">Exploring</BearthBadge>
           </Heading>
           <Paragraph type="normal2">
-            We're creating products that seamlessly blend physical and
-            digital—collectibles that exist in both worlds and unlock
-            experiences in each.
+            Enabling holders to license their NFTs to brands, transforming
+            digital ownership into real commercial value and revenue.
           </Paragraph>
         </div>
       </div>
@@ -356,17 +381,6 @@ export default function MindmapGrid() {
   const expandedItem = items.find((i) => i.id === expandedId);
 
   const getGridClasses = (index: number): string => {
-    // Mobile: 2 columns, items flow naturally
-    // xl: complex spanning layout
-    const desktopPositions = [
-      "xl:[grid-column:1] xl:[grid-row:1/7]",
-      "xl:[grid-column:2] xl:[grid-row:1/4]",
-      "xl:[grid-column:2] xl:[grid-row:4/7]",
-      "xl:[grid-column:3] xl:[grid-row:1/3]",
-      "xl:[grid-column:3] xl:[grid-row:3/5]",
-      "xl:[grid-column:3] xl:[grid-row:5/7]",
-    ];
-
     const tabletPositions = [
       "md:[grid-column:1/7] md:[grid-row:1]",
       "md:[grid-column:1/4] md:[grid-row:2]",
@@ -375,24 +389,24 @@ export default function MindmapGrid() {
       "md:[grid-column:3/5] md:[grid-row:3]",
       "md:[grid-column:5/7] md:[grid-row:3]",
     ];
-    return `${desktopPositions[index]} ${tabletPositions[index]}` || "";
+    return `${tabletPositions[index]}` || "";
   };
 
   return (
     <div className="relative grow h-full flex flex-col">
-      <div className="grid grid-cols-2 gap-3 md:grid-cols-6 md:grid-rows-3 xl:grid-cols-3 xl:grid-rows-6 grow">
+      <div className="grid grid-cols-2 gap-3 md:grid-cols-6 md:grid-rows-3 grow">
         {items.map((item, index) => (
           <motion.div
             key={item.id}
             layoutId={`card-${item.id}`}
-            className={`relative cursor-pointer overflow-hidden rounded-xl aspect-square md:aspect-auto xl:rounded-2xl z-0 bg-[#EBE7E0] shadow-[3px_3px_4px_0px_#00000040_inset] ${getGridClasses(index)}`}
+            className={`relative cursor-pointer overflow-hidden rounded-xl aspect-square md:aspect-auto z-0 bg-[#EBE7E0] shadow-[3px_3px_4px_0px_#00000040_inset] ${getGridClasses(index)}`}
             onClick={() => setExpandedId(item.id)}
             transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
           >
-            <div className="absolute top-0 right-0 z-10 h-full aspect-square xl:hidden mix-blend-darken opacity-60">
+            <div className="absolute top-0 right-0 z-10 h-full aspect-square mix-blend-darken opacity-60">
               <Image
                 src={item.image}
-                alt={item.title}
+                alt={item.contentTitle ?? item.title}
                 fill
                 sizes="190px"
                 className="h-full w-full object-contain"
@@ -400,21 +414,19 @@ export default function MindmapGrid() {
             </div>
             <div
               className={cn(
-                "relative flex h-full w-full p-4 justify-between xl:items-start xl:justify-end xl:p-6 xl:text-left flex-col",
-                !item.desktop2Line &&
-                  "xl:items-center xl:justify-start xl:gap-6 xl:flex-row",
+                "relative flex h-full w-full p-4 justify-between flex-col",
               )}
             >
               <motion.div
                 layoutId={`number-${item.id}`}
-                className="text-3xl font-semibold text-[#2d3748] md:text-[32px] xl:text-[80px]"
+                className="text-3xl font-semibold text-[#2d3748] md:hidden"
                 transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
               >
                 {item.number}
               </motion.div>
               <motion.h2
                 layoutId={`title-${item.id}`}
-                className="mt-2 whitespace-pre-line text-sm font-semibold text-[#2d3748] text-right md:text-left xl:mt-1 md:text-[32px] xl:text-[60px]"
+                className="mt-2 text-sm font-semibold text-[#2d3748] text-right md:text-left xl:mt-1 md:text-[32px]"
                 transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
               >
                 {item.title}
@@ -444,10 +456,10 @@ export default function MindmapGrid() {
             >
               <XIcon className="size-12" />
             </motion.button>
-            <div className="relative flex xl:flex-3 h-full w-full flex-col p-4 xl:p-8">
+            <div className="relative flex h-full w-full flex-col p-4 lg:p-8">
               <motion.h1
                 layoutId={`title-${expandedId}`}
-                className="mb-4 whitespace-pre-line text-3xl font-bold text-secondary pb-2 xl:text-6xl border-b border-black"
+                className="mb-4 whitespace-pre-line text-3xl text-secondary pb-2 lg:text-6xl border-b border-black font-semibold"
                 transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
               >
                 {expandedItem.contentTitle ?? expandedItem.title}
@@ -462,15 +474,6 @@ export default function MindmapGrid() {
               >
                 {expandedItem.content}
               </motion.div>
-            </div>
-            <div className="hidden xl:flex relative xl:flex-2 w-full h-full pointer-events-none">
-              <Image
-                src={expandedItem.image}
-                alt={expandedItem.title}
-                fill
-                sizes="50vw"
-                className="-z-1 object-cover mix-blend-darken"
-              ></Image>
             </div>
           </motion.div>
         )}

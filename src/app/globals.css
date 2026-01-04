@@ -5,6 +5,7 @@
 
 @custom-variant desktop (@media (min-height: 700px) and (min-width: 1024px));
 @custom-variant lvh (@media (min-height: 800px) and (min-width: 1024px));
+@custom-variant kvh (@media (max-height: 1000px) and (min-width: 1280px));
 
 @theme inline {
   --breakpoint-xs: 22rem;
