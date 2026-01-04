@@ -3,7 +3,6 @@ import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { preload } from "react-dom";
 import { cn } from "@/lib/utils";
-import { useScroll } from "motion/react";
 import ScrollTransformContainer from "./ScrollTransformContainer";
 
 const bearImages = [
@@ -34,7 +33,59 @@ export default function RandomBear() {
   const [bearImage, setBearImage] = useState<string>("");
   const [isHideBear, setIsHideBear] = useState(true);
 
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const showTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const bearRef = useRef<HTMLImageElement>(null);
+
+  const observer = useRef<IntersectionObserver | null>(null);
+  const lastIsIntersectingRef = useRef<boolean>(false);
+
+  const imageRefForObserver = (ref: HTMLImageElement) => {
+    if (observer.current) {
+      observer.current.disconnect();
+    }
+
+    bearRef.current = ref;
+
+    if (!ref) {
+      return;
+    }
+    observer.current?.observe(ref);
+  };
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    observer.current = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (
+          lastIsIntersectingRef.current !== entry.isIntersecting &&
+          entry.isIntersecting
+        ) {
+          if (showTimeoutRef.current) {
+            clearTimeout(showTimeoutRef.current);
+          }
+
+          if (hideTimeoutRef.current) {
+            clearTimeout(hideTimeoutRef.current);
+          }
+
+          showTimeoutRef.current = null;
+          hideTimeoutRef.current = null;
+          hideBear();
+
+          scheduleBear(0);
+        }
+        lastIsIntersectingRef.current = entry.isIntersecting;
+      });
+    });
+
+    return () => {
+      observer.current?.disconnect();
+    };
+  }, []);
 
   const showAndPlayVideo = useCallback((bearImage: string) => {
     setKey((key) => key + 1);
@@ -49,29 +100,40 @@ export default function RandomBear() {
     setIsHideBear(true);
   }, []);
 
-  const scheduleBear = useCallback(() => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
+  const scheduleBear = useCallback(
+    (waitTimeOverride?: number) => {
+      if (showTimeoutRef.current) {
+        clearTimeout(showTimeoutRef.current);
+        showTimeoutRef.current = null;
+      }
 
-    const randomBear =
-      bearImages[Math.floor(Math.random() * bearImages.length)];
+      if (hideTimeoutRef.current) {
+        clearTimeout(hideTimeoutRef.current);
+        hideTimeoutRef.current = null;
+      }
 
-    if (!randomBear) {
-      return;
-    }
+      const randomBear =
+        bearImages[Math.floor(Math.random() * bearImages.length)];
 
-    preload(randomBear.url, { as: "image" });
+      if (!randomBear) {
+        return;
+      }
 
-    timeoutRef.current = setTimeout(() => {
-      showAndPlayVideo(randomBear.url);
+      preload(randomBear.url, { as: "image" });
 
-      setTimeout(() => {
-        hideBear();
-        scheduleBear();
-      }, randomBear.playTime);
-    }, waitTime);
-  }, [hideBear, showAndPlayVideo]);
+      showTimeoutRef.current = setTimeout(() => {
+        console.log("showBear");
+
+        showAndPlayVideo(randomBear.url);
+
+        hideTimeoutRef.current = setTimeout(() => {
+          hideBear();
+          scheduleBear();
+        }, randomBear.playTime);
+      }, waitTimeOverride ?? waitTime);
+    },
+    [hideBear, showAndPlayVideo],
+  );
 
   useEffect(() => {
     scheduleBear();
@@ -84,6 +146,7 @@ export default function RandomBear() {
     >
       {!isHideBear && (
         <Image
+          ref={imageRefForObserver}
           alt=""
           width={200}
           height={400}
