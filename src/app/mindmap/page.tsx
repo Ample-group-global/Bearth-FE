@@ -15,10 +15,10 @@ export default function MindmapPage() {
       outerDivClassName="w-full bg-secondary"
       className="relative desktop:h-[min(100vh,fit-content)] text-white w-full flex flex-col kvh:flex-row items-center px-4 min-h-screen overflow-y-hidden gap-8"
       slotOutside={
-        <BearthFooter className="max-w-7xl left-1/2 -translate-x-1/2" />
+        <BearthFooter className="max-w-7xl left-1/2 -translate-x-1/2 mt-4" />
       }
     >
-      <header className="max-w-[800px] kvh:max-w-[35%] self-start">
+      <header className="max-w-[600px] kvh:max-w-[35%] self-start">
         <Heading
           type="h1"
           className="text-primary title-stroke title-strokecolor-white"
@@ -26,16 +26,15 @@ export default function MindmapPage() {
           MINDMAP
         </Heading>
         <div className="space-y-4">
-          <p className="text-base md:text-lg leading-relaxed">
-            Building a universe takes time, patience, and the right rhythm.
-            While many projects rush forward with rigid roadmaps, we believe in
-            something more organic—a mindmap that grows and evolves with our
-            community.
+          <p className="text-base leading-[1.1]">
+            Bearth is an original IP, a universe born from a story of loss and
+            rebirth. We are building a transmedia world that grows and evolves
+            with its community.
           </p>
-          <p className="text-base md:text-lg leading-relaxed">
-            This isn't about racing to milestones. It's about creating a home
-            among the stars, one thoughtful step at a time. Here's how we're
-            thinking about building Bearth, together.
+          <p className="text-base leading-[1.1]">
+            This mindmap is our living blueprint, not a rigid roadmap. It's
+            about creating a home among the stars, one thoughtful step at a
+            time.
           </p>
         </div>
       </header>
@@ -44,7 +43,7 @@ export default function MindmapPage() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.7 }}
-        className="grow w-full lg:min-h-[800px] xl:min-h-[600px] pb-24 flex flex-col kvh:self-start kvh:h-[calc(100vh-80px)]"
+        className="grow w-full lg:min-h-[800px] xl:min-h-[600px] pb-20 flex flex-col kvh:self-start kvh:h-[calc(100vh-80px)]"
       >
         <MindmapGrid />
       </motion.div>

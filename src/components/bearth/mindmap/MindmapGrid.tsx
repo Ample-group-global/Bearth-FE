@@ -22,77 +22,83 @@ const items = [
     desktop2Line: true,
     image: "/assets/mindmap-vision-and-value.png",
     content: (
-      <div className="flex flex-col gap-2">
-        <div>
-          <Heading type="h4" as="h2">
-            Our Vision
-          </Heading>
-          <Paragraph type="normal2">
-            Create a healing universe where loss transforms into creation, and
-            every being finds their place among the stars.
-          </Paragraph>
-        </div>
-
+      <div className="flex flex-col">
         <div className="flex flex-col gap-2">
-          <Heading type="h4" as="h2">
-            Our Values
-          </Heading>
+          <div className="flex flex-col gap-2">
+            <Heading type="h4" as="h2">
+              Our Vision
+            </Heading>
+            <Paragraph type="normal2">
+              Create a healing universe where loss transforms into creation, and
+              every being finds their place among the stars.
+            </Paragraph>
+            <Heading type="h4" as="h2">
+              Our Values
+            </Heading>
+            <Paragraph type="normal2">
+              The Bearth universe is guided by a core set of values, rooted in
+              the story of the Bear Tribe:
+            </Paragraph>
+          </div>
 
-          <Paragraph type="normal2">
-            The Bearth universe is guided by a core set of values, rooted in the
-            story of the Bear Tribe:
-          </Paragraph>
+          <div className="flex flex-col gap-1">
+            <Heading
+              type="h5"
+              as="h3"
+              className="w-fit px-1 text-white bg-primary"
+            >
+              Sustainability in action
+            </Heading>
+            <Paragraph type="normal2">
+              Sustainability isn't just a slogan—it's a commitment woven into
+              every decision. From eco-friendly materials to responsible
+              production, our actions speak louder than words.
+            </Paragraph>
+          </div>
 
-          <Heading
-            type="h5"
-            as="h3"
-            className="w-fit px-1 text-white bg-primary"
-          >
-            Healing First
-          </Heading>
-          <Paragraph type="normal2">
-            Bearth began with a story of loss and rebirth. We believe art and
-            creation can heal hearts, allowing precious memories to live on in
-            new forms.
-          </Paragraph>
+          <div className="flex flex-col gap-1">
+            <Heading
+              type="h5"
+              as="h3"
+              className="w-fit px-1 text-white bg-primary"
+            >
+              Healing First
+            </Heading>
+            <Paragraph type="normal2">
+              Bearth began with a story of loss and rebirth. We believe art and
+              creation can heal hearts, allowing precious memories to live on in
+              new forms.
+            </Paragraph>
+          </div>
 
-          <Heading
-            type="h5"
-            as="h3"
-            className="w-fit px-1 text-white bg-primary"
-          >
-            Coexistence over competition
-          </Heading>
-          <Paragraph type="normal2">
-            Like the Bear Tribe's laid-back philosophy, we believe the best
-            future isn't about fighting for space, but finding a planet where
-            everyone can rest comfortably.
-          </Paragraph>
+          <div className="flex flex-col gap-1">
+            <Heading
+              type="h5"
+              as="h3"
+              className="w-fit px-1 text-white bg-primary"
+            >
+              Coexistence over competition
+            </Heading>
+            <Paragraph type="normal2">
+              Like the Bear Tribe's laid-back philosophy, we believe the best
+              future isn't about fighting for space, but finding a planet where
+              everyone can rest comfortably.
+            </Paragraph>
+          </div>
 
-          <Heading
-            type="h5"
-            as="h3"
-            className="w-fit px-1 text-white bg-primary"
-          >
-            Thoughtfully Crafted
-          </Heading>
-          <Paragraph type="normal2">
-            Inspired by architectural thinking, every detail of Bearth is
-            designed with careful consideration. We pursue meaning, not speed.
-          </Paragraph>
-
-          <Heading
-            type="h5"
-            as="h3"
-            className="w-fit px-1 text-white bg-primary"
-          >
-            Sustainability in action
-          </Heading>
-          <Paragraph type="normal2">
-            Sustainability isn't just a slogan—it's a commitment woven into
-            every decision. From eco-friendly materials to responsible
-            production, our actions speak louder than words.
-          </Paragraph>
+          <div className="flex flex-col gap-1">
+            <Heading
+              type="h5"
+              as="h3"
+              className="w-fit px-1 text-white bg-primary"
+            >
+              Thoughtfully Crafted
+            </Heading>
+            <Paragraph type="normal2">
+              Inspired by architectural thinking, every detail of Bearth is
+              designed with careful consideration. We pursue meaning, not speed.
+            </Paragraph>
+          </div>
         </div>
       </div>
     ),
@@ -114,57 +120,65 @@ const items = [
         </div>
 
         <div className="flex flex-col gap-2">
-          <Heading
-            type="h5"
-            as="h3"
-            className="w-fit px-1 text-white bg-primary"
-          >
-            Creator Empowerment
-          </Heading>
-          <Paragraph type="normal2">
-            We empower creators from within, building infrastructure that helps
-            artists, storytellers, musicians, and dreamers of all kinds rise and
-            thrive.
-          </Paragraph>
+          <div className="flex flex-col gap-1">
+            <Heading
+              type="h5"
+              as="h3"
+              className="w-fit px-1 text-white bg-primary"
+            >
+              Creator Empowerment
+            </Heading>
+            <Paragraph type="normal2">
+              We empower creators from within, building infrastructure that
+              helps artists, storytellers, musicians, and dreamers of all kinds
+              rise and thrive.
+            </Paragraph>
+          </div>
 
-          <Heading
-            type="h5"
-            as="h3"
-            className="w-fit px-1 text-white bg-primary"
-          >
-            Value Alignment
-          </Heading>
-          <Paragraph type="normal2">
-            Our community supports healing, coexistence, and intentional
-            creation. We lead and support movements that share our vision,
-            building a kinder, more thoughtful web3.
-          </Paragraph>
+          <div className="flex flex-col gap-1">
+            <Heading
+              type="h5"
+              as="h3"
+              className="w-fit px-1 text-white bg-primary"
+            >
+              Value Alignment
+            </Heading>
+            <Paragraph type="normal2">
+              Our community supports healing, coexistence, and intentional
+              creation. We lead and support movements that share our vision,
+              building a kinder, more thoughtful web3.
+            </Paragraph>
+          </div>
 
-          <Heading
-            type="h5"
-            as="h3"
-            className="w-fit px-1 text-white bg-primary"
-          >
-            Growing Together
-          </Heading>
-          <Paragraph type="normal2">
-            We're recruiting global ambassadors and establishing governance
-            structures that let the community shape Bearth's future. But we
-            won't rush—we trust the process.
-          </Paragraph>
+          <div className="flex flex-col gap-1">
+            <Heading
+              type="h5"
+              as="h3"
+              className="w-fit px-1 text-white bg-primary"
+            >
+              Growing Together
+            </Heading>
+            <Paragraph type="normal2">
+              We're recruiting global ambassadors and establishing governance
+              structures that let the community shape Bearth's future. But we
+              won't rush—we trust the process.
+            </Paragraph>
+          </div>
 
-          <Heading
-            type="h5"
-            as="h3"
-            className="w-fit px-1 text-white bg-primary"
-          >
-            Decentralized Governance (DAO)
-          </Heading>
-          <Paragraph type="normal2">
-            As our community matures, we're moving toward a DAO structure,
-            enabling holders to shape Bearth's future through collective
-            decision-making.
-          </Paragraph>
+          <div className="flex flex-col gap-1">
+            <Heading
+              type="h5"
+              as="h3"
+              className="w-fit px-1 text-white bg-primary"
+            >
+              Decentralized Governance (DAO)
+            </Heading>
+            <Paragraph type="normal2">
+              As our community matures, we're moving toward a DAO structure,
+              enabling holders to shape Bearth's future through collective
+              decision-making.
+            </Paragraph>
+          </div>
         </div>
       </div>
     ),
@@ -174,7 +188,7 @@ const items = [
     number: "3",
     title: "Expansion",
     desktop2Line: true,
-    image: "/assets/mindmap-expand.png",
+    image: "/assets/mindmap-expansion.png",
     content: (
       <div className="flex flex-col gap-2">
         <div>
@@ -186,45 +200,53 @@ const items = [
         </div>
 
         <div className="flex flex-col gap-2">
-          <Heading type="h5" as="h3">
-            NFT Collection <BearthBadge color="green">In Progress</BearthBadge>
-          </Heading>
-          <Paragraph type="normal2">
-            The first entry into the Bearth universe is through our genesis NFT
-            collection. These 9,999 digital collectibles serve as your identity
-            and key within our world. The collection will be released in seven
-            phases, following the Fibonacci sequence: 303, 303, 606, 909, 1515,
-            2424, 3939.
-          </Paragraph>
+          <div className="flex flex-col gap-1">
+            <Heading type="h5" as="h3">
+              NFT Collection{" "}
+              <BearthBadge color="green">In Progress</BearthBadge>
+            </Heading>
+            <Paragraph type="normal2">
+              The first entry into the Bearth universe is through our genesis
+              NFT collection. These 9,999 digital collectibles serve as your
+              identity and key within our world. The collection will be released
+              in seven phases, following the Fibonacci sequence: 303, 303, 606,
+              909, 1515, 2424, 3939.
+            </Paragraph>
+          </div>
 
-          <Heading type="h5" as="h3">
-            Partnerships <BearthBadge color="green">In Progress</BearthBadge>
-          </Heading>
-          <Paragraph type="normal2">
-            We're exploring collaborations with artists, brands, and projects
-            that share our values, helping us reach new audiences while staying
-            true to our mission.
-          </Paragraph>
+          <div className="flex flex-col gap-1">
+            <Heading type="h5" as="h3">
+              Partnerships <BearthBadge color="green">In Progress</BearthBadge>
+            </Heading>
+            <Paragraph type="normal2">
+              We're exploring collaborations with artists, brands, and projects
+              that share our values, helping us reach new audiences while
+              staying true to our mission.
+            </Paragraph>
+          </div>
 
-          <Heading type="h5" as="h3">
-            Ambassador Program{" "}
-            <BearthBadge color="yellow">Exploring</BearthBadge>
-          </Heading>
-          <Paragraph type="normal2" as="div">
-            Ambassadors are co-creators and community builders who help Bearth
-            find home worldwide. We're seeking:
-            <ul className="list-disc pl-8 [&>li::marker]:text-xs">
-              <li>
-                Community Builders - Organize local meet-ups and gatherings
-              </li>
-              <li>
-                Story Tellers - Create content and share personal journeys
-              </li>
-              <li>
-                Brand Advocates - Represent Bearth authentically on social media
-              </li>
-            </ul>
-          </Paragraph>
+          <div className="flex flex-col gap-1">
+            <Heading type="h5" as="h3">
+              Ambassador Program{" "}
+              <BearthBadge color="yellow">Exploring</BearthBadge>
+            </Heading>
+            <Paragraph type="normal2" as="div">
+              Ambassadors are co-creators and community builders who help Bearth
+              find home worldwide. We're seeking:
+              <ul className="list-disc pl-8 [&>li::marker]:text-xs">
+                <li>
+                  Community Builders - Organize local meet-ups and gatherings
+                </li>
+                <li>
+                  Story Tellers - Create content and share personal journeys
+                </li>
+                <li>
+                  Brand Advocates - Represent Bearth authentically on social
+                  media
+                </li>
+              </ul>
+            </Paragraph>
+          </div>
         </div>
       </div>
     ),
@@ -244,32 +266,38 @@ const items = [
           </Paragraph>
         </div>
 
-        <div className="flex flex-col gap-1">
-          <Heading type="h5" as="h3">
-            The City <BearthBadge color="green">In Progress</BearthBadge>
-          </Heading>
-          <Paragraph type="normal2">
-            A web-based metaverse, similar to Azuki's Hilumia platform, that
-            will become our community's digital home.
-          </Paragraph>
+        <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-1">
+            <Heading type="h5" as="h3">
+              The City <BearthBadge color="green">In Progress</BearthBadge>
+            </Heading>
+            <Paragraph type="normal2">
+              A web-based metaverse, similar to Azuki's Hilumia platform, that
+              will become our community's digital home.
+            </Paragraph>
+          </div>
 
-          <Heading type="h5" as="h3">
-            3D Characters <BearthBadge color="yellow">Exploring</BearthBadge>
-          </Heading>
-          <Paragraph type="normal2">
-            We'll create 3D versions of every bear following OTHERSIDE
-            specifications. Your bear is a traveler, free to explore anywhere on
-            the journey, just like you.
-          </Paragraph>
+          <div className="flex flex-col gap-1">
+            <Heading type="h5" as="h3">
+              3D Characters <BearthBadge color="yellow">Exploring</BearthBadge>
+            </Heading>
+            <Paragraph type="normal2">
+              We'll create 3D versions of every bear following OTHERSIDE
+              specifications. Your bear is a traveler, free to explore anywhere
+              on the journey, just like you.
+            </Paragraph>
+          </div>
 
-          <Heading type="h5" as="h3">
-            Digital Experiences{" "}
-            <BearthBadge color="yellow">Exploring</BearthBadge>
-          </Heading>
-          <Paragraph type="normal2">
-            We're exploring interactive experiences, mini-games, and
-            storytelling formats that make the digital universe feel alive.
-          </Paragraph>
+          <div className="flex flex-col gap-1">
+            <Heading type="h5" as="h3">
+              Digital Experiences{" "}
+              <BearthBadge color="yellow">Exploring</BearthBadge>
+            </Heading>
+            <Paragraph type="normal2">
+              We're exploring interactive experiences, mini-games, and
+              storytelling formats that make the digital universe feel alive.
+            </Paragraph>
+          </div>
         </div>
       </div>
     ),
@@ -291,36 +319,47 @@ const items = [
         </div>
 
         <div className="flex flex-col gap-2">
-          <Heading type="h5" as="h3">
-            Toys & Collectibles{" "}
-            <BearthBadge color="yellow">Exploring</BearthBadge>
-          </Heading>
-          <Paragraph type="normal2">
-            We're creating high-quality Bear Tribe toys and collectibles that
-            bring joy and comfort. These aren't just merchandise—they're
-            companions that make the universe tangible.
-          </Paragraph>
-          <Heading type="h5" as="h3">
-            Sustainable Production{" "}
-            <BearthBadge color="yellow">Exploring</BearthBadge>
-          </Heading>
-          <Paragraph type="normal2">
-            Every product uses eco-friendly materials and ethical manufacturing.
-            Our values aren't just digital.
-          </Paragraph>
-          <Heading type="h5" as="h3">
-            Apparel <BearthBadge color="yellow">Exploring</BearthBadge>
-          </Heading>
-          <Paragraph type="normal2">
-            We're exploring clothing that brings Bearth into everyday life.
-          </Paragraph>
-          <Heading type="h5" as="h3">
-            Others <BearthBadge color="yellow">Exploring</BearthBadge>
-          </Heading>
-          <Paragraph type="normal2">
-            We're exploring art prints, home goods, and other merchandise that
-            bring Bearth into daily life.{" "}
-          </Paragraph>
+          <div>
+            <Heading type="h5" as="h3">
+              Toys & Collectibles{" "}
+              <BearthBadge color="yellow">Exploring</BearthBadge>
+            </Heading>
+            <Paragraph type="normal2">
+              We're creating high-quality Bear Tribe toys and collectibles that
+              bring joy and comfort. These aren't just merchandise—they're
+              companions that make the universe tangible.
+            </Paragraph>
+          </div>
+
+          <div>
+            <Heading type="h5" as="h3">
+              Sustainable Production{" "}
+              <BearthBadge color="yellow">Exploring</BearthBadge>
+            </Heading>
+            <Paragraph type="normal2">
+              Every product uses eco-friendly materials and ethical
+              manufacturing. Our values aren't just digital.
+            </Paragraph>
+          </div>
+
+          <div>
+            <Heading type="h5" as="h3">
+              Apparel <BearthBadge color="yellow">Exploring</BearthBadge>
+            </Heading>
+            <Paragraph type="normal2">
+              We're exploring clothing that brings Bearth into everyday life.
+            </Paragraph>
+          </div>
+
+          <div>
+            <Heading type="h5" as="h3">
+              Others <BearthBadge color="yellow">Exploring</BearthBadge>
+            </Heading>
+            <Paragraph type="normal2">
+              We're exploring art prints, home goods, and other merchandise that
+              bring Bearth into daily life.{" "}
+            </Paragraph>
+          </div>
         </div>
       </div>
     ),
@@ -342,33 +381,39 @@ const items = [
         </div>
 
         <div className="flex flex-col gap-2">
-          <Heading type="h5" as="h3">
-            Interactive Storytelling{" "}
-            <BearthBadge color="yellow">Exploring</BearthBadge>
-          </Heading>
-          <Paragraph type="normal2">
-            Imagine RPG games where the community shapes the storyline, or
-            animated shorts where your Bear plays a role.
-          </Paragraph>
+          <div className="flex flex-col gap-1">
+            <Heading type="h5" as="h3">
+              Interactive Storytelling{" "}
+              <BearthBadge color="yellow">Exploring</BearthBadge>
+            </Heading>
+            <Paragraph type="normal2">
+              Imagine RPG games where the community shapes the storyline, or
+              animated shorts where your Bear plays a role.
+            </Paragraph>
+          </div>
 
-          <Heading type="h5" as="h3">
-            Phygital Technology{" "}
-            <BearthBadge color="yellow">Exploring</BearthBadge>
-          </Heading>
-          <Paragraph type="normal2">
-            We're creating products that seamlessly blend physical and digital,
-            collectibles that exist in both worlds and unlock experiences in
-            each.
-          </Paragraph>
+          <div className="flex flex-col gap-1">
+            <Heading type="h5" as="h3">
+              Phygital Technology{" "}
+              <BearthBadge color="yellow">Exploring</BearthBadge>
+            </Heading>
+            <Paragraph type="normal2">
+              We're creating products that seamlessly blend physical and
+              digital, collectibles that exist in both worlds and unlock
+              experiences in each.
+            </Paragraph>
+          </div>
 
-          <Heading type="h5" as="h3">
-            IP Licensing & Monetization{" "}
-            <BearthBadge color="yellow">Exploring</BearthBadge>
-          </Heading>
-          <Paragraph type="normal2">
-            Enabling holders to license their NFTs to brands, transforming
-            digital ownership into real commercial value and revenue.
-          </Paragraph>
+          <div className="flex flex-col gap-1">
+            <Heading type="h5" as="h3">
+              IP Licensing & Monetization{" "}
+              <BearthBadge color="yellow">Exploring</BearthBadge>
+            </Heading>
+            <Paragraph type="normal2">
+              Enabling holders to license their NFTs to brands, transforming
+              digital ownership into real commercial value and revenue.
+            </Paragraph>
+          </div>
         </div>
       </div>
     ),
@@ -403,7 +448,7 @@ export default function MindmapGrid() {
             onClick={() => setExpandedId(item.id)}
             transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
           >
-            <div className="absolute top-0 right-0 z-10 h-full aspect-square mix-blend-darken opacity-60">
+            <div className="absolute top-0 right-0 z-10 h-full max-w-full aspect-square mix-blend-darken opacity-60">
               <Image
                 src={item.image}
                 alt={item.contentTitle ?? item.title}
@@ -414,19 +459,19 @@ export default function MindmapGrid() {
             </div>
             <div
               className={cn(
-                "relative flex h-full w-full p-4 justify-between flex-col",
+                "relative flex h-full w-full p-4 md:p-8 justify-between flex-col",
               )}
             >
               <motion.div
                 layoutId={`number-${item.id}`}
-                className="text-3xl font-semibold text-[#2d3748] md:hidden"
+                className="text-[40px] font-semibold text-[#2d3748] md:hidden"
                 transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
               >
                 {item.number}
               </motion.div>
               <motion.h2
                 layoutId={`title-${item.id}`}
-                className="mt-2 text-sm font-semibold text-[#2d3748] text-right md:text-left xl:mt-1 md:text-[32px]"
+                className="text-[20px] font-semibold text-[#2d3748] text-right md:text-left md:text-[40px]"
                 transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
               >
                 {item.title}
@@ -456,10 +501,10 @@ export default function MindmapGrid() {
             >
               <XIcon className="size-12" />
             </motion.button>
-            <div className="relative flex h-full w-full flex-col p-4 lg:p-8">
+            <div className="relative flex h-full w-full flex-col p-6 lg:p-8">
               <motion.h1
                 layoutId={`title-${expandedId}`}
-                className="mb-4 whitespace-pre-line text-3xl text-secondary pb-2 lg:text-6xl border-b border-black font-semibold"
+                className="mb-4 whitespace-pre-line text-[40px] text-secondary pb-2 border-b border-black font-semibold"
                 transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
               >
                 {expandedItem.contentTitle ?? expandedItem.title}
