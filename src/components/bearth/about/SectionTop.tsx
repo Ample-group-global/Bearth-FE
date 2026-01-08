@@ -51,9 +51,7 @@ export default function SectionTop() {
     <MaxWidthConstraintedLayout
       as="section"
       outerDivClassName="relative z-21 bg-secondary"
-      className="flex flex-col justify-between relative min-h-screen"
-      paddingHeader
-      paddingFooter
+      className="flex flex-col justify-between relative min-h-screen py-16 md:py-24"
       slotOutside={
         <BearthBackgroundImage src="/assets/about-bg-top.webm" absolute />
       }

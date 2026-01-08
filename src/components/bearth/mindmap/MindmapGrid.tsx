@@ -515,7 +515,7 @@ export default function MindmapGrid() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3, delay: 0.2 }}
-                className="text-black overflow-y-auto"
+                className="text-black overflow-y-auto max-w-[800px]"
               >
                 {expandedItem.content}
               </motion.div>

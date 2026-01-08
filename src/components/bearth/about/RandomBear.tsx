@@ -122,8 +122,6 @@ export default function RandomBear() {
       preload(randomBear.url, { as: "image" });
 
       showTimeoutRef.current = setTimeout(() => {
-        console.log("showBear");
-
         showAndPlayVideo(randomBear.url);
 
         hideTimeoutRef.current = setTimeout(() => {
@@ -159,7 +157,7 @@ export default function RandomBear() {
             transform: direction === "right" ? "scaleX(-1)" : "scaleX(1)",
           }}
           className={cn(
-            "w-[60px] sm:w-[100px] md:w-[120px] lg:w-[150px] xl:w-[200px] absolute",
+            "w-[110px] md:w-[160px] absolute",
           )}
           unoptimized={true}
           src={bearImage}

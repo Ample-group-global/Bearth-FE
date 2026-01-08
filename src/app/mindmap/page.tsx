@@ -10,10 +10,10 @@ export default function MindmapPage() {
   return (
     <MaxWidthConstraintedLayout
       as="main"
-      paddingHeader
       fullHeight
+      paddingHeader
       outerDivClassName="w-full bg-secondary"
-      className="relative desktop:h-[min(100vh,fit-content)] text-white w-full flex flex-col kvh:flex-row items-center px-4 min-h-screen overflow-y-hidden gap-8"
+      className="relative desktop:h-[min(100vh,fit-content)] text-white w-full flex flex-col kvh:flex-row items-center px-4 min-h-screen overflow-y-hidden gap-8 pb-8 md:pb-[82px]"
       slotOutside={
         <BearthFooter className="max-w-7xl left-1/2 -translate-x-1/2 mt-4" />
       }
@@ -43,7 +43,7 @@ export default function MindmapPage() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.7 }}
-        className="grow w-full lg:min-h-[800px] xl:min-h-[600px] pb-20 flex flex-col kvh:self-start kvh:h-[calc(100vh-80px)]"
+        className="grow w-full lg:min-h-[800px] xl:min-h-[600px] flex flex-col kvh:self-start kvh:h-[calc(100vh-80px)]"
       >
         <MindmapGrid />
       </motion.div>

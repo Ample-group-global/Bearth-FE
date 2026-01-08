@@ -11,7 +11,7 @@ import { SectionSecondCarousel } from "./SectionSecondCarousel";
 const sections = [
   {
     order: 1,
-    image: "/assets/about-1.png",
+    image: "/assets/about-1-1.png",
     title: "The Great Awakening",
     text: (
       <>
@@ -34,7 +34,7 @@ const sections = [
   },
   {
     order: 2,
-    image: "/assets/about-1.png",
+    image: "/assets/about-1-2.png",
     title: "The Age of Bear Logic",
     text: (
       <>
@@ -55,7 +55,7 @@ const sections = [
   },
   {
     order: 3,
-    image: "/assets/about-1.png",
+    image: "/assets/about-1-3.png",
     title: "The Quest for the Perfect Nap",
     text: (
       <>
@@ -80,7 +80,7 @@ const sections = [
 
 export default function SectionSecond() {
   return (
-    <section className="py-8 desktop:pt-20 desktop:pb-8 text-white flex flex-col justify-center items-center">
+    <section className="py-16 md:py-24 text-white flex flex-col justify-center items-center">
       <CarouselProvider>
         <div className="w-full max-w-[1280px] px-4">
           <div className="flex flex-col">
@@ -146,7 +146,7 @@ export default function SectionSecond() {
             ))}
           </SectionSecondCarousel>
         </div>
-        <div className="flex desktop:hidden items-center justify-center my-8">
+        <div className="flex desktop:hidden items-center justify-center mt-8">
           <CarouselButton className="flex" />
         </div>
       </CarouselProvider>
