@@ -13,8 +13,23 @@ const figtree = Figtree({
 });
 
 export const metadata: Metadata = {
-  title: "BEARTH - Genosis NFT Minting",
-  description: "BEARTH - Genosis NFT Minting is LIVE NOW!",
+  title: "BEARTH | Your perfect nap spot is waiting.",
+  description:
+    "Bearth is an original cross-media IP that conveys healing, coexistence, and sustainability values ​​through the story of the Bear Tribe, creating experiences that span physical and digital worlds.",
+  openGraph: {
+    title: "BEARTH | Your perfect nap spot is waiting.",
+    description:
+      "Bearth is an original cross-media IP that conveys healing, coexistence, and sustainability values ​​through the story of the Bear Tribe, creating experiences that span physical and digital worlds.",
+    images: "/assets/og-image.png",
+    type: "website",
+  },
+  twitter: {
+    title: "BEARTH | Your perfect nap spot is waiting.",
+    description:
+      "Bearth is an original cross-media IP that conveys healing, coexistence, and sustainability values ​​through the story of the Bear Tribe, creating experiences that span physical and digital worlds.",
+    images: "/assets/og-image.png",
+    card: "summary_large_image",
+  },
 };
 
 export default function RootLayout({
