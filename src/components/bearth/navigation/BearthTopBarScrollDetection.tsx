@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import { patchRemoveChildForTranslationCrash } from "@/lib/translation-patch";
 
 export default function BearthTopBarScrollDetection({
   children,
@@ -12,6 +13,10 @@ export default function BearthTopBarScrollDetection({
   const pathname = usePathname();
 
   const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    patchRemoveChildForTranslationCrash();
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
