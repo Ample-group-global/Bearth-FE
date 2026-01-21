@@ -3,6 +3,7 @@ import { Figtree } from "next/font/google";
 import "./font.css";
 import "./globals.css";
 import { BreathLiquidGlassBase } from "@/components/bearth/navigation/BearthLiquidGlassEffect";
+import { GoogleTagManager } from "@next/third-parties/google";
 import BearthTopBar from "@/components/bearth/navigation/BearthTopBar";
 import BearthTopBarScrollDetection from "@/components/bearth/navigation/BearthTopBarScrollDetection";
 
@@ -39,6 +40,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      {process.env.NEXT_PUBLIC_GTM_ID && (
+        <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />
+      )}
       <body className={`${figtree.variable} antialiased bg-secondary`}>
         {/* Top Navigation */}
         <BearthTopBarScrollDetection>
