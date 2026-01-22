@@ -12,7 +12,7 @@ export default function ScrollTransformContainer({
   const { scrollY } = useScroll();
   scrollY.on("change", (scrollY: number) => {
     if (divRef.current) {
-      divRef.current.style.transform = `translateY(max(calc(100vh - ${scrollY}px), 0px))`;
+      divRef.current.style.transform = `translateY(max(calc(100dvh - ${scrollY}px), 0px))`;
     }
   });
 
@@ -21,7 +21,7 @@ export default function ScrollTransformContainer({
       {...props}
       ref={divRef}
       style={{
-        transform: `translateY(100vh)`,
+        transform: `translateY(100dvh)`,
         ...props.style,
       }}
     >

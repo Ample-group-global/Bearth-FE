@@ -21,7 +21,7 @@ export default function MaxWidthConstraintedLayout({
   slotOutside?: React.ReactNode;
 }) {
   return (
-    <div className={cn(fullHeight && "min-h-screen", outerDivClassName)}>
+    <div className={cn(fullHeight && "min-h-dvh", outerDivClassName)}>
       {createElement(
         as,
         {

@@ -17,7 +17,7 @@ export default function HomePage() {
     >
       <BearthBackgroundImage src="/assets/home-bg.webm"></BearthBackgroundImage>
       {/* Content Container */}
-      <div className="relative z-1 flex min-h-screen flex-col items-center justify-between px-4 py-6 md:px-8">
+      <div className="relative z-1 flex min-h-dvh flex-col items-center justify-between px-4 py-6 md:px-8">
         {/* Hero Section */}
         <div className="flex flex-col items-center justify-center text-center grow w-full">
           {/* Main Logo */}

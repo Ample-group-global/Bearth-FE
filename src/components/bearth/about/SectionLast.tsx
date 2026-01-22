@@ -7,7 +7,7 @@ export default function SectionLast() {
   return (
     <MaxWidthConstraintedLayout
       as="section"
-      className="px-4 py-16 md:py-24 text-white flex flex-col min-h-screen justify-between"
+      className="px-4 py-16 md:py-24 text-white flex flex-col min-h-dvh justify-between"
       outerDivClassName="relative"
       slotOutside={
         <BearthBackgroundImage

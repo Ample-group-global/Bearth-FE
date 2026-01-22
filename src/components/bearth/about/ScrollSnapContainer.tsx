@@ -138,7 +138,7 @@ export default function ScrollSnapContainer({
     <div
       ref={containerRef}
       className={cn(
-        `h-screen no-scrollbar`,
+        `h-dvh no-scrollbar`,
         isDesktop ? "overflow-hidden" : "overflow-y-auto",
       )}
       id="scroll-snap-container"

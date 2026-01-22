@@ -13,12 +13,12 @@ export default function MindmapPage() {
       fullHeight
       paddingHeader
       outerDivClassName="w-full bg-secondary"
-      className="relative desktop:h-[min(100vh,fit-content)] text-white w-full flex flex-col kvh:flex-row items-center px-4 min-h-screen overflow-y-hidden gap-8 pb-8 md:pb-[82px]"
+      className="relative desktop:h-[min(100dvh,fit-content)] text-white w-full flex flex-col kdvh:flex-row items-center px-4 min-h-dvh overflow-y-hidden gap-8 pb-8 md:pb-[82px]"
       slotOutside={
         <BearthFooter className="max-w-7xl left-1/2 -translate-x-1/2 mt-4" />
       }
     >
-      <header className="max-w-[600px] kvh:max-w-[35%] self-start">
+      <header className="max-w-[600px] kdvh:max-w-[35%] self-start">
         <Heading
           type="h1"
           className="text-primary title-stroke title-strokecolor-white"
@@ -43,7 +43,7 @@ export default function MindmapPage() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.7 }}
-        className="grow w-full lg:min-h-[800px] xl:min-h-[600px] flex flex-col kvh:self-start kvh:h-[calc(100vh-80px)]"
+        className="grow w-full lg:min-h-[800px] xl:min-h-[600px] flex flex-col kdvh:self-start kdvh:h-[calc(100dvh-80px)]"
       >
         <MindmapGrid />
       </motion.div>

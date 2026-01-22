@@ -51,16 +51,16 @@ export default function SectionTop() {
     <MaxWidthConstraintedLayout
       as="section"
       outerDivClassName="relative z-21 bg-secondary"
-      className="flex flex-col justify-between relative min-h-screen py-16 md:py-24"
+      className="flex flex-col justify-between relative min-h-dvh py-16 md:py-24"
       slotOutside={
         <BearthBackgroundImage src="/assets/about-bg-top.webm" absolute />
       }
     >
       {/* Hero Section */}
       <div className="p-4 lg:p-12 flex flex-col grow items-center justify-center text-center">
-        <div className="w-full flex flex-col grow justify-between max-h-[70vh]">
+        <div className="w-full flex flex-col grow justify-between max-h-[70dvh]">
           <div
-            className="relative flex items-center justify-center h-[20vh]"
+            className="relative flex items-center justify-center h-[20dvh]"
             ref={imageRef}
           >
             <Image

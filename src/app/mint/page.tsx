@@ -60,7 +60,7 @@ export default function MintPage() {
       paddingHeader
       paddingFooter
       fullHeight
-      outerDivClassName="w-screen h-screen relative overflow-hidden"
+      outerDivClassName="w-dvh h-dvh relative overflow-hidden"
       className="text-white w-full flex flex-col items-center px-4 lg:py-40"
     >
       <BearthBackgroundImage src="/assets/mint-bg-2.png" />
