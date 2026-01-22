@@ -5,7 +5,6 @@ import "./globals.css";
 import { BreathLiquidGlassBase } from "@/components/bearth/navigation/BearthLiquidGlassEffect";
 import { GoogleTagManager } from "@next/third-parties/google";
 import BearthTopBar from "@/components/bearth/navigation/BearthTopBar";
-import BearthTopBarScrollDetection from "@/components/bearth/navigation/BearthTopBarScrollDetection";
 
 const figtree = Figtree({
   subsets: ["latin"],
@@ -45,9 +44,7 @@ export default function RootLayout({
       )}
       <body className={`${figtree.variable} antialiased bg-secondary`}>
         {/* Top Navigation */}
-        <BearthTopBarScrollDetection>
-          <BearthTopBar />
-        </BearthTopBarScrollDetection>
+        <BearthTopBar />
         {children}
         <BreathLiquidGlassBase />
       </body>
