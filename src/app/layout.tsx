@@ -16,18 +16,23 @@ const figtree = Figtree({
 export const metadata: Metadata = {
   title: "BEARTH | Your perfect nap spot is waiting.",
   description:
-    "Bearth is an original cross-media IP that conveys healing, coexistence, and sustainability values ​​through the story of the Bear Tribe, creating experiences that span physical and digital worlds.",
+    "Bearth is an original IP, a universe born from a story of loss and rebirth. We are building a transmedia world that grows and evolves with its community.",
+  keywords: ["Bearth", "Web3", "Brand", "IP", "Community", "Merchandise", "Toys", "Digital Collectibles", "Healing", "Metaverse"],
+  authors: [{ name: "Bearth Lab" }],
+  icons: {
+    apple: "/assets/apple-touch-icon.png",
+  },
   openGraph: {
     title: "BEARTH | Your perfect nap spot is waiting.",
     description:
-      "Bearth is an original cross-media IP that conveys healing, coexistence, and sustainability values ​​through the story of the Bear Tribe, creating experiences that span physical and digital worlds.",
+      "Bearth is an original IP, a universe born from a story of loss and rebirth. We are building a transmedia world that grows and evolves with its community.",
     images: "/assets/og-image.png",
     type: "website",
   },
   twitter: {
     title: "BEARTH | Your perfect nap spot is waiting.",
     description:
-      "Bearth is an original cross-media IP that conveys healing, coexistence, and sustainability values ​​through the story of the Bear Tribe, creating experiences that span physical and digital worlds.",
+      "Bearth is an original IP, a universe born from a story of loss and rebirth. We are building a transmedia world that grows and evolves with its community.",
     images: "/assets/og-image.png",
     card: "summary_large_image",
   },
