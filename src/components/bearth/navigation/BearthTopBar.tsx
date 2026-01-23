@@ -5,7 +5,7 @@ import { BearthSideMenu } from "./BearthSideMenu";
 
 export default function BearthTopBar() {
   return (
-    <div className="flex w-full items-center justify-center max-w-7xl mx-auto fixed z-50">
+    <div className="flex w-full items-center justify-center max-w-7xl left-1/2 -translate-x-1/2 pt-2 md:pt-4 fixed z-50">
       <div className="pl-2">
         <Link href="/">
           <Image
