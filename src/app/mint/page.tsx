@@ -2,6 +2,8 @@ import BearthBackgroundImage from "@/components/bearth/BearthBackgroundImage";
 import { BearthButton } from "@/components/bearth/BearthButton";
 import MaxWidthConstraintedLayout from "@/components/bearth/MaxWidthConstraintedLayout";
 import { WalletConnectControl } from "@/components/bearth/mint/wallet-connect-control";
+import { WalletAddress } from "@/components/wallet/WalletAddress";
+import { WalletBalance } from "@/components/wallet/WalletBalance";
 import { cn } from "@/lib/utils";
 
 export function RingContainer({
@@ -60,10 +62,10 @@ export default function MintPage() {
       paddingHeader
       paddingFooter
       fullHeight
-      outerDivClassName="w-dvh h-dvh relative overflow-hidden"
+      outerDivClassName="w-dvw h-dvh relative overflow-hidden"
       className="text-white w-full flex flex-col items-center px-4 lg:py-40"
     >
-      <BearthBackgroundImage src="/assets/mint-bg-2.png" />
+      <BearthBackgroundImage src="/assets/mint-bg-2.png" showGradient={false} />
 
       {/* Top-Right Status Box */}
       {/* <div className="w-full max-w-[500px] h-[200px] absolute top-0 right-0">
@@ -112,7 +114,7 @@ export function MintForm() {
     <div className="h-full grid grid-cols-3 grid-rows-2 text-center z-10">
       <div className="flex flex-col">
         <div className="font-semibold">ADDRESS</div>
-        <div>0x1234...56789</div>
+        <WalletAddress className="max-w-[120px] truncate" />
       </div>
       <div className="flex flex-col">
         <div className="font-semibold">MINT QUANTITY</div>
@@ -124,7 +126,7 @@ export function MintForm() {
       </div>
       <div className="flex flex-col">
         <div className="font-semibold">ETH BALANCE</div>
-        <div>12.3456 ETH</div>
+        <WalletBalance className="max-w-[120px] truncate" />
       </div>
       <div className="flex flex-col">
         <BearthButton className="h-[35px]" href="#" type="secondary">

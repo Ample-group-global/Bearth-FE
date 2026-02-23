@@ -1,5 +1,6 @@
 "use client";
 
+import { WalletConnectProvider } from "@/components/wallet/WalletConnectContext";
 import { PrivyProvider } from "@privy-io/react-auth";
 
 export const ClientPrivyProvider = ({
@@ -13,5 +14,9 @@ export const ClientPrivyProvider = ({
     return children;
   }
 
-  return <PrivyProvider appId={appId}>{children}</PrivyProvider>;
+  return (
+    <PrivyProvider appId={appId}>
+      <WalletConnectProvider>{children}</WalletConnectProvider>
+    </PrivyProvider>
+  );
 };

@@ -20,7 +20,7 @@ export default function BearthBackgroundImage({
     <div
       className={cn(
         "inset-0 -z-1 flex flex-col items-center justify-center",
-        absolute ? "absolute w-full h-full" : "fixed w-dvh h-dvh",
+        absolute ? "absolute w-full h-full" : "fixed w-dvw h-dvh",
         containerClassName,
       )}
     >
