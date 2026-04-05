@@ -17,6 +17,7 @@ interface WalletConnectContextValue {
   user: User | null;
   wallet: ConnectedWallet | null;
   balance?: string | null;
+  chain?: (typeof chains)[keyof typeof chains] | null;
 }
 
 export const WalletConnectContext = createContext<WalletConnectContextValue>({
@@ -25,6 +26,7 @@ export const WalletConnectContext = createContext<WalletConnectContextValue>({
   user: null,
   wallet: null,
   balance: null,
+  chain: null,
 });
 
 interface WalletConnectContextProps {
@@ -33,9 +35,17 @@ interface WalletConnectContextProps {
 
 export function WalletConnectProvider({ children }: WalletConnectContextProps) {
   const { login, logout, user } = usePrivy();
+
   const { wallet } = useActiveWallet();
+
   const chain =
     chains[process.env.CONTRACT_NET as keyof typeof chains] ?? chains.sepolia;
+
+  useEffect(() => {
+    if (wallet && wallet.type === "ethereum") {
+      wallet.switchChain(chain.id);
+    }
+  }, [wallet, chain]);
 
   const publicClient = useMemo(() => {
     const publicClient = createPublicClient({
@@ -67,6 +77,7 @@ export function WalletConnectProvider({ children }: WalletConnectContextProps) {
         user,
         wallet: wallet as ConnectedWallet | null,
         balance: balance.data,
+        chain,
       }}
     >
       {children}
