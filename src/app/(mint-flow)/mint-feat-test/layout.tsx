@@ -5,7 +5,7 @@ export default function MintFeatTestLayout({
 }: {
   children: React.ReactNode;
 }) {
-  if (process.env.CONTRACT_NET !== "sepolia") {
+  if (process.env.NEXT_PUBLIC_CONTRACT_NET !== "sepolia") {
     notFound();
   }
 

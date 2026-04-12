@@ -8,8 +8,8 @@ export function WalletConnectControl({
 }: {
   children: React.ReactNode;
 }) {
-  const { login, wallet } = useWalletConnect();
-  const isConnected = !!wallet;
+  const { login, authenticated, wallet } = useWalletConnect();
+  const isConnected = !!wallet && authenticated;
 
   if (!isConnected) {
     return (

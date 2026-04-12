@@ -14,6 +14,7 @@ import useSWR from "swr";
 interface WalletConnectContextValue {
   login: ReturnType<typeof usePrivy>["login"];
   logout: () => Promise<void>;
+  authenticated: boolean;
   user: User | null;
   wallet: ConnectedWallet | null;
   balance?: string | null;
@@ -23,6 +24,7 @@ interface WalletConnectContextValue {
 export const WalletConnectContext = createContext<WalletConnectContextValue>({
   login: async () => {},
   logout: async () => {},
+  authenticated: false,
   user: null,
   wallet: null,
   balance: null,
@@ -34,12 +36,13 @@ interface WalletConnectContextProps {
 }
 
 export function WalletConnectProvider({ children }: WalletConnectContextProps) {
-  const { login, logout, user } = usePrivy();
+  const { login, logout, user, authenticated } = usePrivy();
 
   const { wallet } = useActiveWallet();
 
   const chain =
-    chains[process.env.CONTRACT_NET as keyof typeof chains] ?? chains.sepolia;
+    chains[process.env.NEXT_PUBLIC_CONTRACT_NET as keyof typeof chains] ??
+    chains.sepolia;
 
   useEffect(() => {
     if (wallet && wallet.type === "ethereum") {
@@ -74,6 +77,7 @@ export function WalletConnectProvider({ children }: WalletConnectContextProps) {
       value={{
         login,
         logout,
+        authenticated,
         user,
         wallet: wallet as ConnectedWallet | null,
         balance: balance.data,

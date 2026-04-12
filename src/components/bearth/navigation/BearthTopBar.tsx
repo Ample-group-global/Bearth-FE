@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import BearthDesktopNavigationBar from "./BearthDesktopNavigationBar";
 import { BearthSideMenu } from "./BearthSideMenu";
+import { ConnectWalletTopBarButton } from "./ConnectWalletTopBarButton";
 
 export default function BearthTopBar() {
   return (
@@ -19,6 +20,7 @@ export default function BearthTopBar() {
 
       <div className="flex grow items-center justify-center">
         <BearthDesktopNavigationBar className="hidden md:flex" />
+        <ConnectWalletTopBarButton />
       </div>
 
       <div className="pr-2 md:hidden flex items-center justify-center">

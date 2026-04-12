@@ -15,18 +15,28 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import BearthSocialLinks from "./BearthSocialLinks";
+import { cn } from "@/lib/utils";
+import { ConnectWalletBearthSideMenuLink } from "./ConnectWalletBearthSideMenuLink";
 
 export function BearthSideMenuLink({
   href,
   children,
+  className,
+  onClick,
 }: {
   href: string;
   children: React.ReactNode;
+  className?: string;
+  onClick?: () => void;
 }) {
   return (
     <Link
       href={href}
-      className="leading-[50px] w-full after:content-[''] after:block after:h-px after:w-full after:bg-black/10"
+      className={cn(
+        "leading-[50px] w-full after:content-[''] after:block after:h-px after:w-full after:bg-black/10",
+        className,
+      )}
+      onClick={onClick}
     >
       {children}
     </Link>
@@ -36,7 +46,7 @@ export function BearthSideMenuLink({
 export function BearthSideMenu() {
   return (
     <Drawer direction="left">
-      <DrawerTrigger role="button" aria-label="Open Menu">
+      <DrawerTrigger role="button" aria-label="Open Menu" aria-controls="Drawer Trigger">
         <MenuIcon className="size-8 md:size-10 text-background" />
       </DrawerTrigger>
       <DrawerContent aira-describedby="Bearth Side Menu">
@@ -83,17 +93,22 @@ export function BearthSideMenu() {
           </NavigationMenu>
         </div>
 
-        <DrawerFooter className="flex flex-row items-center justify-between p-8">
-          <div className="flex flex-row gap-4 filter brightness-0">
-            <BearthSocialLinks />
+        <DrawerFooter>
+          <div className="px-6 text-2xl font-semibold">
+            <ConnectWalletBearthSideMenuLink></ConnectWalletBearthSideMenuLink>
           </div>
-          <div className="flex flex-col gap-1 text-[8px]">
-            <p>BEARTH LABS, INC ⓒ 2025</p>
-            <p className="underline">
-              <Link href="mailto:official@bearth.earth">
-                official@bearth.earth
-              </Link>
-            </p>
+          <div className="flex flex-row items-center justify-between p-8">
+            <div className="flex flex-row gap-4 filter brightness-0">
+              <BearthSocialLinks />
+            </div>
+            <div className="flex flex-col gap-1 text-[8px]">
+              <p>BEARTH LABS, INC ⓒ 2025</p>
+              <p className="underline">
+                <Link href="mailto:official@bearth.earth">
+                  official@bearth.earth
+                </Link>
+              </p>
+            </div>
           </div>
         </DrawerFooter>
       </DrawerContent>

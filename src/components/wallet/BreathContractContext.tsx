@@ -1,6 +1,12 @@
 "use client";
 
-import { createContext, useCallback, useContext, useMemo } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
 
 import {
   createPublicClient,
@@ -50,7 +56,17 @@ export interface BreathContractContextValue {
   minted: SWRState<bigint>;
   limit: SWRState<bigint>;
   price: SWRState<bigint>;
+  isWhitelisted: SWRState<boolean>;
+
   mint: () => Promise<Hex>;
+  mintQty: number;
+  setMintQty: (qty: number) => void;
+  mintTime: SWRState<{ startTime: bigint; endTime: bigint }>;
+  mintProgress: SWRState<{
+    stage1MintedQty: bigint;
+    stage1Supply: bigint;
+    maxSupply: bigint;
+  }>;
 }
 
 const defaultValue: BreathContractContextValue = {
@@ -58,7 +74,22 @@ const defaultValue: BreathContractContextValue = {
   minted: { state: BigInt(0), isLoading: true },
   limit: { state: BigInt(0), isLoading: true },
   price: { state: BigInt(0), isLoading: true },
+  isWhitelisted: { state: false, isLoading: true },
+  mintTime: {
+    state: { startTime: BigInt(0), endTime: BigInt(0) },
+    isLoading: true,
+  },
+  mintProgress: {
+    state: {
+      stage1MintedQty: BigInt(0),
+      stage1Supply: BigInt(0),
+      maxSupply: BigInt(0),
+    },
+    isLoading: true,
+  },
   mint: async () => "0x" as Hex,
+  mintQty: 1,
+  setMintQty: () => {},
 };
 
 export const BreathContractContext =
@@ -69,6 +100,8 @@ export function BreathContractProvider({
 }: {
   children: React.ReactNode;
 }) {
+  const [mintQty, setMintQty] = useState(1);
+
   const { chain, wallet } = useWalletConnect();
 
   const { data: provider } = useSWR(
@@ -113,6 +146,17 @@ export function BreathContractProvider({
     ([, , c]) => c.read.phase().then((p) => parsePhase(p as number)),
   );
 
+  const { data: whitelistProof, isLoading: whitelistProofLoading } = useSWR(
+    wallet ? (["whitelist-proof", wallet.address] as const) : null,
+    async ([, address]) => {
+      const result = await getWhitelistProof(address);
+      if (!result.is_whitelisted) {
+        setMintQty(0);
+      }
+      return result;
+    },
+  );
+
   const { data: minted, isLoading: mintedLoading } = useSWR(
     contract && wallet && phase !== undefined
       ? (["minted", wallet, phase, contract] as const)
@@ -141,6 +185,41 @@ export function BreathContractProvider({
       ? (["price", phase, contract] as const)
       : null,
     async ([, , c]) => c.read.PRICE(),
+  );
+
+  const { data: mintTime, isLoading: mintTimeLoading } = useSWR(
+    contract ? (["mint-time", contract] as const) : null,
+    async ([, c]) => {
+      const [startTime, endTime] = await Promise.all([
+        c.read.wlStart(),
+        c.read.wlEnd(),
+      ]).then(([start, end]) => [BigInt(start), BigInt(end)]);
+      console.log("Mint time:", { startTime, endTime });
+      return { startTime, endTime };
+    },
+  );
+
+  const { data: mintProgress, isLoading: mintProgressLoading } = useSWR(
+    contract ? (["mint-progress", contract] as const) : null,
+    async ([, c]) => {
+      const [stage1MintedQty, stage1Supply, maxSupply] = await Promise.all([
+        c.read.stage1Minted(),
+        c.read.STAGE1_SUPPLY(),
+        c.read.MAX_SUPPLY(),
+      ]).then(([stage1MintedQty, stage1Supply, maxSupply]) => [
+        BigInt(stage1MintedQty),
+        BigInt(stage1Supply),
+        BigInt(maxSupply),
+      ]);
+
+      console.log("Mint progress:", {
+        stage1MintedQty,
+        stage1Supply,
+        maxSupply,
+      });
+
+      return { stage1MintedQty, stage1Supply, maxSupply };
+    },
   );
 
   const wlMint = useCallback(async () => {
@@ -204,7 +283,28 @@ export function BreathContractProvider({
         state: price ?? BigInt(0),
         isLoading: priceLoading || price === undefined,
       },
+      isWhitelisted: {
+        state: whitelistProof?.is_whitelisted ?? false,
+        isLoading: whitelistProofLoading || whitelistProof === undefined,
+      },
+      mintTime: {
+        state: {
+          startTime: mintTime?.startTime ?? BigInt(0),
+          endTime: mintTime?.endTime ?? BigInt(0),
+        },
+        isLoading: mintTimeLoading || mintTime === undefined,
+      },
+      mintProgress: {
+        state: {
+          stage1MintedQty: mintProgress?.stage1MintedQty ?? BigInt(0),
+          stage1Supply: mintProgress?.stage1Supply ?? BigInt(0),
+          maxSupply: mintProgress?.maxSupply ?? BigInt(0),
+        },
+        isLoading: mintProgressLoading || mintProgress === undefined,
+      },
       mint,
+      mintQty,
+      setMintQty,
     }),
     [
       phase,
@@ -215,11 +315,16 @@ export function BreathContractProvider({
       limitLoading,
       price,
       priceLoading,
+      whitelistProof,
+      whitelistProofLoading,
+      mintTime,
+      mintTimeLoading,
+      mintProgress,
+      mintProgressLoading,
       mint,
+      mintQty,
     ],
   );
-
-  console.log(value);
 
   return (
     <BreathContractContext.Provider value={value}>
