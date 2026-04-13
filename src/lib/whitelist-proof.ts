@@ -16,7 +16,6 @@ export async function getWhitelistProof(
   )
     .then((res) => res.json())
     .then((data) => {
-      console.log("proof data:", data);
       return {
         proof: data.proof,
         root: data.root,
