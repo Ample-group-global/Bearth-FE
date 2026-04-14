@@ -1,11 +1,28 @@
 "use client";
-import { useRouter } from "next/navigation";
+import { useMintFlow } from "@/provider/mint-flow-handler";
 import { BearthButton } from "../bearth/BearthButton";
 import { Phase, useBreathContract } from "./BreathContractContext";
+import { useCallback } from "react";
+import { useRouter } from "next/navigation";
 
 export function BreathMintButton() {
   const contract = useBreathContract();
-  const nav = useRouter();
+  const { setTxHash } = useMintFlow();
+  const displayMethod = "redirect" as "mint-flow" | "redirect";
+  const router = useRouter();
+
+  const redirect = useCallback(
+    (txHash: string) => {
+      if (displayMethod === "redirect") {
+        router.push(`/minting/${txHash}`);
+      }
+
+      if (displayMethod === "mint-flow") {
+        setTxHash(txHash);
+      }
+    },
+    [displayMethod],
+  );
 
   return (
     <div>
@@ -17,7 +34,7 @@ export function BreathMintButton() {
         onClick={async () => {
           try {
             const hash = await contract.mint();
-            nav.push(`/minting/${hash}`);
+            redirect(hash);
           } catch (e) {
             console.error("Minting failed:", e);
             if (
@@ -26,7 +43,8 @@ export function BreathMintButton() {
             ) {
               return;
             }
-            nav.push("/minting/failed");
+
+            redirect("failed");
           }
         }}
         className="h-[35px]"

@@ -2,6 +2,7 @@
 
 import { useBreathContract } from "@/components/wallet/BreathContractContext";
 import { cn } from "@/lib/utils";
+import { usePrivy } from "@privy-io/react-auth";
 
 export function RingContainer({
   children,
@@ -60,9 +61,13 @@ export default function MintRing({ children }: { children: React.ReactNode }) {
   // whitelist mint to public mint: proceed by time
   // public mint to phase 2: proceed by minted quantity
   // phase 2 to sold out: proceed by minted quantity
+  const { authenticated } = usePrivy();
   const contract = useBreathContract();
 
-  if (contract.mintProgress.isLoading || contract.mintTime.isLoading) {
+  if (
+    authenticated &&
+    (contract.mintProgress.isLoading || contract.mintTime.isLoading)
+  ) {
     return <></>;
   }
 

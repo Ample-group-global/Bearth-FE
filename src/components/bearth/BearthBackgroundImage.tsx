@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 
 export default function BearthBackgroundImage({
@@ -12,7 +11,6 @@ export default function BearthBackgroundImage({
   showGradient = true,
   videoLoop = true,
   videoOptions = {},
-  active = true,
 }: {
   src: string;
   absolute?: boolean;
@@ -24,18 +22,6 @@ export default function BearthBackgroundImage({
   videoOptions?: React.VideoHTMLAttributes<HTMLVideoElement>;
   active?: boolean;
 }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    if (active) {
-      video.currentTime = 0;
-      video.play();
-    } else {
-      video.pause();
-    }
-  }, [active]);
   return (
     <div
       className={cn(
@@ -54,10 +40,9 @@ export default function BearthBackgroundImage({
       <div className="w-full xl:w-auto h-full xl:aspect-video relative">
         {src.endsWith(".webm") || src.endsWith(".mp4") ? (
           <video
-            ref={videoRef}
+            autoPlay
             src={src}
             preload="auto"
-            autoPlay={false}
             muted
             loop={videoLoop}
             playsInline
