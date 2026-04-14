@@ -1,37 +1,141 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { useEffect, useRef } from "react";
+import {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useCallback,
+} from "react";
 import type { OGVPlayer } from "ogv";
 
-interface MintAnimationCanvasProps {
+export interface VideoStep {
   src: string;
-  absolute?: boolean;
-  containerClassName?: string;
-  videoLoop?: boolean;
-  active?: boolean;
-  onEnded?: () => void;
+  loop?: boolean;
 }
 
-export function MintAnimationCanvas({
-  src,
-  absolute,
-  containerClassName,
-  videoLoop = true,
-  active = true,
-  onEnded,
-}: MintAnimationCanvasProps) {
+export interface MintAnimationCanvasHandle {
+  /** Advance to the next video step. If the current step is looping, it finishes the current loop iteration first. */
+  next: () => void;
+}
+
+interface MintAnimationCanvasProps {
+  steps: VideoStep[];
+  containerClassName?: string;
+  /** Called when the final step finishes playing (non-looping) or when next() is called on the last step. */
+  onFinished?: () => void;
+  /** Called whenever a step completes and transitions to the next one, with the index of the step that just finished. */
+  onStepEnd?: (stepIndex: number) => void;
+}
+
+interface PlayerSlot {
+  player: OGVPlayer;
+  element: HTMLDivElement;
+}
+
+function createPlayerSlot(
+  OGVPlayerCtor: typeof OGVPlayer,
+  hidden: boolean,
+): PlayerSlot {
+  const player = new OGVPlayerCtor();
+  player.width = 2880;
+  player.height = 2048;
+  player.muted = true;
+
+  const element = player as unknown as HTMLDivElement;
+  element.className = "w-full xl:w-auto h-full xl:aspect-video relative";
+  element.style.width = "";
+  element.style.height = "";
+  if (hidden) {
+    element.style.visibility = "hidden";
+    element.style.position = "absolute";
+  }
+
+  const canvas = element.getElementsByTagName("canvas").item(0);
+  if (canvas) {
+    canvas.style.objectFit = "cover";
+  }
+
+  return { player, element };
+}
+
+export const MintAnimationCanvas = forwardRef<
+  MintAnimationCanvasHandle,
+  MintAnimationCanvasProps
+>(function MintAnimationCanvas(
+  { steps, containerClassName, onFinished, onStepEnd },
+  ref,
+) {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const playerRef = useRef<OGVPlayer | null>(null);
-  const onEndedRef = useRef(onEnded);
-  onEndedRef.current = onEnded;
+  const activeSlotRef = useRef<PlayerSlot | null>(null);
+  const standbySlotRef = useRef<PlayerSlot | null>(null);
+  const currentStepRef = useRef(0);
+  const pendingNextRef = useRef(false);
+  const onFinishedRef = useRef(onFinished);
+  onFinishedRef.current = onFinished;
+  const onStepEndRef = useRef(onStepEnd);
+  onStepEndRef.current = onStepEnd;
+  const stepsRef = useRef(steps);
+  stepsRef.current = steps;
 
-  const activeRef = useRef(active);
-  activeRef.current = active;
+  const preloadStandby = useCallback((stepIndex: number) => {
+    const step = stepsRef.current[stepIndex];
+    const standby = standbySlotRef.current;
+    if (!step || !standby) return;
+    standby.player.src = step.src;
+    // OGV will load metadata + first frame when src is set
+  }, []);
 
-  const videoLoopRef = useRef(videoLoop);
-  videoLoopRef.current = videoLoop;
+  const swapToStandby = useCallback(() => {
+    const active = activeSlotRef.current;
+    const standby = standbySlotRef.current;
+    if (!active || !standby) return;
 
-  // Initialize the OGV player once
+    // Hide old active, show standby
+    active.element.style.visibility = "hidden";
+    active.element.style.position = "absolute";
+    standby.element.style.visibility = "";
+    standby.element.style.position = "";
+
+    // Swap refs
+    activeSlotRef.current = standby;
+    standbySlotRef.current = active;
+
+    // Start playback on the now-active player
+    standby.player.play();
+  }, []);
+
+  const advanceToNext = useCallback(
+    (finishedIndex: number) => {
+      onStepEndRef.current?.(finishedIndex);
+      const nextIndex = finishedIndex + 1;
+      if (nextIndex < stepsRef.current.length) {
+        currentStepRef.current = nextIndex;
+        pendingNextRef.current = false;
+        swapToStandby();
+
+        // Preload the step after the one we just started
+        const preloadIndex = nextIndex + 1;
+        if (preloadIndex < stepsRef.current.length) {
+          preloadStandby(preloadIndex);
+        }
+      } else {
+        onFinishedRef.current?.();
+      }
+    },
+    [swapToStandby, preloadStandby],
+  );
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      next: () => {
+        pendingNextRef.current = true;
+      },
+    }),
+    [],
+  );
+
   useEffect(() => {
     let cancelled = false;
 
@@ -40,74 +144,69 @@ export function MintAnimationCanvas({
 
       OGVLoader.base = "/ogv";
 
-      const player = new OGVPlayer();
-      playerRef.current = player;
-
-      player.width = 2880;
-      player.height = 2048;
-
-      const playerElement = player as unknown as HTMLDivElement;
-      playerElement.className =
-        "w-full xl:w-auto h-full xl:aspect-video relative";
-      playerElement.style.width = "";
-      playerElement.style.height = "";
-
-      const canvas = playerElement.getElementsByTagName("canvas").item(0);
-      if (canvas) {
-        canvas.style.objectFit = "cover";
-      }
+      const active = createPlayerSlot(OGVPlayer, false);
+      const standby = createPlayerSlot(OGVPlayer, true);
+      activeSlotRef.current = active;
+      standbySlotRef.current = standby;
 
       if (containerRef.current) {
-        containerRef.current.appendChild(playerElement);
+        containerRef.current.appendChild(active.element);
+        containerRef.current.appendChild(standby.element);
       }
 
-      player.addEventListener("ended", () => {
-        if (videoLoopRef.current) {
-          player.currentTime = 0;
-          player.play();
+      const handleEnded = (slot: PlayerSlot) => {
+        // Only handle events from the currently active player
+        if (slot !== activeSlotRef.current) return;
+
+        const idx = currentStepRef.current;
+        const step = stepsRef.current[idx];
+        if (!step) return;
+
+        if (step.loop && !pendingNextRef.current) {
+          slot.player.currentTime = 0;
+          slot.player.play();
         } else {
-          onEndedRef.current?.();
+          advanceToNext(idx);
         }
-      });
+      };
 
-      player.src = src;
-      player.muted = true;
+      active.player.addEventListener("ended", () => handleEnded(active));
+      standby.player.addEventListener("ended", () => handleEnded(standby));
 
-      if (activeRef.current) {
-        player.play();
+      // Start playing step 0
+      const firstStep = stepsRef.current[0];
+      if (firstStep) {
+        currentStepRef.current = 0;
+        active.player.src = firstStep.src;
+        active.player.play();
+
+        // Preload step 1 on standby
+        if (stepsRef.current.length > 1) {
+          preloadStandby(1);
+        }
       }
     });
 
     return () => {
       cancelled = true;
-      if (playerRef.current) {
-        playerRef.current.pause();
+      for (const slotRef of [activeSlotRef, standbySlotRef]) {
+        const slot = slotRef.current;
+        if (slot) {
+          slot.player.pause();
+          if (containerRef.current) {
+            containerRef.current.removeChild(slot.element);
+          }
+        }
       }
-      if (containerRef.current && playerRef.current) {
-        containerRef.current.removeChild(
-          playerRef.current as unknown as HTMLCanvasElement,
-        );
-      }
-      playerRef.current = null;
+      activeSlotRef.current = null;
+      standbySlotRef.current = null;
     };
-  }, [src]);
-
-  // Play or pause based on active prop
-  useEffect(() => {
-    if (!playerRef.current) return;
-    if (active) {
-      playerRef.current.currentTime = 0;
-      playerRef.current.play();
-    } else {
-      playerRef.current.pause();
-    }
-  }, [active]);
+  }, [advanceToNext, preloadStandby]);
 
   return (
     <div
       className={cn(
-        "inset-0 -z-1 flex flex-col items-center justify-center",
-        absolute ? "absolute w-full h-full" : "fixed w-dvw h-dvh",
+        "inset-0 -z-1 flex flex-col items-center justify-center fixed w-dvw h-dvh",
         containerClassName,
       )}
       ref={containerRef}
@@ -118,4 +217,4 @@ export function MintAnimationCanvas({
       </div>
     </div>
   );
-}
+});

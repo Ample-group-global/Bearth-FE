@@ -1,6 +1,9 @@
 "use client";
 import MaxWidthConstraintedLayout from "@/components/bearth/MaxWidthConstraintedLayout";
-import { MintAnimationCanvas } from "@/components/bearth/mint/MintAnimationCanvas";
+import {
+  MintAnimationCanvas,
+  type MintAnimationCanvasHandle,
+} from "@/components/bearth/mint/MintAnimationCanvas";
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { createPublicClient, http, type Hex } from "viem";
@@ -48,6 +51,7 @@ export function MintingAnimation({ txHash }: { txHash: string }) {
   >(null);
   const [canComplete, setCanComplete] = useState(false);
   const receiptLoadedRef = useRef(false);
+  const canvasRef = useRef<MintAnimationCanvasHandle>(null);
 
   const publicClient = useMemo(
     () => (chain ? createPublicClient({ chain, transport: http() }) : null),
@@ -69,16 +73,22 @@ export function MintingAnimation({ txHash }: { txHash: string }) {
 
         setTimeout(() => {
           setCanComplete(true);
-        }, 3000);
+        }, 5000);
       })
       .catch(() => {
         setReceiptStatus("reverted");
 
         setTimeout(() => {
           setCanComplete(true);
-        }, 3000);
+        }, 5000);
       });
   }, [publicClient, txHash]);
+
+  useEffect(() => {
+    if (canComplete) {
+      canvasRef.current?.next();
+    }
+  }, [canComplete]);
 
   return (
     <MaxWidthConstraintedLayout
@@ -90,40 +100,23 @@ export function MintingAnimation({ txHash }: { txHash: string }) {
       className="text-white w-full flex flex-col items-center px-4 lg:py-40"
     >
       <MintAnimationCanvas
-        src="/assets/mint-transaction-sent.webm"
-        videoLoop={false}
-        containerClassName={videoState !== VideoState.Init ? "invisible" : ""}
-        onEnded={() => {
-          setVideoState(VideoState.InProgressLoop);
-        }}
-      />
-
-      <MintAnimationCanvas
-        src="/assets/mint-transaction-in-progress-loop.webm"
-        videoLoop={!canComplete}
-        active={videoState === VideoState.InProgressLoop}
-        containerClassName={
-          videoState !== VideoState.InProgressLoop ? "invisible" : ""
-        }
-        onEnded={() => {
-          if (canComplete) {
+        ref={canvasRef}
+        steps={[
+          { src: "/assets/mint-transaction-sent.webm" },
+          { src: "/assets/mint-transaction-in-progress-loop.webm", loop: true },
+          { src: "/assets/mint-transaction-complete.webm" },
+        ]}
+        onStepEnd={(stepIndex) => {
+          if (stepIndex === 0) {
+            setVideoState(VideoState.InProgressLoop);
+          } else if (stepIndex === 1) {
             setVideoState(VideoState.Completed);
-          }
-        }}
-      />
-
-      <MintAnimationCanvas
-        src="/assets/mint-transaction-complete.webm"
-        videoLoop={false}
-        active={videoState === VideoState.Completed}
-        containerClassName={
-          videoState !== VideoState.Completed ? "invisible" : ""
-        }
-        onEnded={() => {
-          if (receiptStatus === "success") {
-            setVideoState(VideoState.CompletedResult);
-          } else {
-            setVideoState(VideoState.Failed);
+          } else if (stepIndex === 2) {
+            if (receiptStatus === "success") {
+              setVideoState(VideoState.CompletedResult);
+            } else {
+              setVideoState(VideoState.Failed);
+            }
           }
         }}
       />
