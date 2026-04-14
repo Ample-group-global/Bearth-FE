@@ -1,6 +1,6 @@
 "use client";
 import MaxWidthConstraintedLayout from "@/components/bearth/MaxWidthConstraintedLayout";
-import BearthBackgroundImage from "@/components/bearth/BearthBackgroundImage";
+import { MintAnimationCanvas } from "@/components/bearth/mint/MintAnimationCanvas";
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { createPublicClient, http, type Hex } from "viem";
@@ -89,48 +89,42 @@ export function MintingAnimation({ txHash }: { txHash: string }) {
       outerDivClassName="w-dvw h-dvh relative overflow-hidden"
       className="text-white w-full flex flex-col items-center px-4 lg:py-40"
     >
-      <BearthBackgroundImage
+      <MintAnimationCanvas
         src="/assets/mint-transaction-sent.webm"
         videoLoop={false}
         containerClassName={videoState !== VideoState.Init ? "invisible" : ""}
-        videoOptions={{
-          onEnded: () => {
-            setVideoState(VideoState.InProgressLoop);
-          },
+        onEnded={() => {
+          setVideoState(VideoState.InProgressLoop);
         }}
       />
 
-      <BearthBackgroundImage
+      <MintAnimationCanvas
         src="/assets/mint-transaction-in-progress-loop.webm"
         videoLoop={!canComplete}
         active={videoState === VideoState.InProgressLoop}
         containerClassName={
           videoState !== VideoState.InProgressLoop ? "invisible" : ""
         }
-        videoOptions={{
-          onEnded: () => {
-            if (canComplete) {
-              setVideoState(VideoState.Completed);
-            }
-          },
+        onEnded={() => {
+          if (canComplete) {
+            setVideoState(VideoState.Completed);
+          }
         }}
       />
 
-      <BearthBackgroundImage
+      <MintAnimationCanvas
         src="/assets/mint-transaction-complete.webm"
         videoLoop={false}
         active={videoState === VideoState.Completed}
         containerClassName={
           videoState !== VideoState.Completed ? "invisible" : ""
         }
-        videoOptions={{
-          onEnded: () => {
-            if (receiptStatus === "success") {
-              setVideoState(VideoState.CompletedResult);
-            } else {
-              setVideoState(VideoState.Failed);
-            }
-          },
+        onEnded={() => {
+          if (receiptStatus === "success") {
+            setVideoState(VideoState.CompletedResult);
+          } else {
+            setVideoState(VideoState.Failed);
+          }
         }}
       />
 
