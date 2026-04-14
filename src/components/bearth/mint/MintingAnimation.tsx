@@ -30,7 +30,7 @@ function MintResultOverlay({ children }: { children?: React.ReactNode }) {
         backgroundSize: "cover",
         backgroundPosition: "center",
         opacity: 0,
-        animation: "fadeIn 3s ease-in 1s forwards",
+        animation: "fadeIn 1s ease-in 1s forwards",
       }}
     >
       {children}
@@ -62,6 +62,10 @@ export function MintingAnimation({ txHash }: { txHash: string }) {
     if (!publicClient || !txHash || receiptLoadedRef.current) return;
     receiptLoadedRef.current = true;
 
+    setTimeout(() => {
+      setCanComplete(true);
+    }, 5000);
+
     publicClient
       .waitForTransactionReceipt({ hash: txHash as Hex })
       .then((receipt) => {
@@ -70,17 +74,9 @@ export function MintingAnimation({ txHash }: { txHash: string }) {
         if (receipt.to && tokenId) {
           setTokenId([receipt.to, BigInt(tokenId).toString()]);
         }
-
-        setTimeout(() => {
-          setCanComplete(true);
-        }, 5000);
       })
       .catch(() => {
         setReceiptStatus("reverted");
-
-        setTimeout(() => {
-          setCanComplete(true);
-        }, 5000);
       });
   }, [publicClient, txHash]);
 
