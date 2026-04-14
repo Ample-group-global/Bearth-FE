@@ -1,10 +1,10 @@
 "use client";
 
+import { PrivyProvider } from "@privy-io/react-auth";
+import { Fragment } from "react";
+import { SWRConfig } from "swr";
 import { BreathContractProvider } from "@/components/wallet/BreathContractContext";
 import { WalletConnectProvider } from "@/components/wallet/WalletConnectContext";
-import { PrivyProvider } from "@privy-io/react-auth";
-import { SWRConfig } from "swr";
-import { Fragment } from "react";
 
 export const ClientPrivyProvider = ({
   appId,
@@ -27,7 +27,18 @@ export const ClientPrivyProvider = ({
           },
         }}
       >
-        <PrivyProvider key="privy-provider" appId={appId}>
+        <PrivyProvider
+          key="privy-provider"
+          appId={appId}
+          config={{
+            appearance: {
+              walletList: [
+                "bitget_wallet",
+                "detected_ethereum_wallets"
+              ],
+            },
+          }}
+        >
           <WalletConnectProvider>
             <BreathContractProvider>{children}</BreathContractProvider>
           </WalletConnectProvider>
