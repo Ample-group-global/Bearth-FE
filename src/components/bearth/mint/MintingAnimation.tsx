@@ -69,22 +69,27 @@ export function MintingAnimation({ txHash }: { txHash: string }) {
     publicClient
       .waitForTransactionReceipt({ hash: txHash as Hex })
       .then((receipt) => {
+        console.log("Transaction Receipt: ", receipt);
         setReceiptStatus(receipt.status);
         const tokenId = receipt?.logs?.[0]?.topics?.[3];
         if (receipt.to && tokenId) {
           setTokenId([receipt.to, BigInt(tokenId).toString()]);
         }
       })
-      .catch(() => {
+      .catch((e) => {
         setReceiptStatus("reverted");
+        console.error("Mint Failed: ", e);
       });
   }, [publicClient, txHash]);
 
   useEffect(() => {
-    if (canComplete) {
+    if (
+      canComplete &&
+      (receiptStatus === "success" || receiptStatus === "reverted")
+    ) {
       canvasRef.current?.next();
     }
-  }, [canComplete]);
+  }, [canComplete, receiptStatus]);
 
   return (
     <MaxWidthConstraintedLayout
