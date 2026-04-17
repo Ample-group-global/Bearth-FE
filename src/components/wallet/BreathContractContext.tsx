@@ -230,8 +230,13 @@ export function BreathContractProvider({
       throw new Error("Address is not whitelisted");
     }
 
+    const account = wallet.address as Hex;
+    const gasEstimate = await contract.estimateGas.wlMint([proofResult.proof], {
+      account,
+    });
+
     const hash = await contract.write.wlMint([proofResult.proof], {
-      gas: BigInt(250_000),
+      gas: (gasEstimate * 120n) / 100n,
     });
 
     return hash;
@@ -240,8 +245,19 @@ export function BreathContractProvider({
   const paidMint = useCallback(
     async (qty: number) => {
       if (!contract || !wallet) throw new Error("Not initialized");
+
+      const account = wallet.address as Hex;
+      const mintPrice = (await contract.read.PRICE()) as bigint;
+      const value = mintPrice * BigInt(qty);
+
+      const gasEstimate = await contract.estimateGas.paidMint([BigInt(qty)], {
+        account,
+        value,
+      });
+
       const hash = await contract.write.paidMint([BigInt(qty)], {
-        gas: BigInt(220_000 + 130_000 * (qty - 1)),
+        gas: (gasEstimate * 120n) / 100n,
+        value,
       });
       return hash;
     },
@@ -254,8 +270,10 @@ export function BreathContractProvider({
     if (phase === Phase.WhitelistMint) {
       return wlMint();
     } else if (phase === Phase.PublicMint) {
+      const account = wallet.address as Hex;
+      const gasEstimate = await contract.estimateGas.publicMint({ account });
       const hash = await contract.write.publicMint({
-        gas: BigInt(200_000),
+        gas: (gasEstimate * 120n) / 100n,
       });
       return hash;
     } else if (phase === Phase.PaidMint) {
