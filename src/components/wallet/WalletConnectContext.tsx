@@ -59,7 +59,7 @@ export function WalletConnectProvider({ children }: WalletConnectContextProps) {
   }, [chain]);
 
   const balance = useSWR(wallet ? [wallet.address] : null, async () => {
-    if (!wallet) return null;
+    if (!authenticated || !wallet) return null;
     const balance = await publicClient.getBalance({
       address: wallet?.address as `0x${string}`,
     });
@@ -67,7 +67,7 @@ export function WalletConnectProvider({ children }: WalletConnectContextProps) {
   });
 
   useEffect(() => {
-    if (wallet && wallet.type === "ethereum") {
+    if (authenticated && wallet && wallet.type === "ethereum") {
       wallet.switchChain(chain.id);
     }
   }, [wallet, chain]);

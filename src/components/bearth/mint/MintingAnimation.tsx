@@ -47,7 +47,7 @@ export function MintingAnimation({ txHash }: { txHash: string }) {
 
   const [videoState, setVideoState] = useState<VideoState>(VideoState.Init);
   const [receiptStatus, setReceiptStatus] = useState<
-    "success" | "reverted" | null
+    "success" | "reverted" | "timeout" | "failed" | null
   >(null);
   const [canComplete, setCanComplete] = useState(false);
   const receiptLoadedRef = useRef(false);
@@ -66,8 +66,17 @@ export function MintingAnimation({ txHash }: { txHash: string }) {
       setCanComplete(true);
     }, 5000);
 
+    if (!txHash || txHash === "failed") {
+      setReceiptStatus("failed");
+      return;
+    }
+
     publicClient
-      .waitForTransactionReceipt({ hash: txHash as Hex })
+      .waitForTransactionReceipt({
+        hash: txHash as Hex,
+        // 3 minutes
+        timeout: 180000,
+      })
       .then((receipt) => {
         console.log("Transaction Receipt: ", receipt);
         setReceiptStatus(receipt.status);
@@ -83,10 +92,7 @@ export function MintingAnimation({ txHash }: { txHash: string }) {
   }, [publicClient, txHash]);
 
   useEffect(() => {
-    if (
-      canComplete &&
-      (receiptStatus === "success" || receiptStatus === "reverted")
-    ) {
+    if (canComplete && receiptStatus != null) {
       canvasRef.current?.next();
     }
   }, [canComplete, receiptStatus]);
@@ -182,9 +188,24 @@ export function MintingAnimation({ txHash }: { txHash: string }) {
               <h1 className="text-3xl md:text-5xl font-semibold">
                 Mint Failed
               </h1>
-              <p className="text-center font-semibold text-base max-w-md">
-                Unfortunately, your transaction was reverted.
-              </p>
+              {receiptStatus === "reverted" && (
+                <p className="text-center font-semibold text-base max-w-md">
+                  Unfortunately, your transaction was reverted.
+                </p>
+              )}
+
+              {receiptStatus === "timeout" && (
+                <p className="text-center font-semibold text-base max-w-md">
+                  We couldn't confirm your transaction in time. It might still
+                  be processed on the blockchain. Please check your transaction
+                  status on a block explorer.
+                </p>
+              )}
+              {receiptStatus === "failed" && (
+                <p className="text-center font-semibold text-base max-w-md">
+                  We couldn't process your transaction. Please try again.
+                </p>
+              )}
               <BearthButton type="secondary" href="/mint">
                 Try Again
               </BearthButton>
