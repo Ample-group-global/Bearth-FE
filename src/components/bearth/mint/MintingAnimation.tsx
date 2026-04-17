@@ -11,6 +11,7 @@ import { useWalletConnect } from "@/components/wallet/WalletConnectContext";
 import { BearthButton } from "@/components/bearth/BearthButton";
 import { chainOptions } from "@/components/wallet/chains";
 import { useMintFlow } from "@/provider/mint-flow-handler";
+import Link from "next/link";
 
 enum VideoState {
   Init = "init",
@@ -75,7 +76,7 @@ export function MintingAnimation({ txHash }: { txHash: string }) {
       .waitForTransactionReceipt({
         hash: txHash as Hex,
         // 3 minutes
-        timeout: 180000,
+        timeout: 180_000,
       })
       .then((receipt) => {
         console.log("Transaction Receipt: ", receipt);
@@ -86,8 +87,13 @@ export function MintingAnimation({ txHash }: { txHash: string }) {
         }
       })
       .catch((e) => {
-        setReceiptStatus("reverted");
         console.error("Mint Failed: ", e);
+
+        if (e.name === "WaitForTransactionReceiptTimeoutError") {
+          setReceiptStatus("timeout");
+        } else {
+          setReceiptStatus("reverted");
+        }
       });
   }, [publicClient, txHash]);
 
@@ -198,7 +204,15 @@ export function MintingAnimation({ txHash }: { txHash: string }) {
                 <p className="text-center font-semibold text-base max-w-md">
                   We couldn't confirm your transaction in time. It might still
                   be processed on the blockchain. Please check your transaction
-                  status on a block explorer.
+                  status on a{" "}
+                  <Link
+                    href={chainOption.blockExplorerUrl(txHash)}
+                    target="_blank"
+                    className="underline"
+                  >
+                    block explorer
+                  </Link>
+                  .
                 </p>
               )}
               {receiptStatus === "failed" && (
