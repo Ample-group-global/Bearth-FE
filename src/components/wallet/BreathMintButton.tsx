@@ -1,9 +1,10 @@
 "use client";
+import { useRouter } from "next/navigation";
+import { useCallback } from "react";
+import { unlockAudioContext } from "@/lib/audioContext";
 import { useMintFlow } from "@/provider/mint-flow-handler";
 import { BearthButton } from "../bearth/BearthButton";
 import { Phase, useBreathContract } from "./BreathContractContext";
-import { useCallback } from "react";
-import { useRouter } from "next/navigation";
 
 export function BreathMintButton() {
   const contract = useBreathContract();
@@ -32,6 +33,7 @@ export function BreathMintButton() {
           !contract.isWhitelisted.state
         }
         onClick={async () => {
+          unlockAudioContext(); // create/resume AudioContext from user gesture
           try {
             const hash = await contract.mint();
             redirect(hash);

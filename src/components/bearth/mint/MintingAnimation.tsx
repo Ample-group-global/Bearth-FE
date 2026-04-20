@@ -1,17 +1,19 @@
 "use client";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { createPublicClient, type Hex, http } from "viem";
+import { BearthButton } from "@/components/bearth/BearthButton";
 import MaxWidthConstraintedLayout from "@/components/bearth/MaxWidthConstraintedLayout";
 import {
   MintAnimationCanvas,
   type MintAnimationCanvasHandle,
 } from "@/components/bearth/mint/MintAnimationCanvas";
-import { useEffect, useMemo, useRef, useState } from "react";
-import Image from "next/image";
-import { createPublicClient, http, type Hex } from "viem";
-import { useWalletConnect } from "@/components/wallet/WalletConnectContext";
-import { BearthButton } from "@/components/bearth/BearthButton";
+import { useRocketAudio } from "@/components/bearth/mint/useRocketAudio";
 import { chainOptions } from "@/components/wallet/chains";
+import { useWalletConnect } from "@/components/wallet/WalletConnectContext";
+import { getAudioContext } from "@/lib/audioContext";
 import { useMintFlow } from "@/provider/mint-flow-handler";
-import Link from "next/link";
 
 enum VideoState {
   Init = "init",
@@ -53,11 +55,59 @@ export function MintingAnimation({ txHash }: { txHash: string }) {
   const [canComplete, setCanComplete] = useState(false);
   const receiptLoadedRef = useRef(false);
   const canvasRef = useRef<MintAnimationCanvasHandle>(null);
+  const audio = useRocketAudio();
+  const [audioLocked, setAudioLocked] = useState(false);
+
+  useEffect(() => {
+    const check = () => {
+      const ctx = getAudioContext();
+      setAudioLocked(!!ctx && ctx.state === "suspended");
+    };
+    check();
+    const id = setInterval(check, 500);
+    return () => clearInterval(id);
+  }, []);
 
   const publicClient = useMemo(
     () => (chain ? createPublicClient({ chain, transport: http() }) : null),
     [chain],
   );
+
+  useEffect(() => {
+    // Try to play immediately (works if Mint button already unlocked ctx)
+    // If audio is locked, retry on any user interaction
+    let played = false;
+    const attempt = () => {
+      if (played) return;
+      if (audio.tryPlaySent()) {
+        played = true;
+      }
+    };
+
+    // Try now, and keep trying every 100ms (covers buffer-load race)
+    attempt();
+    const pollId = setInterval(() => {
+      attempt();
+      if (played) clearInterval(pollId);
+    }, 100);
+
+    // Fallback for locked audio — any gesture unlocks
+    const unlock = () => {
+      audio.unlockAndPlay();
+      played = true;
+    };
+    window.addEventListener("click", unlock);
+    window.addEventListener("keydown", unlock);
+    window.addEventListener("touchstart", unlock);
+
+    return () => {
+      clearInterval(pollId);
+      window.removeEventListener("click", unlock);
+      window.removeEventListener("keydown", unlock);
+      window.removeEventListener("touchstart", unlock);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (!publicClient || !txHash || receiptLoadedRef.current) return;
@@ -67,19 +117,25 @@ export function MintingAnimation({ txHash }: { txHash: string }) {
       setCanComplete(true);
     }, 5000);
 
+    // Hard deadline — guarantees the animation advances even if the RPC hangs
+    const hardDeadline = setTimeout(() => {
+      setReceiptStatus((prev) => prev ?? "timeout");
+    }, 30_000);
+
     if (!txHash || txHash === "failed") {
       setReceiptStatus("failed");
+      clearTimeout(hardDeadline);
       return;
     }
 
     publicClient
       .waitForTransactionReceipt({
         hash: txHash as Hex,
-        // 3 minutes
-        timeout: 180_000,
+        timeout: 30_000,
       })
       .then((receipt) => {
         console.log("Transaction Receipt: ", receipt);
+        clearTimeout(hardDeadline);
         setReceiptStatus(receipt.status);
         const tokenId = receipt?.logs?.[0]?.topics?.[3];
         if (receipt.to && tokenId) {
@@ -88,13 +144,15 @@ export function MintingAnimation({ txHash }: { txHash: string }) {
       })
       .catch((e) => {
         console.error("Mint Failed: ", e);
-
+        clearTimeout(hardDeadline);
         if (e.name === "WaitForTransactionReceiptTimeoutError") {
           setReceiptStatus("timeout");
         } else {
           setReceiptStatus("reverted");
         }
       });
+
+    return () => clearTimeout(hardDeadline);
   }, [publicClient, txHash]);
 
   useEffect(() => {
@@ -112,6 +170,16 @@ export function MintingAnimation({ txHash }: { txHash: string }) {
       outerDivClassName="w-dvw h-dvh relative overflow-hidden"
       className="text-white w-full flex flex-col items-center px-4 lg:py-40"
     >
+      {audioLocked && (
+        <button
+          type="button"
+          onClick={() => audio.unlockAndPlay()}
+          className="fixed top-20 right-4 z-50 rounded-full bg-white/90 text-black px-4 py-2 text-sm font-semibold shadow-lg hover:bg-white"
+        >
+          🔊 Enable sound
+        </button>
+      )}
+
       <MintAnimationCanvas
         ref={canvasRef}
         steps={[
@@ -122,9 +190,12 @@ export function MintingAnimation({ txHash }: { txHash: string }) {
         onStepEnd={(stepIndex) => {
           if (stepIndex === 0) {
             setVideoState(VideoState.InProgressLoop);
+            audio.startLoop();
           } else if (stepIndex === 1) {
             setVideoState(VideoState.Completed);
+            audio.stopLoopAndReplayLaunch();
           } else if (stepIndex === 2) {
+            audio.stopAll();
             if (receiptStatus === "success") {
               setVideoState(VideoState.CompletedResult);
             } else {
