@@ -40,7 +40,8 @@ function createPlayerSlot(
   const player = new OGVPlayerCtor();
   player.width = 2880;
   player.height = 2048;
-  player.muted = true;
+  player.muted = false;
+  player.volume = 1;
 
   const element = player as unknown as HTMLDivElement;
   element.className = "w-full xl:w-auto h-full xl:aspect-video relative";

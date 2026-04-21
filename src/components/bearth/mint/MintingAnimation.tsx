@@ -9,10 +9,8 @@ import {
   MintAnimationCanvas,
   type MintAnimationCanvasHandle,
 } from "@/components/bearth/mint/MintAnimationCanvas";
-import { useRocketAudio } from "@/components/bearth/mint/useRocketAudio";
 import { chainOptions } from "@/components/wallet/chains";
 import { useWalletConnect } from "@/components/wallet/WalletConnectContext";
-import { getAudioContext } from "@/lib/audioContext";
 import { useMintFlow } from "@/provider/mint-flow-handler";
 
 enum VideoState {
@@ -55,37 +53,11 @@ export function MintingAnimation({ txHash }: { txHash: string }) {
   const [canComplete, setCanComplete] = useState(false);
   const receiptLoadedRef = useRef(false);
   const canvasRef = useRef<MintAnimationCanvasHandle>(null);
-  const audio = useRocketAudio();
-  const [audioLocked, setAudioLocked] = useState(false);
-
-  useEffect(() => {
-    // No AudioContext state anymore — treat "locked" as "first play attempt failed".
-    // The hook sets hasPlayed back to false on failure, so we just expose a retry button
-    // if the initial tryPlaySent below didn't succeed.
-    setAudioLocked(!getAudioContext());
-  }, []);
 
   const publicClient = useMemo(
     () => (chain ? createPublicClient({ chain, transport: http() }) : null),
     [chain],
   );
-
-  useEffect(() => {
-    audio.tryPlaySent();
-    const unlock = () => {
-      audio.unlockAndPlay();
-      setAudioLocked(false);
-    };
-    window.addEventListener("click", unlock);
-    window.addEventListener("keydown", unlock);
-    window.addEventListener("touchstart", unlock);
-    return () => {
-      window.removeEventListener("click", unlock);
-      window.removeEventListener("keydown", unlock);
-      window.removeEventListener("touchstart", unlock);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   useEffect(() => {
     if (!publicClient || !txHash || receiptLoadedRef.current) return;
@@ -148,32 +120,22 @@ export function MintingAnimation({ txHash }: { txHash: string }) {
       outerDivClassName="w-dvw h-dvh relative overflow-hidden"
       className="text-white w-full flex flex-col items-center px-4 lg:py-40"
     >
-      {audioLocked && (
-        <button
-          type="button"
-          onClick={() => audio.unlockAndPlay()}
-          className="fixed top-20 right-4 z-50 rounded-full bg-white/90 text-black px-4 py-2 text-sm font-semibold shadow-lg hover:bg-white"
-        >
-          🔊 Enable sound
-        </button>
-      )}
-
       <MintAnimationCanvas
         ref={canvasRef}
         steps={[
-          { src: "/assets/mint-transaction-sent.webm" },
-          { src: "/assets/mint-transaction-in-progress-loop.webm", loop: true },
-          { src: "/assets/mint-transaction-complete.webm" },
+          { src: "/assets/mint-transaction-sent-audio.webm" },
+          {
+            src: "/assets/mint-transaction-in-progress-loop-audio.webm",
+            loop: true,
+          },
+          { src: "/assets/mint-transaction-complete-audio.webm" },
         ]}
         onStepEnd={(stepIndex) => {
           if (stepIndex === 0) {
             setVideoState(VideoState.InProgressLoop);
-            audio.startLoop();
           } else if (stepIndex === 1) {
             setVideoState(VideoState.Completed);
-            audio.stopLoopAndReplayLaunch();
           } else if (stepIndex === 2) {
-            audio.stopAll();
             if (receiptStatus === "success") {
               setVideoState(VideoState.CompletedResult);
             } else {
