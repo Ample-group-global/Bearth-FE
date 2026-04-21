@@ -1,43 +1,62 @@
 "use client";
 
-let _ctx: AudioContext | null = null;
+// Module-singleton HTMLAudioElements. By keeping a single set of <audio>
+// elements created on first Mint click (= user gesture), we sidestep iOS
+// Safari's AudioContext re-suspend behavior across wallet popups and
+// client-side navigation.
 
-type WebkitWindow = Window & {
-  webkitAudioContext?: typeof AudioContext;
+type RocketAudio = {
+  sent: HTMLAudioElement;
+  loop: HTMLAudioElement;
 };
 
-function getCtor(): typeof AudioContext | null {
+let _audio: RocketAudio | null = null;
+
+function make(src: string, loop: boolean) {
+  const el = new Audio(src);
+  el.loop = loop;
+  el.preload = "auto";
+  el.crossOrigin = "anonymous";
+  // iOS: must be inline, not fullscreen
+  el.setAttribute("playsinline", "true");
+  return el;
+}
+
+export function unlockAudioContext(): RocketAudio | null {
   if (typeof window === "undefined") return null;
-  const w = window as WebkitWindow;
-  return window.AudioContext ?? w.webkitAudioContext ?? null;
+  if (_audio) {
+    // Re-arm: in case iOS suspended these, muted-play "kicks" them inside the gesture.
+    primeInGesture(_audio);
+    return _audio;
+  }
+  _audio = {
+    sent: make("/assets/rocket-sent.mp3", false),
+    loop: make("/assets/rocket-loop.mp3", true),
+  };
+  primeInGesture(_audio);
+  return _audio;
 }
 
-export function unlockAudioContext(): AudioContext | null {
-  const Ctor = getCtor();
-  if (!Ctor) return null;
-  if (!_ctx) {
-    _ctx = new Ctor();
+// Inside a user gesture we briefly play each track muted, then pause+rewind.
+// This registers the element with the iOS autoplay allowlist so subsequent
+// unmuted play() calls — even after blur/navigation — are permitted.
+function primeInGesture(a: RocketAudio) {
+  for (const el of [a.sent, a.loop]) {
+    el.muted = true;
+    const p = el.play();
+    if (p && typeof p.then === "function") {
+      p.then(() => {
+        el.pause();
+        el.currentTime = 0;
+        el.muted = false;
+      }).catch(() => {
+        // Autoplay denied — will retry on the Enable-sound button.
+        el.muted = false;
+      });
+    }
   }
-  // Always attempt resume — Safari/iOS and some Chrome configurations start
-  // in "suspended" even when the constructor ran inside a user gesture.
-  if (_ctx.state === "suspended") {
-    _ctx.resume().catch(() => {
-      /* user gesture required — will retry on next gesture */
-    });
-  }
-  // Play a silent buffer inside the gesture to fully unlock iOS Safari.
-  try {
-    const buf = _ctx.createBuffer(1, 1, 22050);
-    const src = _ctx.createBufferSource();
-    src.buffer = buf;
-    src.connect(_ctx.destination);
-    src.start(0);
-  } catch {
-    /* ignore */
-  }
-  return _ctx;
 }
 
-export function getAudioContext(): AudioContext | null {
-  return _ctx;
+export function getAudioContext(): RocketAudio | null {
+  return _audio;
 }

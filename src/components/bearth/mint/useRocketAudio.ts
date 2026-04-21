@@ -2,139 +2,85 @@
 import { useEffect, useRef } from "react";
 import { getAudioContext, unlockAudioContext } from "@/lib/audioContext";
 
-type AudioBuffers = {
-  sent?: AudioBuffer;
-  loop?: AudioBuffer;
-};
-
-type PlayingNode = { source: AudioBufferSourceNode; gain: GainNode };
-
 export function useRocketAudio() {
-  const ctxRef = useRef<AudioContext | null>(null);
-  const buffersRef = useRef<AudioBuffers>({});
-  const launchNodeRef = useRef<PlayingNode | null>(null);
-  const loopNodeRef = useRef<PlayingNode | null>(null);
+  const audioRef = useRef<ReturnType<typeof getAudioContext>>(null);
   const hasPlayedRef = useRef(false);
-  const buffersLoadedRef = useRef(false);
 
   useEffect(() => {
-    const ctx = getAudioContext() ?? unlockAudioContext();
-    if (!ctx) return;
-    ctxRef.current = ctx;
-
-    const load = (url: string) =>
-      fetch(url)
-        .then((r) => r.arrayBuffer())
-        .then((ab) => ctx.decodeAudioData(ab));
-
-    Promise.all([
-      load("/assets/rocket-sent.mp3"),
-      load("/assets/rocket-loop.mp3"),
-    ])
-      .then(([sent, loop]) => {
-        buffersRef.current = { sent, loop };
-        buffersLoadedRef.current = true;
-      })
-      .catch((e) => console.error("Audio load failed:", e));
-
+    audioRef.current = getAudioContext() ?? unlockAudioContext();
     return () => {
       try {
-        launchNodeRef.current?.source.stop();
+        audioRef.current?.sent.pause();
+        audioRef.current?.loop.pause();
       } catch {
-        /* already stopped */
+        /* ignore */
       }
-      try {
-        loopNodeRef.current?.source.stop();
-      } catch {
-        /* already stopped */
-      }
-      // Don't close ctx — it's a module singleton shared across navigations
     };
   }, []);
 
-  const stopWithFade = (
-    nodeRef: React.MutableRefObject<PlayingNode | null>,
-    fadeMs = 120,
-  ) => {
-    const ctx = ctxRef.current;
-    const node = nodeRef.current;
-    if (!ctx || !node) return;
-    try {
-      const t = ctx.currentTime;
-      node.gain.gain.cancelScheduledValues(t);
-      node.gain.gain.setValueAtTime(node.gain.gain.value, t);
-      node.gain.gain.linearRampToValueAtTime(0, t + fadeMs / 1000);
-      node.source.stop(t + fadeMs / 1000);
-    } catch {
-      /* already stopped */
-    }
-    nodeRef.current = null;
-  };
-
-  const playBuffer = (
-    buffer: AudioBuffer | undefined,
-    opts: { loop?: boolean; fadeInMs?: number } = {},
-  ): PlayingNode | null => {
-    const ctx = ctxRef.current;
-    if (!ctx || !buffer) return null;
-    const source = ctx.createBufferSource();
-    source.buffer = buffer;
-    source.loop = !!opts.loop;
-    const gain = ctx.createGain();
-    const t = ctx.currentTime;
-    if (opts.fadeInMs) {
-      gain.gain.setValueAtTime(0, t);
-      gain.gain.linearRampToValueAtTime(1, t + opts.fadeInMs / 1000);
-    } else {
-      gain.gain.value = 1;
-    }
-    source.connect(gain);
-    gain.connect(ctx.destination);
-    source.start(t);
-    return { source, gain };
-  };
-
-  const tryPlaySent = () => {
-    const ctx = ctxRef.current;
-    if (!ctx || hasPlayedRef.current || !buffersLoadedRef.current) return false;
-    if (ctx.state !== "running") return false;
+  const playSent = () => {
+    const a = audioRef.current;
+    if (!a || hasPlayedRef.current) return false;
     hasPlayedRef.current = true;
-    launchNodeRef.current = playBuffer(buffersRef.current.sent);
+    a.sent.currentTime = 0;
+    a.sent.volume = 1;
+    const p = a.sent.play();
+    if (p && typeof p.catch === "function") {
+      p.catch((err) => {
+        console.warn("rocket-sent play blocked:", err);
+        hasPlayedRef.current = false;
+      });
+    }
     return true;
   };
 
+  const fade = (el: HTMLAudioElement, to: number, ms: number) => {
+    const from = el.volume;
+    const start = performance.now();
+    const step = (t: number) => {
+      const k = Math.min(1, (t - start) / ms);
+      el.volume = from + (to - from) * k;
+      if (k < 1) requestAnimationFrame(step);
+      else if (to === 0) el.pause();
+    };
+    requestAnimationFrame(step);
+  };
+
   return {
-    tryPlaySent,
+    tryPlaySent: playSent,
     unlockAndPlay: () => {
-      const ctx = ctxRef.current;
-      if (!ctx) return;
-      ctx.resume().then(() => {
-        const attempt = () => {
-          if (tryPlaySent()) return;
-          if (!buffersLoadedRef.current) setTimeout(attempt, 50);
-        };
-        attempt();
-      });
+      audioRef.current = unlockAudioContext();
+      hasPlayedRef.current = false;
+      playSent();
     },
-    // Called when sent video ends → transition to loop
     startLoop: () => {
-      stopWithFade(launchNodeRef, 150);
-      loopNodeRef.current = playBuffer(buffersRef.current.loop, {
-        loop: true,
-        fadeInMs: 150,
-      });
+      const a = audioRef.current;
+      if (!a) return;
+      fade(a.sent, 0, 150);
+      a.loop.currentTime = 0;
+      a.loop.volume = 0;
+      const p = a.loop.play();
+      if (p && typeof p.catch === "function") {
+        p.catch((err) => console.warn("rocket-loop play blocked:", err));
+      }
+      fade(a.loop, 1, 150);
     },
-    // Called when loop video ends → transition to complete + replay launch
     stopLoopAndReplayLaunch: () => {
-      stopWithFade(loopNodeRef, 150);
-      launchNodeRef.current = playBuffer(buffersRef.current.sent, {
-        fadeInMs: 50,
-      });
+      const a = audioRef.current;
+      if (!a) return;
+      fade(a.loop, 0, 150);
+      a.sent.currentTime = 0;
+      a.sent.volume = 1;
+      const p = a.sent.play();
+      if (p && typeof p.catch === "function") {
+        p.catch((err) => console.warn("rocket-sent replay blocked:", err));
+      }
     },
-    // Called when complete video ends → fade everything out
     stopAll: () => {
-      stopWithFade(launchNodeRef, 300);
-      stopWithFade(loopNodeRef, 300);
+      const a = audioRef.current;
+      if (!a) return;
+      fade(a.sent, 0, 300);
+      fade(a.loop, 0, 300);
     },
   };
 }
