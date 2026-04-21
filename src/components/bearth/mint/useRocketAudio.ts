@@ -27,8 +27,8 @@ export function useRocketAudio() {
         .then((ab) => ctx.decodeAudioData(ab));
 
     Promise.all([
-      load("/assets/rocket-sent.ogg"),
-      load("/assets/rocket-loop.ogg"),
+      load("/assets/rocket-sent.mp3"),
+      load("/assets/rocket-loop.mp3"),
     ])
       .then(([sent, loop]) => {
         buffersRef.current = { sent, loop };
