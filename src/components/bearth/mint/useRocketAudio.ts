@@ -19,6 +19,7 @@ export function useRocketAudio() {
 
   useEffect(() => {
     const ctx = getAudioContext() ?? unlockAudioContext();
+    if (!ctx) return;
     ctxRef.current = ctx;
 
     const load = (url: string) =>
