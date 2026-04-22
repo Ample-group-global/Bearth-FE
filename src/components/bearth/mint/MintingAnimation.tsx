@@ -59,10 +59,13 @@ export function MintingAnimation({ txHash }: { txHash: string }) {
   const [audioLocked, setAudioLocked] = useState(false);
 
   useEffect(() => {
-    // No AudioContext state anymore — treat "locked" as "first play attempt failed".
-    // The hook sets hasPlayed back to false on failure, so we just expose a retry button
-    // if the initial tryPlaySent below didn't succeed.
-    setAudioLocked(!getAudioContext());
+    const check = () => {
+      const ctx = getAudioContext();
+      setAudioLocked(!!ctx && ctx.state === "suspended");
+    };
+    check();
+    const id = setInterval(check, 500);
+    return () => clearInterval(id);
   }, []);
 
   const publicClient = useMemo(
@@ -71,15 +74,34 @@ export function MintingAnimation({ txHash }: { txHash: string }) {
   );
 
   useEffect(() => {
-    audio.tryPlaySent();
+    // Try to play immediately (works if Mint button already unlocked ctx)
+    // If audio is locked, retry on any user interaction
+    let played = false;
+    const attempt = () => {
+      if (played) return;
+      if (audio.tryPlaySent()) {
+        played = true;
+      }
+    };
+
+    // Try now, and keep trying every 100ms (covers buffer-load race)
+    attempt();
+    const pollId = setInterval(() => {
+      attempt();
+      if (played) clearInterval(pollId);
+    }, 100);
+
+    // Fallback for locked audio — any gesture unlocks
     const unlock = () => {
       audio.unlockAndPlay();
-      setAudioLocked(false);
+      played = true;
     };
     window.addEventListener("click", unlock);
     window.addEventListener("keydown", unlock);
     window.addEventListener("touchstart", unlock);
+
     return () => {
+      clearInterval(pollId);
       window.removeEventListener("click", unlock);
       window.removeEventListener("keydown", unlock);
       window.removeEventListener("touchstart", unlock);
