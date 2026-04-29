@@ -69,7 +69,13 @@ export function MintingAnimation({ txHash }: { txHash: string }) {
   }, []);
 
   const publicClient = useMemo(
-    () => (chain ? createPublicClient({ chain, transport: http() }) : null),
+    () =>
+      chain
+        ? createPublicClient({
+            chain,
+            transport: http(process.env.NEXT_PUBLIC_RPC_URL),
+          })
+        : null,
     [chain],
   );
 

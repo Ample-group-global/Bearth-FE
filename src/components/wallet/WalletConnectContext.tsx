@@ -53,7 +53,7 @@ export function WalletConnectProvider({ children }: WalletConnectContextProps) {
   const publicClient = useMemo(() => {
     const publicClient = createPublicClient({
       chain,
-      transport: http(),
+      transport: http(process.env.NEXT_PUBLIC_RPC_URL),
     });
     return publicClient;
   }, [chain]);

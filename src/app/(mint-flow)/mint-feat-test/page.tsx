@@ -40,7 +40,7 @@ export default function MintPage() {
 
     const publicClient = createPublicClient({
       chain: sepolia,
-      transport: http(),
+      transport: http(process.env.NEXT_PUBLIC_RPC_URL),
     });
 
     console.log("publicClient:", publicClient);
