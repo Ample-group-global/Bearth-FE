@@ -138,7 +138,9 @@ export function BreathContractProvider({
     () =>
       publicClient && walletClient
         ? getContract({
-            address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`,
+            address: (
+              process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as string
+            )?.replace(/\s+/g, "") as `0x${string}`,
             abi: BearthNFTAbi.abi,
             client: { public: publicClient, wallet: walletClient },
           })
