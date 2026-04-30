@@ -287,9 +287,16 @@ export function BreathContractProvider({
   const mint = useCallback(async () => {
     if (!contract || !wallet) throw new Error("Not initialized");
 
-    if (phase === Phase.WhitelistMint) {
+    // The phase() enum is admin-set and lags reality. publicMint() reverts
+    // with PublicMintUnavailable() once block.timestamp > wlEnd, so once the
+    // free window closes, route to paidMint regardless of the stored phase.
+    const wlEnd = mintTime?.endTime ?? BigInt(0);
+    const nowSec = BigInt(Math.floor(Date.now() / 1000));
+    const freeWindowOpen = wlEnd === BigInt(0) || nowSec <= wlEnd;
+
+    if (phase === Phase.WhitelistMint && freeWindowOpen) {
       return wlMint();
-    } else if (phase === Phase.PublicMint) {
+    } else if (phase === Phase.PublicMint && freeWindowOpen) {
       const account = wallet.address as Hex;
       const gasEstimate = await contract.estimateGas.publicMint({ account });
       const fees = await getFees();
@@ -298,12 +305,12 @@ export function BreathContractProvider({
         ...fees,
       });
       return hash;
-    } else if (phase === Phase.PaidMint) {
+    } else if (phase === Phase.PaidMint || !freeWindowOpen) {
       return paidMint(1);
     }
 
     throw new Error("Minting has not started");
-  }, [contract, wallet, phase, wlMint, paidMint, getFees]);
+  }, [contract, wallet, phase, wlMint, paidMint, getFees, mintTime]);
 
   const value = useMemo(
     () => ({
