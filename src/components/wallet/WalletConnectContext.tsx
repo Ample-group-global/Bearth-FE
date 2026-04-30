@@ -1,15 +1,15 @@
 "use client";
 
-import { createContext, useContext, useEffect, useMemo } from "react";
 import {
   type ConnectedWallet,
-  usePrivy,
   type User,
+  useActiveWallet,
+  usePrivy,
 } from "@privy-io/react-auth";
-import { useActiveWallet } from "@privy-io/react-auth";
-import { chains } from "./chains";
-import { createPublicClient, formatEther, http } from "viem";
+import { createContext, useContext, useEffect, useMemo } from "react";
 import useSWR from "swr";
+import { createPublicClient, formatEther, http } from "viem";
+import { chains } from "./chains";
 
 interface WalletConnectContextValue {
   login: ReturnType<typeof usePrivy>["login"];

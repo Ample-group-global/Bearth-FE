@@ -7,7 +7,7 @@ import {
   useMemo,
   useState,
 } from "react";
-
+import useSWR from "swr";
 import {
   createPublicClient,
   createWalletClient,
@@ -16,11 +16,10 @@ import {
   type Hex,
   http,
 } from "viem";
-import useSWR from "swr";
 
 import BearthNFTAbi from "@/BearthNFTAbi";
-import { useWalletConnect } from "./WalletConnectContext";
 import { getWhitelistProof } from "@/lib/whitelist-proof";
+import { useWalletConnect } from "./WalletConnectContext";
 
 export type BreathAbi = typeof BearthNFTAbi.abi;
 

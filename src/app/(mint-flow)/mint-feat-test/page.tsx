@@ -13,8 +13,8 @@ import {
 } from "viem";
 import { sepolia } from "viem/chains";
 import { parseEther } from "viem/utils";
-import BearthNFT from "../../../BearthNFTAbi";
 import { getWhitelistProof } from "@/lib/whitelist-proof";
+import BearthNFT from "../../../BearthNFTAbi";
 export default function MintPage() {
   const { login, logout, user } = usePrivy();
   const { wallet } = useActiveWallet();

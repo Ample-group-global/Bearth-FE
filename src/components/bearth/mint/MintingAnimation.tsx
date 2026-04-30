@@ -126,7 +126,7 @@ export function MintingAnimation({ txHash }: { txHash: string }) {
     // Hard deadline — guarantees the animation advances even if the RPC hangs
     const hardDeadline = setTimeout(() => {
       setReceiptStatus((prev) => prev ?? "timeout");
-    }, 30_000);
+    }, 180_000);
 
     if (!txHash || txHash === "failed") {
       setReceiptStatus("failed");
@@ -137,7 +137,7 @@ export function MintingAnimation({ txHash }: { txHash: string }) {
     publicClient
       .waitForTransactionReceipt({
         hash: txHash as Hex,
-        timeout: 30_000,
+        timeout: 180_000,
       })
       .then((receipt) => {
         console.log("Transaction Receipt: ", receipt);
