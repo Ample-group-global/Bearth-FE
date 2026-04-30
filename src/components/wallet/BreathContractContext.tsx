@@ -227,6 +227,17 @@ export function BreathContractProvider({
     },
   );
 
+  // EIP-1559 fee headroom: 30% over the network's current suggestion so the
+  // tx isn't stranded if base fee climbs between sign and inclusion.
+  const getFees = useCallback(async () => {
+    if (!publicClient) throw new Error("Public client not ready");
+    const fees = await publicClient.estimateFeesPerGas();
+    return {
+      maxFeePerGas: (fees.maxFeePerGas * 130n) / 100n,
+      maxPriorityFeePerGas: fees.maxPriorityFeePerGas,
+    };
+  }, [publicClient]);
+
   const wlMint = useCallback(async () => {
     if (!contract || !wallet) throw new Error("Not initialized");
     const proofResult = await getWhitelistProof(wallet.address);
@@ -239,13 +250,15 @@ export function BreathContractProvider({
     const gasEstimate = await contract.estimateGas.wlMint([proofResult.proof], {
       account,
     });
+    const fees = await getFees();
 
     const hash = await contract.write.wlMint([proofResult.proof], {
       gas: (gasEstimate * 120n) / 100n,
+      ...fees,
     });
 
     return hash;
-  }, [contract, wallet]);
+  }, [contract, wallet, getFees]);
 
   const paidMint = useCallback(
     async (qty: number) => {
@@ -259,14 +272,16 @@ export function BreathContractProvider({
         account,
         value,
       });
+      const fees = await getFees();
 
       const hash = await contract.write.paidMint([BigInt(qty)], {
         gas: (gasEstimate * 120n) / 100n,
         value,
+        ...fees,
       });
       return hash;
     },
-    [contract, wallet],
+    [contract, wallet, getFees],
   );
 
   const mint = useCallback(async () => {
@@ -277,8 +292,10 @@ export function BreathContractProvider({
     } else if (phase === Phase.PublicMint) {
       const account = wallet.address as Hex;
       const gasEstimate = await contract.estimateGas.publicMint({ account });
+      const fees = await getFees();
       const hash = await contract.write.publicMint({
         gas: (gasEstimate * 120n) / 100n,
+        ...fees,
       });
       return hash;
     } else if (phase === Phase.PaidMint) {
@@ -286,7 +303,7 @@ export function BreathContractProvider({
     }
 
     throw new Error("Minting has not started");
-  }, [contract, wallet, phase, wlMint, paidMint]);
+  }, [contract, wallet, phase, wlMint, paidMint, getFees]);
 
   const value = useMemo(
     () => ({
