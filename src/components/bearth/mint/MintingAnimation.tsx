@@ -1,17 +1,17 @@
 "use client";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { createPublicClient, type Hex, http } from "viem";
+import { BearthButton } from "@/components/bearth/BearthButton";
 import MaxWidthConstraintedLayout from "@/components/bearth/MaxWidthConstraintedLayout";
 import {
   MintAnimationCanvas,
   type MintAnimationCanvasHandle,
 } from "@/components/bearth/mint/MintAnimationCanvas";
-import { useEffect, useMemo, useRef, useState } from "react";
-import Image from "next/image";
-import { createPublicClient, http, type Hex } from "viem";
-import { useWalletConnect } from "@/components/wallet/WalletConnectContext";
-import { BearthButton } from "@/components/bearth/BearthButton";
 import { chainOptions } from "@/components/wallet/chains";
+import { useWalletConnect } from "@/components/wallet/WalletConnectContext";
 import { useMintFlow } from "@/provider/mint-flow-handler";
-import Link from "next/link";
 
 enum VideoState {
   Init = "init",
@@ -55,7 +55,13 @@ export function MintingAnimation({ txHash }: { txHash: string }) {
   const canvasRef = useRef<MintAnimationCanvasHandle>(null);
 
   const publicClient = useMemo(
-    () => (chain ? createPublicClient({ chain, transport: http() }) : null),
+    () =>
+      chain
+        ? createPublicClient({
+            chain,
+            transport: http(process.env.NEXT_PUBLIC_RPC_URL || undefined),
+          })
+        : null,
     [chain],
   );
 

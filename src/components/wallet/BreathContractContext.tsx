@@ -7,7 +7,7 @@ import {
   useMemo,
   useState,
 } from "react";
-
+import useSWR from "swr";
 import {
   createPublicClient,
   createWalletClient,
@@ -16,11 +16,10 @@ import {
   type Hex,
   http,
 } from "viem";
-import useSWR from "swr";
 
 import BearthNFTAbi from "@/BearthNFTAbi";
-import { useWalletConnect } from "./WalletConnectContext";
 import { getWhitelistProof } from "@/lib/whitelist-proof";
+import { useWalletConnect } from "./WalletConnectContext";
 
 export type BreathAbi = typeof BearthNFTAbi.abi;
 
@@ -113,7 +112,13 @@ export function BreathContractProvider({
   );
 
   const publicClient = useMemo(
-    () => (chain ? createPublicClient({ chain, transport: http() }) : null),
+    () =>
+      chain
+        ? createPublicClient({
+            chain,
+            transport: http(process.env.NEXT_PUBLIC_RPC_URL || undefined),
+          })
+        : null,
     [chain],
   );
 

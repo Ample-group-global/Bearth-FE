@@ -13,8 +13,8 @@ import {
 } from "viem";
 import { sepolia } from "viem/chains";
 import { parseEther } from "viem/utils";
-import BearthNFT from "../../../BearthNFTAbi";
 import { getWhitelistProof } from "@/lib/whitelist-proof";
+import BearthNFT from "../../../BearthNFTAbi";
 export default function MintPage() {
   const { login, logout, user } = usePrivy();
   const { wallet } = useActiveWallet();
@@ -40,7 +40,7 @@ export default function MintPage() {
 
     const publicClient = createPublicClient({
       chain: sepolia,
-      transport: http(),
+      transport: http(process.env.NEXT_PUBLIC_RPC_URL || undefined),
     });
 
     console.log("publicClient:", publicClient);
