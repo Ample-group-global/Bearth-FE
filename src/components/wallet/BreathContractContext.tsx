@@ -164,6 +164,11 @@ export function BreathContractProvider({
     },
   );
 
+  const { data: onchainRoot, isLoading: onchainRootLoading } = useSWR(
+    contract ? (["wl-root", contract] as const) : null,
+    async ([, c]) => (await c.read.root()) as Hex,
+  );
+
   const { data: minted, isLoading: mintedLoading } = useSWR(
     contract && wallet && phase !== undefined
       ? (["minted", wallet, phase, contract] as const)
@@ -229,6 +234,21 @@ export function BreathContractProvider({
     },
   );
 
+  const getFeeOverrides = useCallback(async () => {
+    if (!publicClient) return {};
+    try {
+      const block = await publicClient.getBlock({ blockTag: "latest" });
+      const fees = await publicClient.estimateFeesPerGas();
+      const baseFee = block.baseFeePerGas ?? 0n;
+      const priority = fees.maxPriorityFeePerGas ?? 1_500_000_000n; // 1.5 gwei fallback
+      // pad maxFeePerGas: 2x base fee + priority to absorb base-fee bumps
+      const maxFeePerGas = baseFee * 2n + priority;
+      return { maxFeePerGas, maxPriorityFeePerGas: priority };
+    } catch {
+      return {};
+    }
+  }, [publicClient]);
+
   const wlMint = useCallback(async () => {
     if (!contract || !wallet) throw new Error("Not initialized");
     const proofResult = await getWhitelistProof(wallet.address);
@@ -241,13 +261,15 @@ export function BreathContractProvider({
     const gasEstimate = await contract.estimateGas.wlMint([proofResult.proof], {
       account,
     });
+    const fees = await getFeeOverrides();
 
     const hash = await contract.write.wlMint([proofResult.proof], {
       gas: (gasEstimate * 120n) / 100n,
+      ...fees,
     });
 
     return hash;
-  }, [contract, wallet]);
+  }, [contract, wallet, getFeeOverrides]);
 
   const paidMint = useCallback(
     async (qty: number) => {
@@ -261,14 +283,16 @@ export function BreathContractProvider({
         account,
         value,
       });
+      const fees = await getFeeOverrides();
 
       const hash = await contract.write.paidMint([BigInt(qty)], {
         gas: (gasEstimate * 120n) / 100n,
         value,
+        ...fees,
       });
       return hash;
     },
-    [contract, wallet],
+    [contract, wallet, getFeeOverrides],
   );
 
   const mint = useCallback(async () => {
@@ -279,8 +303,10 @@ export function BreathContractProvider({
     } else if (phase === Phase.PublicMint) {
       const account = wallet.address as Hex;
       const gasEstimate = await contract.estimateGas.publicMint({ account });
+      const fees = await getFeeOverrides();
       const hash = await contract.write.publicMint({
         gas: (gasEstimate * 120n) / 100n,
+        ...fees,
       });
       return hash;
     } else if (phase === Phase.PaidMint) {
@@ -288,7 +314,7 @@ export function BreathContractProvider({
     }
 
     throw new Error("Minting has not started");
-  }, [contract, wallet, phase, wlMint, paidMint]);
+  }, [contract, wallet, phase, wlMint, paidMint, getFeeOverrides]);
 
   const value = useMemo(
     () => ({
@@ -309,8 +335,16 @@ export function BreathContractProvider({
         isLoading: priceLoading || price === undefined,
       },
       isWhitelisted: {
-        state: whitelistProof?.is_whitelisted ?? false,
-        isLoading: whitelistProofLoading || whitelistProof === undefined,
+        state:
+          (whitelistProof?.is_whitelisted ?? false) &&
+          !!onchainRoot &&
+          !!whitelistProof?.root &&
+          whitelistProof.root.toLowerCase() === onchainRoot.toLowerCase(),
+        isLoading:
+          whitelistProofLoading ||
+          whitelistProof === undefined ||
+          onchainRootLoading ||
+          onchainRoot === undefined,
       },
       mintTime: {
         state: {
@@ -342,6 +376,8 @@ export function BreathContractProvider({
       priceLoading,
       whitelistProof,
       whitelistProofLoading,
+      onchainRoot,
+      onchainRootLoading,
       mintTime,
       mintTimeLoading,
       mintProgress,
