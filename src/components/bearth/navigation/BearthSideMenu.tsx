@@ -14,6 +14,7 @@ import {
   NavigationMenu,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
+import { socialLinks } from "@/config";
 import BearthSocialLinks from "./BearthSocialLinks";
 
 export function BearthSideMenuLink({
@@ -90,9 +91,7 @@ export function BearthSideMenu() {
           <div className="flex flex-col gap-1 text-[8px]">
             <p>BEARTH LABS, INC ⓒ 2025</p>
             <p className="underline">
-              <Link href="mailto:official@bearth.earth">
-                official@bearth.earth
-              </Link>
+              <Link href={socialLinks.inquiries}>official@imbearth.com</Link>
             </p>
           </div>
         </DrawerFooter>
