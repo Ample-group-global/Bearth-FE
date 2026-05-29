@@ -18,7 +18,7 @@ export default function AboutPage() {
       </div>
       <div className="h-dvh"></div>
       <div className="bg-secondary z-22 relative">
-        <ScrollTransformContainer className="h-dvh w-dvh fixed inset-0 pointer-events-none">
+        <ScrollTransformContainer className="h-dvh w-dvw fixed inset-0 pointer-events-none">
           <BearthBackgroundImage
             unoptimized
             src="/assets/star.webp"

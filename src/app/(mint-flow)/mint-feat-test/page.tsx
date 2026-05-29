@@ -13,29 +13,26 @@ import {
 } from "viem";
 import { sepolia } from "viem/chains";
 import { parseEther } from "viem/utils";
-import BearthNFT from "../../BearthNFTAbi";
+import { getWhitelistProof } from "@/lib/whitelist-proof";
+import BearthNFT from "../../../BearthNFTAbi";
 export default function MintPage() {
   const { login, logout, user } = usePrivy();
   const { wallet } = useActiveWallet();
 
-  useEffect(() => {
-    if (wallet && wallet.type === "ethereum") {
-      wallet.switchChain(sepolia.id);
-    }
-  }, [wallet]);
-
   const mint = useCallback(async () => {
-    if (typeof window === "undefined" || !window.ethereum) return;
+    console.log("button clicked.");
 
-    if (!wallet || wallet.type !== "ethereum") return;
+    if (typeof window === "undefined" || !window.ethereum) {
+      console.error("No Ethereum provider found. Please install MetaMask.");
+      return;
+    }
+
+    if (!wallet || wallet.type !== "ethereum") {
+      console.error("No active Ethereum wallet found.");
+      return;
+    }
 
     console.log("wallet:", wallet);
-
-    const [address] = await window.ethereum.request({
-      method: "eth_requestAccounts",
-    });
-
-    console.log("eth address:", address);
 
     const provider = await wallet.getEthereumProvider();
 
@@ -43,7 +40,7 @@ export default function MintPage() {
 
     const publicClient = createPublicClient({
       chain: sepolia,
-      transport: http(),
+      transport: http(process.env.NEXT_PUBLIC_RPC_URL || undefined),
     });
 
     console.log("publicClient:", publicClient);
@@ -58,7 +55,7 @@ export default function MintPage() {
 
     const contract = getContract({
       address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`,
-      abi: BearthNFT,
+      abi: BearthNFT.abi,
       client: { public: publicClient, wallet: walletClient },
     });
 
@@ -69,20 +66,43 @@ export default function MintPage() {
     const totalPrice = price * BigInt(5);
     console.log("totalPrice:", totalPrice);
 
-    // const { requestWl } = await contract.simulate.wlMint([""]);
+    // const { request } = await contract.simulate.wlMint();
     // const { request } = await contract.simulate.paidMint([totalPrice]);
     // const { request } = await contract.simulate.publicMint();
 
     // console.log("request:", request);
 
     // const hash = await walletClient.writeContract(request);
-    const hash = await contract.write.publicMint();
+    // const hash = await contract.write.publicMint();
+    // const eli = await checkEligibility(wallet.address)
+    // console.log(eli);
+
+    const proofResult = await getWhitelistProof(wallet.address);
+    console.log("proofResult:", proofResult);
+    if (!proofResult.is_whitelisted) {
+      console.log("Address is not whitelisted");
+      return;
+    }
+
+    const wlLimit = await publicClient.getStorageAt({
+      address: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as `0x${string}`,
+      slot: "0x14",
+    });
+    console.log("wlLimit:", BigInt(wlLimit as `0x${string}`));
+
+    // const hash = await contract.write.wlMint([localProof.proof], {
+    const hash = await contract.write.wlMint([proofResult.proof], {
+      gas: BigInt(500_000),
+    });
 
     console.log("contract call successful, hash:", hash);
+
+    const receipt = await publicClient.waitForTransactionReceipt({ hash });
+    console.log("transaction receipt:", receipt);
   }, [wallet, wallet?.type]);
 
   return (
-    <div>
+    <div className="p-32 bg-white">
       <main>
         {JSON.stringify(user)}
 

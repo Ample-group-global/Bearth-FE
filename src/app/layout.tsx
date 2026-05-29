@@ -5,6 +5,8 @@ import "./globals.css";
 import { BreathLiquidGlassBase } from "@/components/bearth/navigation/BearthLiquidGlassEffect";
 import { GoogleTagManager } from "@next/third-parties/google";
 import BearthTopBar from "@/components/bearth/navigation/BearthTopBar";
+import { ServerProvider } from "@/provider/server-provider";
+import { notFound } from "next/navigation";
 
 const figtree = Figtree({
   subsets: ["latin"],
@@ -16,7 +18,18 @@ export const metadata: Metadata = {
   title: "BEARTH | Your perfect nap spot is waiting.",
   description:
     "Bearth is an original IP, a universe born from a story of loss and rebirth. We are building a transmedia world that grows and evolves with its community.",
-  keywords: ["Bearth", "Web3", "Brand", "IP", "Community", "Merchandise", "Toys", "Digital Collectibles", "Healing", "Metaverse"],
+  keywords: [
+    "Bearth",
+    "Web3",
+    "Brand",
+    "IP",
+    "Community",
+    "Merchandise",
+    "Toys",
+    "Digital Collectibles",
+    "Healing",
+    "Metaverse",
+  ],
   authors: [{ name: "Bearth Lab" }],
   icons: {
     apple: "/assets/apple-touch-icon.png",
@@ -42,16 +55,22 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  if (!process.env.NEXT_PUBLIC_CONTRACT_NET) {
+    return notFound();
+  }
+
   return (
     <html lang="en">
       {process.env.NEXT_PUBLIC_GTM_ID && (
         <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />
       )}
       <body className={`${figtree.variable} antialiased bg-secondary`}>
-        {/* Top Navigation */}
-        <BearthTopBar />
-        {children}
-        <BreathLiquidGlassBase />
+        <ServerProvider>
+          {/* Top Navigation */}
+          <BearthTopBar />
+          {children}
+          <BreathLiquidGlassBase />
+        </ServerProvider>
       </body>
     </html>
   );

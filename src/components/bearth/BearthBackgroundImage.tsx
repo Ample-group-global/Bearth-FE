@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
@@ -8,6 +9,8 @@ export default function BearthBackgroundImage({
   imageClassName,
   unoptimized,
   showGradient = true,
+  videoLoop = true,
+  videoOptions = {},
 }: {
   src: string;
   absolute?: boolean;
@@ -15,12 +18,15 @@ export default function BearthBackgroundImage({
   imageClassName?: string;
   unoptimized?: boolean;
   showGradient?: boolean;
+  videoLoop?: boolean;
+  videoOptions?: React.VideoHTMLAttributes<HTMLVideoElement>;
+  active?: boolean;
 }) {
   return (
     <div
       className={cn(
         "inset-0 -z-1 flex flex-col items-center justify-center",
-        absolute ? "absolute w-full h-full" : "fixed w-dvh h-dvh",
+        absolute ? "absolute w-full h-full" : "fixed w-dvw h-dvh",
         containerClassName,
       )}
     >
@@ -34,12 +40,14 @@ export default function BearthBackgroundImage({
       <div className="w-full xl:w-auto h-full xl:aspect-video relative">
         {src.endsWith(".webm") || src.endsWith(".mp4") ? (
           <video
-            src={src}
             autoPlay
+            src={src}
+            preload="auto"
             muted
-            loop
+            loop={videoLoop}
             playsInline
             className={cn("object-cover w-full h-full", imageClassName)}
+            {...videoOptions}
           />
         ) : (
           <Image

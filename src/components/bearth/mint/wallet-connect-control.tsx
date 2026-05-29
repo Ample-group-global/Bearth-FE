@@ -1,22 +1,19 @@
 "use client";
 
-import { useState } from "react";
 import { BearthButton } from "../BearthButton";
+import { useWalletConnect } from "@/components/wallet/WalletConnectContext";
 
 export function WalletConnectControl({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [isConnected, setIsConnected] = useState(false);
+  const { login, authenticated, wallet } = useWalletConnect();
+  const isConnected = !!wallet && authenticated;
 
   if (!isConnected) {
     return (
-      <BearthButton
-        href="#"
-        type="secondary"
-        onClick={() => setIsConnected(true)}
-      >
+      <BearthButton href="#" type="secondary" onClick={() => login()}>
         Connect Wallet
       </BearthButton>
     );
