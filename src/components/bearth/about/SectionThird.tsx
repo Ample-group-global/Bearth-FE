@@ -41,8 +41,7 @@ export default function SectionThird() {
             </div>
             <div className="gap-4 flex flex-col px-2 lg:px-0 shrink-0">
               <Paragraph type="normal">
-                Created by Judy, an architecture student in Lyon, Bearth is
-                built with the same vision she brings to her studies.
+                Created by Judy, Bearth began with a simple love for bears and a growing curiosity about the worlds they might live in.
               </Paragraph>
               <Paragraph type="normal">
                 She's designing an entire universe—from bear cities to the
@@ -63,9 +62,8 @@ export default function SectionThird() {
             </div>
             <div className="gap-4 flex flex-col px-2 lg:px-0 shrink-0">
               <Paragraph type="normal">
-                Judy combines architectural rigor with childlike imagination.
-                For her, art is the language of the soul—a force for change,
-                inspired by artist MAGO.
+                Judy combines creativity, curiosity, and a love for storytelling, finding inspiration in the small moments of everyday life.
+                Bearth is her dream, and a gentle gift to the world.
               </Paragraph>
               <Paragraph type="normal">
                 Bearth is her dream, and a gentle gift to the world.
