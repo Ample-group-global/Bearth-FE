@@ -4,11 +4,13 @@ import { cn } from "@/lib/utils";
 export default function Paragraph({
   children,
   className,
+  style,
   type = "normal",
   as = "p",
 }: {
   children: React.ReactNode;
   className?: string;
+  style?: React.CSSProperties;
   type?: "normal" | "large" | "large2" | "normal2";
   as?: "p" | "div";
 }) {
@@ -23,6 +25,7 @@ export default function Paragraph({
         type === "normal2" && "text-base leading-[1.25]",
         className,
       ),
+      style,
     },
     children,
   );

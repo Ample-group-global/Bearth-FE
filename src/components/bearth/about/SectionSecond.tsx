@@ -12,67 +12,75 @@ const sections = [
   {
     order: 1,
     image: "/assets/about-1-1.png",
-    title: "The Great Awakening",
+    title: "THE BEGINNING",
     text: (
       <>
-        <Paragraph type="normal">
-          The story begins with an exceptionally long nap.
+        <Paragraph type="normal" style={{ fontWeight: "bold", fontSize: "25px", color: "#fbead4" }}>
+          Why We Left Earth
         </Paragraph>
         <Paragraph type="normal">
-          When the bears woke, the noisy humans had vanished—leaving behind a
-          silent, high-tech floating city.
+          Earth was no longer the cozy home it used to be.
         </Paragraph>
         <Paragraph type="normal">
+          So four little bears set off into the stars, searching for a new place to call home — and the perfect place for a nap.
+        </Paragraph>
+        {/* <Paragraph type="normal">
           To these groggy new tenants, the abandoned city wasn't a crisis.
           Through sleepy eyes, it wasn't a ruin.
         </Paragraph>
         <Paragraph type="normal" className="font-bold">
           It was a giant, unopened playground.
-        </Paragraph>
+        </Paragraph> */}
       </>
     ),
   },
   {
     order: 2,
     image: "/assets/about-1-2.png",
-    title: "The Age of Bear Logic",
+    title: "THE JOURNEY",
     text: (
       <>
-        <Paragraph type="normal">
-          We ignored the manuals and used "Bear Logic" instead, replacing
-          complex climate dashboards with simple "Gentle Breeze" knobs and
-          converting geothermal plants into hot springs.
+        <Paragraph type="normal" style={{ fontWeight: "bold", fontSize: "25px", color: "#fbead4" }}>
+          A Home Among the Stars
         </Paragraph>
         <Paragraph type="normal">
+          They traveled from planet to planet, following the stars and perhaps the smell of honey. Some places were too hot, some were too cold, and some just weren’t right for a good nap. So they kept going.
+        </Paragraph>
+        {/* <Paragraph type="normal">
           We slowed time and rewrote the "Second Layer" rules.
         </Paragraph>
         <Paragraph type="normal" className="font-bold">
           We repurposed humanity's highest technology for the serious business
           of relaxation.
-        </Paragraph>
+        </Paragraph> */}
       </>
     ),
   },
   {
     order: 3,
     image: "/assets/about-1-3.png",
-    title: "The Quest for the Perfect Nap",
+    title: "WELCOME TO BEARTH",
     text: (
       <>
-        <Paragraph type="normal">
-          With home cozy, curiosity turned to the stars.
+        <Paragraph type="normal" style={{ fontWeight: "bold", fontSize: "25px", color: "#fbead4" }}>
+          A New World, A New Home
         </Paragraph>
         <Paragraph type="normal">
-          We filled rockets with honey and cushions, launching to find the
-          universe's sweetest honey and perfect sunlight.
+          They found a quiet little world among the stars and decided to make it their own. Together, they turned it into a home filled with honey, cozy naps, new friends, and memories worth holding onto.
         </Paragraph>
         <Paragraph type="normal">
+          <b style={{ fontWeight: "bold", fontSize: "18px", color: "#fbead4" }}>They called it BEARTH.</b>
+        </Paragraph>
+        {/* <Paragraph type="normal">
+          So four little bears set off into the stars, searching for a new place to call home — and the perfect place for a nap.
+        </Paragraph> */}
+        {/* <Paragraph type="normal">
           Our mission: find the ultimate napping spot.
         </Paragraph>
         <Paragraph type="normal" className="font-bold">
           As for saving the world? That might just be the best side effect of
           the journey.
-        </Paragraph>
+        </Paragraph> */}
       </>
     ),
   },
